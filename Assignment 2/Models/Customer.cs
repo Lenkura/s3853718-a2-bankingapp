@@ -33,8 +33,7 @@ namespace Assignment_2.Models
         [StringLength(40)]
         public string Suburb { get; set; }
         [StringLength(3)]
-        [EnumDataType(typeof(AusStates), ErrorMessage = "Postcodes are 4 digit numbers")]
-        public string State { get; set; }
+        public AusStates State { get; set; }
         [StringLength(4)]
         [RegularExpression(@"/\d{4}/", ErrorMessage = "Postcodes are 4 digit numbers")]
         public string PostCode { get; set; }
