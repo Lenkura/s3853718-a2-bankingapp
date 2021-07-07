@@ -1,0 +1,85 @@
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\appsettings.Development.json
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\appsettings.json
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Assignment 2.StaticWebAssets.xml
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Assignment 2.exe
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Assignment 2.deps.json
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Assignment 2.runtimeconfig.json
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Assignment 2.runtimeconfig.dev.json
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Assignment 2.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\ref\Assignment 2.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Assignment 2.pdb
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Assignment 2.Views.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Assignment 2.Views.pdb
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Humanizer.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Embedded.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\System.Runtime.Caching.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.csproj.AssemblyReference.cache
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.GeneratedMSBuildEditorConfig.editorconfig
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.AssemblyInfoInputs.cache
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.AssemblyInfo.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.csproj.CoreCompileInputs.cache
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.MvcApplicationPartsAssemblyInfo.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.MvcApplicationPartsAssemblyInfo.cache
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.RazorAssemblyInfo.cache
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.RazorAssemblyInfo.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\staticwebassets\Assignment 2.StaticWebAssets.Manifest.cache
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\staticwebassets\Assignment 2.StaticWebAssets.xml
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\scopedcss\bundle\Assignment 2.styles.css
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.TagHelpers.input.cache
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.TagHelpers.output.cache
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.RazorCoreGenerate.cache
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.RazorTargetAssemblyInfo.cache
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.RazorTargetAssemblyInfo.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.Views.pdb
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.csproj.CopyComplete
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.dll
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\ref\Assignment 2.dll
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.pdb
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.genruntimeconfig.cache
