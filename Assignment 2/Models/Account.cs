@@ -22,6 +22,7 @@ namespace Assignment_2.Models
         public int AccountNumber { get; set; }
 
         [Display(Name = "Type")]
+        [Column(TypeName = "char")]
         public AccountType AccountType { get; set; }
 
         [Display(Name = "Customer ID")]

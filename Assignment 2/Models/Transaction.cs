@@ -21,9 +21,9 @@ namespace Assignment_2.Models
         [Required]
         public int TransactionID { get; set; }
         [Required]
+        [Column(TypeName = "char")]
         public TransactionType TransactionType { get; set; }
         [Required]
-        [Column(TypeName = "char")]
         public int AccountNumber { get; set; }
         public virtual Account Account { get; set; }
         public int? DestinationAccountNumber { get; set; }
