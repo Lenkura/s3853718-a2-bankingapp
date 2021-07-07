@@ -25,7 +25,6 @@ namespace Assignment_2.Models
         [Required]
         [Column(TypeName = "char")]
         public int AccountNumber { get; set; }
-
         public virtual Account Account { get; set; }
         public int? DestinationAccountNumber { get; set; }
         public virtual Account DestinationAccount { get; set; }
