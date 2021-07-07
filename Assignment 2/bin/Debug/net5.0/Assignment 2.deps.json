@@ -36,6 +36,7 @@
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "5.0.7",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
           "Microsoft.AspNetCore.Identity.UI": "5.0.7",
+          "Microsoft.EntityFrameworkCore.Design": "5.0.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.7",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.7",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
@@ -533,9 +534,6 @@
             "assemblyVersion": "5.0.7.0",
             "fileVersion": "5.0.721.26102"
           }
-        },
-        "compile": {
-          "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Design.dll": {}
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/5.0.7": {
