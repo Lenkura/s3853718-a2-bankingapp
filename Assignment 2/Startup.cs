@@ -1,17 +1,11 @@
 using Assignment_2.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Assignment_2
 {
@@ -28,9 +22,15 @@ namespace Assignment_2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Assignment2DbContext>(options =>
+            {
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection"));
+                 // Enable lazy loading.
+                options.UseLazyLoadingProxies();
+            });
+
             services.AddDatabaseDeveloperPageExceptionFilter();
+
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<Assignment2DbContext>();

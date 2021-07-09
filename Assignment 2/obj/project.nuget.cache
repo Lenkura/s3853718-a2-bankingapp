@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VD7oHZubJBw1Dn6uFX1e9O5G0L4KYC81KcRi8jFFtB/PPWADKBCLvGnODZLHhFheIyr9WBQqn/2aFuCzgPsDCA==",
+  "dgSpecHash": "H3+8+k6HkW4YtaPpGufIoolp1oyClt06lP68i1ggvGSwuxtHZ647Jm+kknb5do4yYPt0m4cMoqymiZdRZOI23Q==",
   "success": true,
   "projectFilePath": "D:\\Git\\s3853718-a2\\Assignment 2\\Assignment 2.csproj",
   "expectedPackageFiles": [
@@ -31,7 +31,7 @@
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.entityframeworkcore.design\\5.0.7\\microsoft.entityframeworkcore.design.5.0.7.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.entityframeworkcore.proxies\\5.0.7\\microsoft.entityframeworkcore.proxies.5.0.7.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.7\\microsoft.entityframeworkcore.relational.5.0.7.nupkg.sha512",
-    "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\5.0.6\\microsoft.entityframeworkcore.sqlserver.5.0.6.nupkg.sha512",
+    "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\5.0.7\\microsoft.entityframeworkcore.sqlserver.5.0.7.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\5.0.7\\microsoft.entityframeworkcore.tools.5.0.7.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\5.0.0\\microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.extensions.caching.memory\\5.0.0\\microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",

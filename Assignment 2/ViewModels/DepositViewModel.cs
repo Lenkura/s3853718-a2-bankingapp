@@ -13,4 +13,4 @@ namespace Assignment_2.ViewModels
         public decimal Amount { get; set; }
     }
 }
-}
+

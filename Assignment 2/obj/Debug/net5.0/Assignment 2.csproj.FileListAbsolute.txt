@@ -162,3 +162,6 @@ D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Customers\Delete.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Customers\Details.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Customers\Edit.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Customers\Index.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Castle.Core.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Proxies.dll
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Deposit.cshtml.g.cs
