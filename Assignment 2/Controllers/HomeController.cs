@@ -1,6 +1,7 @@
 ﻿using Assignment_2.Data;
 using Assignment_2.Models;
 using Assignment_2.ViewModels;
+using DataValidator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -41,7 +42,13 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> Deposit(DepositViewModel viewModel)
         {
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
+            if (!viewModel.Amount.ToString().IsDollarAmount())
+            {
+                ModelState.AddModelError(nameof(viewModel.Amount), "Enter a dollar amount");
+                return View(viewModel);
+            }
 
+            if (ModelState.IsValid) { 
             viewModel.Account.Balance += viewModel.Amount;
             viewModel.Account.Transactions.Add(
                 new Transaction
@@ -54,6 +61,9 @@ namespace Assignment_2.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+            }
+            ModelState.AddModelError(nameof(viewModel.Amount), "Enter a dollar amount");
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

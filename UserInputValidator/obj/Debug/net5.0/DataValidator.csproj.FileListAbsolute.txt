@@ -1,0 +1,12 @@
+D:\Git\s3123456-a1\UserInputValidator\bin\Debug\net5.0\DataValidator.deps.json
+D:\Git\s3123456-a1\UserInputValidator\bin\Debug\net5.0\DataValidator.dll
+D:\Git\s3123456-a1\UserInputValidator\bin\Debug\net5.0\ref\DataValidator.dll
+D:\Git\s3123456-a1\UserInputValidator\bin\Debug\net5.0\DataValidator.pdb
+D:\Git\s3123456-a1\UserInputValidator\obj\Debug\net5.0\DataValidator.csproj.AssemblyReference.cache
+D:\Git\s3123456-a1\UserInputValidator\obj\Debug\net5.0\DataValidator.GeneratedMSBuildEditorConfig.editorconfig
+D:\Git\s3123456-a1\UserInputValidator\obj\Debug\net5.0\DataValidator.AssemblyInfoInputs.cache
+D:\Git\s3123456-a1\UserInputValidator\obj\Debug\net5.0\DataValidator.AssemblyInfo.cs
+D:\Git\s3123456-a1\UserInputValidator\obj\Debug\net5.0\DataValidator.csproj.CoreCompileInputs.cache
+D:\Git\s3123456-a1\UserInputValidator\obj\Debug\net5.0\DataValidator.dll
+D:\Git\s3123456-a1\UserInputValidator\obj\Debug\net5.0\ref\DataValidator.dll
+D:\Git\s3123456-a1\UserInputValidator\obj\Debug\net5.0\DataValidator.pdb
