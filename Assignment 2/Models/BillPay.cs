@@ -22,10 +22,8 @@ namespace Assignment_2.Models
         [Display(Name = "Account Number")]
         [Range(1000, 9999)]
         public int AccountNumber { get; set; }
-        public virtual Account Account { get; set; }
         [Required]
-        [Display(Name = "Customer ID")]
-        [Range(1000, 9999)]
+        [Display(Name = "Payee ID")]
         public int PayeeID { get; set; }
         public virtual Payee Payee { get; set; }
         [Required]
