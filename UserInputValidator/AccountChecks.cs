@@ -40,6 +40,46 @@ namespace DataValidator
             else
                 return false;
         }
+        public static decimal GetAccountTypeMin(string accountType)
+        {
+            switch (accountType)
+            {
+                case ("C"):
+                    return _checkingMinimum;
+                case ("S"):
+                    return _savingsMinimum;
+                default:
+                    return 0;
+            }
+        }
+        public static string AccountTypeExtender(string accountType)
+        {
+            switch (accountType)
+            {
+                case ("C"):
+                    return "Checking";
+                case ("S"):
+                    return "Savings";
+                default:
+                    return "";
+            }
+        }
+        public static string TransactionTypeExtender(string transactionType)
+        {
+            switch (transactionType)
+            {
+                case ("D"):
+                    return "Deposit";
+                case ("W"):
+                    return "Withdrawal";
+                case ("T"):
+                    return "Transfer";
+                case ("S"):
+                    return "Service";
+                default:
+                    return "";
+            }
+        }
         public static decimal GetSavingsMin() => _savingsMinimum;
 
         public static decimal GetCheckingsMin() => _checkingMinimum;
