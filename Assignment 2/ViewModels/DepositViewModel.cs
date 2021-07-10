@@ -12,7 +12,7 @@ namespace Assignment_2.ViewModels
         public int AccountNumber { get; set; }
         public Account Account { get; set; }
         [Required]
-        [Range(0.01, double.MaxValue,ErrorMessage = "Enter a positive amount")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Enter a positive amount")]
         public decimal Amount { get; set; }
     }
 }

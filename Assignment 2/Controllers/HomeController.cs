@@ -20,7 +20,7 @@ namespace Assignment_2.Controllers
             _logger = logger;
             _context = context;
         }
-        
+
 
         public async Task<IActionResult> Index()
         {
@@ -48,7 +48,7 @@ namespace Assignment_2.Controllers
                 return View(viewModel);
             }
 
- 
+
             viewModel.Account.Balance += viewModel.Amount;
             viewModel.Account.Transactions.Add(
                 new Transaction
@@ -57,6 +57,46 @@ namespace Assignment_2.Controllers
                     Amount = viewModel.Amount,
                     TransactionTimeUtc = DateTime.UtcNow
                 });
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Withdraw(int accountNumber)
+        {
+            return View(
+                new WithdrawViewModel
+                {
+                    AccountNumber = accountNumber,
+                    Account = await _context.Accounts.FindAsync(accountNumber)
+                });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Withdraw(WithdrawViewModel viewModel)
+        {
+            viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
+            if (!viewModel.Amount.ToString().IsDollarAmount())
+            {
+                ModelState.AddModelError(nameof(viewModel.Amount), "Enter a dollar amount");
+                return View(viewModel);
+            }
+
+
+            if (viewModel.Account.Balance - viewModel.Amount < 0)
+            {
+                ModelState.AddModelError(nameof(viewModel.Amount), "Insufficient Funds for Withdrawal");
+                return View(viewModel);
+            }
+            viewModel.Account.Balance -= viewModel.Amount;
+            viewModel.Account.Transactions.Add(
+            new Transaction
+            {
+                TransactionType = TransactionType.W,
+                Amount = viewModel.Amount,
+                TransactionTimeUtc = DateTime.UtcNow
+            });
+
 
             await _context.SaveChangesAsync();
 
