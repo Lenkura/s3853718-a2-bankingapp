@@ -55,7 +55,9 @@ namespace Assignment_2.Controllers
                 {
                     TransactionType = TransactionType.D,
                     Amount = viewModel.Amount,
+                    Comment = viewModel.Comment,
                     TransactionTimeUtc = DateTime.UtcNow
+                    
                 });
 
             await _context.SaveChangesAsync();
@@ -101,6 +103,7 @@ namespace Assignment_2.Controllers
             {
                 TransactionType = TransactionType.W,
                 Amount = viewModel.Amount,
+                Comment = viewModel.Comment,
                 TransactionTimeUtc = DateTime.UtcNow
             });
             if (fees > 0)
@@ -108,6 +111,7 @@ namespace Assignment_2.Controllers
                 {
                     TransactionType = TransactionType.S,
                     Amount = fees,
+                    Comment = "Withdrawal Service Fee",
                     TransactionTimeUtc = DateTime.UtcNow
                 });
 
