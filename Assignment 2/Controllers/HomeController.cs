@@ -48,7 +48,7 @@ namespace Assignment_2.Controllers
                 return View(viewModel);
             }
 
-            if (ModelState.IsValid) { 
+ 
             viewModel.Account.Balance += viewModel.Amount;
             viewModel.Account.Transactions.Add(
                 new Transaction
@@ -61,9 +61,6 @@ namespace Assignment_2.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
-            }
-            ModelState.AddModelError(nameof(viewModel.Amount), "Enter a dollar amount");
-            return View(viewModel);
         }
 
         public IActionResult Privacy()
