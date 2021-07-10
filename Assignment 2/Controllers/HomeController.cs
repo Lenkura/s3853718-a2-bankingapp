@@ -57,7 +57,7 @@ namespace Assignment_2.Controllers
                     Amount = viewModel.Amount,
                     Comment = viewModel.Comment,
                     TransactionTimeUtc = DateTime.UtcNow
-                    
+
                 });
 
             await _context.SaveChangesAsync();
@@ -112,6 +112,85 @@ namespace Assignment_2.Controllers
                     TransactionType = TransactionType.S,
                     Amount = fees,
                     Comment = "Withdrawal Service Fee",
+                    TransactionTimeUtc = DateTime.UtcNow
+                });
+
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Transfer(int accountNumber)
+        {
+            return View(
+                new TwoAccountTransactionViewModel
+                {
+                    AccountNumber = accountNumber,
+                    Account = await _context.Accounts.FindAsync(accountNumber)
+                });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Transfer(TwoAccountTransactionViewModel viewModel)
+        {
+            viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
+            if (viewModel.DestinationAccountNumber == viewModel.AccountNumber)
+            {
+                ModelState.AddModelError(nameof(viewModel.DestinationAccountNumber), "Can not Transfer to same account");
+                return View(viewModel);
+            }
+            viewModel.DestinationAccount = await _context.Accounts.FindAsync(viewModel.DestinationAccountNumber);
+            if (viewModel.DestinationAccount == null)
+            {
+                ModelState.AddModelError(nameof(viewModel.DestinationAccountNumber), "Account not Found");
+                return View(viewModel);
+            }
+
+            if (!viewModel.Amount.ToString().IsDollarAmount())
+            {
+                ModelState.AddModelError(nameof(viewModel.Amount), "Enter a dollar amount");
+                return View(viewModel);
+            }
+            decimal fees = AccountChecks.GetTransferFee();
+            if (viewModel.Account.FreeTransactions > 0)
+            {
+                fees = 0;
+                viewModel.Account.FreeTransactions -= 1;
+            }
+
+            if (viewModel.Account.Balance - viewModel.Amount - fees < 0)
+            {
+                ModelState.AddModelError(nameof(viewModel.Amount), "Insufficient Funds for Transfer");
+                return View(viewModel);
+            }
+
+
+            viewModel.Account.Balance = viewModel.Account.Balance - viewModel.Amount - fees;
+            viewModel.DestinationAccount.Balance += viewModel.Amount;
+            viewModel.Account.Transactions.Add(
+            new Transaction
+            {
+                TransactionType = TransactionType.T,
+                DestinationAccountNumber = viewModel.DestinationAccountNumber,
+                Amount = viewModel.Amount,
+                Comment = viewModel.Comment,
+                TransactionTimeUtc = DateTime.UtcNow
+            });
+            viewModel.DestinationAccount.Transactions.Add(
+            new Transaction
+            {
+                TransactionType = TransactionType.T,
+                Amount = viewModel.Amount,
+                Comment = viewModel.Comment,
+                TransactionTimeUtc = DateTime.UtcNow
+             });
+
+            if (fees > 0)
+                viewModel.Account.Transactions.Add(new Transaction
+                {
+                    TransactionType = TransactionType.S,
+                    Amount = fees,
+                    Comment = "Transfer Service Fee",
                     TransactionTimeUtc = DateTime.UtcNow
                 });
 

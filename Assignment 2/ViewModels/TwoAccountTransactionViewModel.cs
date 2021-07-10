@@ -13,7 +13,9 @@ namespace Assignment_2.ViewModels
         public Account Account { get; set; }
         [Required]
         [Range(1000, 9999, ErrorMessage = "Account not Found")]
+        [DataType(DataType.Text)]
         public int DestinationAccountNumber { get; set; }
+        public Account DestinationAccount { get; set; }
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Enter a positive amount")]
         public decimal Amount { get; set; }

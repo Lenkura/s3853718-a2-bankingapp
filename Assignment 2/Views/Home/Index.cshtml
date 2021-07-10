@@ -23,10 +23,10 @@
         <td>
             <a class="btn btn-primary"
                asp-action="Deposit" asp-route-accountNumber="@account.AccountNumber">Deposit</a>
-        </td>
-        <td>
             <a class="btn btn-primary"
                asp-action="Withdraw" asp-route-accountNumber="@account.AccountNumber">Withdraw</a>
+            <a class="btn btn-primary"
+               asp-action="Transfer" asp-route-accountNumber="@account.AccountNumber">Transfer</a>
         </td>
     </tr>
         }
