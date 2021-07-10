@@ -42,13 +42,11 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> Deposit(SingleAccountTransactionViewModel viewModel)
         {
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
-            if (!viewModel.Amount.ToString().IsDollarAmount())
-            {
-                ModelState.AddModelError(nameof(viewModel.Amount), "Enter a dollar amount");
+
+            viewModel = SingleAccountValidation(viewModel);
+
+            if (!ModelState.IsValid)
                 return View(viewModel);
-            }
-
-
             viewModel.Account.Balance += viewModel.Amount;
             viewModel.Account.Transactions.Add(
                 new Transaction
@@ -78,11 +76,8 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> Withdraw(SingleAccountTransactionViewModel viewModel)
         {
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
-            if (!viewModel.Amount.ToString().IsDollarAmount())
-            {
-                ModelState.AddModelError(nameof(viewModel.Amount), "Enter a dollar amount");
-                return View(viewModel);
-            }
+            viewModel = SingleAccountValidation(viewModel);
+
             decimal fees = AccountChecks.GetATMFee();
             if (viewModel.Account.FreeTransactions > 0)
             {
@@ -90,12 +85,13 @@ namespace Assignment_2.Controllers
                 viewModel.Account.FreeTransactions -= 1;
             }
 
-            if (viewModel.Account.Balance - viewModel.Amount - fees < 0)
+            if (viewModel.Account.Balance - viewModel.Amount - fees < AccountChecks.GetAccountTypeMin(viewModel.Account.AccountType.ToString()))
             {
                 ModelState.AddModelError(nameof(viewModel.Amount), "Insufficient Funds for Withdrawal");
-                return View(viewModel);
             }
 
+            if (!ModelState.IsValid)
+                return View(viewModel);
 
             viewModel.Account.Balance = viewModel.Account.Balance - viewModel.Amount - fees;
             viewModel.Account.Transactions.Add(
@@ -134,23 +130,8 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> Transfer(TwoAccountTransactionViewModel viewModel)
         {
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
-            if (viewModel.DestinationAccountNumber == viewModel.AccountNumber)
-            {
-                ModelState.AddModelError(nameof(viewModel.DestinationAccountNumber), "Can not Transfer to same account");
-                return View(viewModel);
-            }
             viewModel.DestinationAccount = await _context.Accounts.FindAsync(viewModel.DestinationAccountNumber);
-            if (viewModel.DestinationAccount == null)
-            {
-                ModelState.AddModelError(nameof(viewModel.DestinationAccountNumber), "Account not Found");
-                return View(viewModel);
-            }
-
-            if (!viewModel.Amount.ToString().IsDollarAmount())
-            {
-                ModelState.AddModelError(nameof(viewModel.Amount), "Enter a dollar amount");
-                return View(viewModel);
-            }
+            viewModel = TwoAccountValidation(viewModel);
             decimal fees = AccountChecks.GetTransferFee();
             if (viewModel.Account.FreeTransactions > 0)
             {
@@ -158,12 +139,12 @@ namespace Assignment_2.Controllers
                 viewModel.Account.FreeTransactions -= 1;
             }
 
-            if (viewModel.Account.Balance - viewModel.Amount - fees < 0)
+            if (viewModel.Account.Balance - viewModel.Amount - fees < AccountChecks.GetAccountTypeMin(viewModel.Account.AccountType.ToString()))
             {
                 ModelState.AddModelError(nameof(viewModel.Amount), "Insufficient Funds for Transfer");
-                return View(viewModel);
             }
-
+            if (!ModelState.IsValid)
+                return View(viewModel);
 
             viewModel.Account.Balance = viewModel.Account.Balance - viewModel.Amount - fees;
             viewModel.DestinationAccount.Balance += viewModel.Amount;
@@ -209,6 +190,33 @@ namespace Assignment_2.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private SingleAccountTransactionViewModel SingleAccountValidation(SingleAccountTransactionViewModel satv)
+        {
+            if (!satv.Amount.ToString().IsDollarAmount())
+            {
+                ModelState.AddModelError(nameof(satv.Amount), "Enter a dollar amount");
+            }
+            return satv;
+        }
+        private TwoAccountTransactionViewModel TwoAccountValidation(TwoAccountTransactionViewModel satv)
+        {
+            if (satv.DestinationAccountNumber == satv.AccountNumber)
+            {
+                ModelState.AddModelError(nameof(satv.DestinationAccountNumber), "Can not Transfer to same account");
+            }
+            
+            if (satv.DestinationAccount == null)
+            {
+                ModelState.AddModelError(nameof(satv.DestinationAccountNumber), "Account not Found");
+            }
+
+            if (!satv.Amount.ToString().IsDollarAmount())
+            {
+                ModelState.AddModelError(nameof(satv.Amount), "Enter a dollar amount");
+            }
+            return satv;
         }
     }
 }
