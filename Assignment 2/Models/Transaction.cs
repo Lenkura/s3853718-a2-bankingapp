@@ -24,8 +24,10 @@ namespace Assignment_2.Models
         [Column(TypeName = "char")]
         public TransactionType TransactionType { get; set; }
         [Required]
+        [ForeignKey("Account")]
         public int AccountNumber { get; set; }
         public virtual Account Account { get; set; }
+        [ForeignKey("DestinationAccount")]
         public int? DestinationAccountNumber { get; set; }
         public virtual Account DestinationAccount { get; set; }
 
