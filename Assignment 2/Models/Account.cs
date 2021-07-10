@@ -33,6 +33,7 @@ namespace Assignment_2.Models
         [Column(TypeName = "money")]
         [DataType(DataType.Currency)]
         public decimal Balance { get; set; }
+        public int FreeTransactions { get; set; }
 
         public virtual List<Transaction> Transactions { get; set; }
     }

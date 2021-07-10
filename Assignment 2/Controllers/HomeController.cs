@@ -81,14 +81,21 @@ namespace Assignment_2.Controllers
                 ModelState.AddModelError(nameof(viewModel.Amount), "Enter a dollar amount");
                 return View(viewModel);
             }
+            decimal fees = AccountChecks.GetATMFee();
+            if (viewModel.Account.FreeTransactions > 0)
+            {
+                fees = 0;
+                viewModel.Account.FreeTransactions -= 1;
+            }
 
-
-            if (viewModel.Account.Balance - viewModel.Amount < 0)
+            if (viewModel.Account.Balance - viewModel.Amount - fees < 0)
             {
                 ModelState.AddModelError(nameof(viewModel.Amount), "Insufficient Funds for Withdrawal");
                 return View(viewModel);
             }
-            viewModel.Account.Balance -= viewModel.Amount;
+
+
+            viewModel.Account.Balance = viewModel.Account.Balance - viewModel.Amount - fees;
             viewModel.Account.Transactions.Add(
             new Transaction
             {
@@ -96,6 +103,13 @@ namespace Assignment_2.Controllers
                 Amount = viewModel.Amount,
                 TransactionTimeUtc = DateTime.UtcNow
             });
+            if (fees > 0)
+                viewModel.Account.Transactions.Add(new Transaction
+                {
+                    TransactionType = TransactionType.S,
+                    Amount = fees,
+                    TransactionTimeUtc = DateTime.UtcNow
+                });
 
 
             await _context.SaveChangesAsync();

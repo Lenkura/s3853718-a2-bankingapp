@@ -1,4 +1,5 @@
 ﻿using Assignment_2.Models;
+using DataValidator;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -66,28 +67,33 @@ namespace Assignment_2.Data
                     AccountNumber = 4100,
                     AccountType = AccountType.S,
                     CustomerID = 2100,
-                    Balance = 100
+                    Balance = 100,
+                    FreeTransactions = AccountChecks.GetFreeTransacionLimit()
                 },
                 new Account
                 {
                     AccountNumber = 4101,
                     AccountType = AccountType.C,
                     CustomerID = 2100,
-                    Balance = 500
+                    Balance = 500,
+                    FreeTransactions = AccountChecks.GetFreeTransacionLimit()
+
                 },
                 new Account
                 {
                     AccountNumber = 4200,
                     AccountType = AccountType.S,
                     CustomerID = 2200,
-                    Balance = 500.95m
+                    Balance = 500.95m,
+                    FreeTransactions = AccountChecks.GetFreeTransacionLimit()
                 },
                 new Account
                 {
                     AccountNumber = 4300,
                     AccountType = AccountType.C,
                     CustomerID = 2300,
-                    Balance = 1250.50m
+                    Balance = 1250.50m,
+                    FreeTransactions = AccountChecks.GetFreeTransacionLimit()
                 });
 
             const string format = "dd/MM/yyyy hh:mm:ss tt";
