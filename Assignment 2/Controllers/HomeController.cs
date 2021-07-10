@@ -31,7 +31,7 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> Deposit(int accountNumber)
         {
             return View(
-                new DepositViewModel
+                new SingleAccountTransactionViewModel
                 {
                     AccountNumber = accountNumber,
                     Account = await _context.Accounts.FindAsync(accountNumber)
@@ -39,7 +39,7 @@ namespace Assignment_2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Deposit(DepositViewModel viewModel)
+        public async Task<IActionResult> Deposit(SingleAccountTransactionViewModel viewModel)
         {
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
             if (!viewModel.Amount.ToString().IsDollarAmount())
@@ -65,7 +65,7 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> Withdraw(int accountNumber)
         {
             return View(
-                new WithdrawViewModel
+                new SingleAccountTransactionViewModel
                 {
                     AccountNumber = accountNumber,
                     Account = await _context.Accounts.FindAsync(accountNumber)
@@ -73,7 +73,7 @@ namespace Assignment_2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Withdraw(WithdrawViewModel viewModel)
+        public async Task<IActionResult> Withdraw(SingleAccountTransactionViewModel viewModel)
         {
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
             if (!viewModel.Amount.ToString().IsDollarAmount())

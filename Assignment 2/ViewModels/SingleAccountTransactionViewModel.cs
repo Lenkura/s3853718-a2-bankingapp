@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assignment_2.ViewModels
 {
-    public class WithdrawViewModel
+    public class SingleAccountTransactionViewModel
     {
         public int AccountNumber { get; set; }
         public Account Account { get; set; }
