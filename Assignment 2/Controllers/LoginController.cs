@@ -19,19 +19,22 @@ namespace Assignment_2.Controllers
         {
             return View();
         }
+        public IActionResult Index(bool authorise) => Index(authorise);
 
+        [Route("RequestAccess")]
         public IActionResult Login() => View();
 
+
         [HttpPost]
+        [Route("RequestAccess")]
         public async Task<IActionResult> Login(string loginID, string password)
         {
             var login = await _context.Logins.FindAsync(loginID);
             if (login == null || !PBKDF2.Verify(login.PasswordHash, password))
             {
-                ModelState.AddModelError("LoginFailed", "Login failed, please try again.");
+                ModelState.AddModelError("LoginFailed", "Incorrect Username or Password");
                 return View(new Login { LoginID = loginID });
             }
-
             // Login customer.
             HttpContext.Session.SetInt32(nameof(Customer.CustomerID), login.CustomerID);
             HttpContext.Session.SetString(nameof(Customer.Name), login.Customer.Name);
@@ -39,7 +42,6 @@ namespace Assignment_2.Controllers
             return RedirectToAction("Index", "Transaction");
         }
 
-        [Route("LogoutNow")]
         public IActionResult Logout()
         {
             // Logout customer.

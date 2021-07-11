@@ -1,4 +1,5 @@
-﻿using Assignment_2.Data;
+﻿using Assignment_2.Authorise;
+using Assignment_2.Data;
 using Assignment_2.Models;
 using Assignment_2.ViewModels;
 using DataValidator;
@@ -11,8 +12,10 @@ using System.Threading.Tasks;
 
 namespace Assignment_2.Controllers
 {
+    [SecureContent]
     public class TransactionController : Controller
     {
+  
         private readonly ILogger<TransactionController> _logger;
         private readonly Assignment2DbContext _context;
         public TransactionController(ILogger<TransactionController> logger, Assignment2DbContext context)
@@ -21,7 +24,7 @@ namespace Assignment_2.Controllers
             _context = context;
         }
 
-
+     
         public async Task<IActionResult> Index()
         {
 
