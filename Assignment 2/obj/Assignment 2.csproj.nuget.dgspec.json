@@ -79,6 +79,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "SimpleHashing": {
+              "target": "Package",
+              "version": "[2.0.0.1, )"
             }
           },
           "imports": [

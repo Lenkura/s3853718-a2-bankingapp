@@ -1272,6 +1272,15 @@
           }
         }
       },
+      "SimpleHashing/2.0.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/SimpleHashing.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SimpleHashing.dll": {}
+        }
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4804,6 +4813,18 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "SimpleHashing/2.0.0.1": {
+      "sha512": "+THp+FuTQ+bML8BvupOsbmvEosj99tOXB+WopEF8DqIuhkw2lrkuvpY3PGJDIXw/rxj9vvcP/caKyjFAyE5w2w==",
+      "type": "package",
+      "path": "simplehashing/2.0.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/SimpleHashing.dll",
+        "simplehashing.2.0.0.1.nupkg.sha512",
+        "simplehashing.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -8963,7 +8984,8 @@
       "Microsoft.EntityFrameworkCore.Proxies >= 5.0.7",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.7",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.7",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
+      "SimpleHashing >= 2.0.0.1"
     ]
   },
   "packageFolders": {
@@ -9044,6 +9066,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[5.0.2, )"
+          },
+          "SimpleHashing": {
+            "target": "Package",
+            "version": "[2.0.0.1, )"
           }
         },
         "imports": [
