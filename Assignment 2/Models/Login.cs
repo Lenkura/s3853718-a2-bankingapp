@@ -8,7 +8,7 @@ namespace Assignment_2.Models
 {
     public class Login
     {
-        [Required, RegularExpression(@"/\d{8}/", ErrorMessage = "LoginIds are 8 digit numbers")]
+        [Required, Range(10000000,99999999, ErrorMessage = "LoginIds are 8 digit numbers")]
         public string LoginID { get; set; }
         [Required, Range(1000, 9999)]
         public int CustomerID { get; set; }

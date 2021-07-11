@@ -25,7 +25,7 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var customer = await _context.Customers.FindAsync(2100);
+            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
             return View(customer);
         }
         public async Task<IActionResult> Deposit(int accountNumber)
