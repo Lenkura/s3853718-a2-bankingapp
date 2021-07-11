@@ -63,8 +63,6 @@ D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.TagHelpers.input.c
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.TagHelpers.output.cache
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Assignment 2.RazorCoreGenerate.cache
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
-D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
-D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
@@ -160,12 +158,14 @@ D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Customers\Edit.csht
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Customers\Index.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Castle.Core.dll
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Proxies.dll
-D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Deposit.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Azure.Core.dll
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Azure.Identity.dll
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.Identity.Client.Extensions.Msal.dll
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\DataValidator.dll
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\DataValidator.pdb
-D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Withdraw.cshtml.g.cs
-D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Transfer.cshtml.g.cs
-D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Confirm.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Transaction\Confirm.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Transaction\Deposit.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Transaction\Index.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Transaction\Privacy.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Transaction\Transfer.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Transaction\Withdraw.cshtml.g.cs

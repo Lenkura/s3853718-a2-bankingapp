@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Assignment_2.Controllers
 {
-    public class HomeController : Controller
+    public class TransactionController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<TransactionController> _logger;
         private readonly Assignment2DbContext _context;
-        public HomeController(ILogger<HomeController> logger, Assignment2DbContext context)
+        public TransactionController(ILogger<TransactionController> logger, Assignment2DbContext context)
         {
             _logger = logger;
             _context = context;

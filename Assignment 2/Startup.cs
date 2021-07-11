@@ -70,7 +70,7 @@ namespace Assignment_2
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Transaction}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
