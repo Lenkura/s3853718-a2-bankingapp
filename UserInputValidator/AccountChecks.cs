@@ -66,19 +66,14 @@ namespace DataValidator
         }
         public static string TransactionTypeExtender(this string transactionType)
         {
-            switch (transactionType)
+            return transactionType switch
             {
-                case ("D"):
-                    return "Deposit";
-                case ("W"):
-                    return "Withdrawal";
-                case ("T"):
-                    return "Transfer";
-                case ("S"):
-                    return "Service";
-                default:
-                    return "";
-            }
+                ("D") => "Deposit",
+                ("W") => "Withdrawal",
+                ("T") => "Transfer",
+                ("S") => "Service",
+                _ => "",
+            };
         }
         public static decimal GetSavingsMin() => _savingsMinimum;
 

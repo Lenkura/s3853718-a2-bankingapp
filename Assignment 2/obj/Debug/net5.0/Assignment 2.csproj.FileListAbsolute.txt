@@ -168,4 +168,4 @@ D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\DataValidator.dll
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\DataValidator.pdb
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Withdraw.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Transfer.cshtml.g.cs
-D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\TransactionConfirm.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Home\Confirm.cshtml.g.cs

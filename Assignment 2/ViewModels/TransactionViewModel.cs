@@ -19,6 +19,7 @@ namespace Assignment_2.ViewModels
         public decimal Amount { get; set; }
         [StringLength(30)]
         public string Comment { get; set; }
-        public TransactionType TransactionType { get; set; }
+        public string TransactionType { get; set; }
+        public decimal Fees { get; set; }
     }
 }

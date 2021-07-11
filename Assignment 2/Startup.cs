@@ -29,6 +29,13 @@ namespace Assignment_2
                 options.UseLazyLoadingProxies();
             });
 
+            // Store session into Web-Server memory.
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                // Make the session cookie essential.
+                options.Cookie.IsEssential = true;
+            });
             services.AddDatabaseDeveloperPageExceptionFilter();
 
 
@@ -58,7 +65,7 @@ namespace Assignment_2
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -1,0 +1,51 @@
+﻿@using DataValidator;
+
+@model Assignment_2.ViewModels.TransactionViewModel
+@{
+    ViewData["Title"] = "Confirm";
+
+}
+
+<h1 class="display-4">Please Confirm the Details Below</h1>
+<h2>@Model.TransactionType</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <label>Account</label>
+            <label>@Model.AccountNumber</label>
+        </div>
+        @if (Model.DestinationAccount != null)
+        {
+            <div>
+                <label>Destination Account</label>
+                <label>@Model.DestinationAccount.AccountNumber</label>
+            </div>
+        }
+        <div>
+            <label>Amount:</label>
+            <label>@Model.Amount</label>
+        </div>
+        <div>
+            <label>Comment:</label>
+            <label>@Model.Comment</label>
+        </div>
+        <form asp-action="Confirm">
+            <div class="form-group">
+                <input type="hidden" asp-for="AccountNumber" value="@Model.AccountNumber" />
+                <input type="hidden" asp-for="DestinationAccountNumber" value="@Model.DestinationAccountNumber" />
+                <input type="hidden" asp-for="Amount" value="@Model.Amount" />
+                <input type="hidden" asp-for="Comment" value="@Model.Comment" />
+                <input type="hidden" asp-for="TransactionType" value="@Model.TransactionType" />
+                <input type="hidden" asp-for="Fees" value="@Model.Fees" />
+                <input type="submit" value="Confirm" class="btn btn-primary" />
+                <a class="btn btn-primary" asp-action="Index">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
