@@ -31,7 +31,7 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> Deposit(int accountNumber)
         {
             return View(
-                new SingleAccountTransactionViewModel
+                new TransactionViewModel
                 {
                     AccountNumber = accountNumber,
                     Account = await _context.Accounts.FindAsync(accountNumber)
@@ -39,7 +39,7 @@ namespace Assignment_2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Deposit(SingleAccountTransactionViewModel viewModel)
+        public async Task<IActionResult> Deposit(TransactionViewModel viewModel)
         {
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
 
@@ -65,7 +65,7 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> Withdraw(int accountNumber)
         {
             return View(
-                new SingleAccountTransactionViewModel
+                new TransactionViewModel
                 {
                     AccountNumber = accountNumber,
                     Account = await _context.Accounts.FindAsync(accountNumber)
@@ -73,7 +73,7 @@ namespace Assignment_2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Withdraw(SingleAccountTransactionViewModel viewModel)
+        public async Task<IActionResult> Withdraw(TransactionViewModel viewModel)
         {
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
             viewModel = SingleAccountValidation(viewModel);
@@ -119,7 +119,7 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> Transfer(int accountNumber)
         {
             return View(
-                new TwoAccountTransactionViewModel
+                new TransactionViewModel
                 {
                     AccountNumber = accountNumber,
                     Account = await _context.Accounts.FindAsync(accountNumber)
@@ -127,7 +127,7 @@ namespace Assignment_2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Transfer(TwoAccountTransactionViewModel viewModel)
+        public async Task<IActionResult> Transfer(TransactionViewModel viewModel)
         {
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
             viewModel.DestinationAccount = await _context.Accounts.FindAsync(viewModel.DestinationAccountNumber);
@@ -192,31 +192,31 @@ namespace Assignment_2.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private SingleAccountTransactionViewModel SingleAccountValidation(SingleAccountTransactionViewModel satv)
+        private TransactionViewModel SingleAccountValidation(TransactionViewModel tvm)
         {
-            if (!satv.Amount.ToString().IsDollarAmount())
+            if (!tvm.Amount.ToString().IsDollarAmount())
             {
-                ModelState.AddModelError(nameof(satv.Amount), "Enter a dollar amount");
+                ModelState.AddModelError(nameof(tvm.Amount), "Enter a dollar amount");
             }
-            return satv;
+            return tvm;
         }
-        private TwoAccountTransactionViewModel TwoAccountValidation(TwoAccountTransactionViewModel satv)
+        private TransactionViewModel TwoAccountValidation(TransactionViewModel tvm)
         {
-            if (satv.DestinationAccountNumber == satv.AccountNumber)
+            if (tvm.DestinationAccountNumber == tvm.AccountNumber)
             {
-                ModelState.AddModelError(nameof(satv.DestinationAccountNumber), "Can not Transfer to same account");
+                ModelState.AddModelError(nameof(tvm.DestinationAccountNumber), "Can not Transfer to same account");
             }
             
-            if (satv.DestinationAccount == null)
+            if (tvm.DestinationAccount == null)
             {
-                ModelState.AddModelError(nameof(satv.DestinationAccountNumber), "Account not Found");
+                ModelState.AddModelError(nameof(tvm.DestinationAccountNumber), "Account not Found");
             }
 
-            if (!satv.Amount.ToString().IsDollarAmount())
+            if (!tvm.Amount.ToString().IsDollarAmount())
             {
-                ModelState.AddModelError(nameof(satv.Amount), "Enter a dollar amount");
+                ModelState.AddModelError(nameof(tvm.Amount), "Enter a dollar amount");
             }
-            return satv;
+            return tvm;
         }
     }
 }

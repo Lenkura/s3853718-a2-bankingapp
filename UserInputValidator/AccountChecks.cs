@@ -52,7 +52,7 @@ namespace DataValidator
                     return 0;
             }
         }
-        public static string AccountTypeExtender(string accountType)
+        public static string AccountTypeExtender(this string accountType)
         {
             switch (accountType)
             {
@@ -64,7 +64,7 @@ namespace DataValidator
                     return "";
             }
         }
-        public static string TransactionTypeExtender(string transactionType)
+        public static string TransactionTypeExtender(this string transactionType)
         {
             switch (transactionType)
             {

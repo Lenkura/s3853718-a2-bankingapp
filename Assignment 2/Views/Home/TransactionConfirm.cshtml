@@ -1,0 +1,41 @@
+﻿@using DataValidator;
+@model Assignment_2.ViewModels.TransactionViewModel
+@{
+    ViewData["Title"] = "Confirm";
+}
+
+<h1 class="display-4">Please Confirm the Details Below</h1>
+<h2 class="display-3">@Model.TransactionType.ToString().TransactionTypeExtender()</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <label>Account</label>
+            <label>@Model.AccountNumber</label>
+        </div>
+        @if (Model.DestinationAccount != null)
+        {
+            <div>
+                <label>Destination Account</label>
+                <label>@Model.DestinationAccount.AccountNumber</label>
+            </div>
+        }
+        <div>
+            <label>Amount</label>
+            <label>@Model.Amount</label>
+        </div>
+        <div>
+            <label>Comment</label>
+            <label>@Model.Comment</label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="confirm" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
