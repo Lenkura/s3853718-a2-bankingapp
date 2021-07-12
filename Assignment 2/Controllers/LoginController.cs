@@ -19,7 +19,6 @@ namespace Assignment_2.Controllers
         {
             return View();
         }
-        public IActionResult Index(bool authorise) => Index(authorise);
 
         [Route("RequestAccess")]
         public IActionResult Login() => View();

@@ -7,7 +7,12 @@
     <h1 class="display-4">Most Common Bank of Australia</h1>
 </div>
 
-
+<div>
+    <h2>Welcome</h2>
+    <p></p>
+    <img src="~/img/bank.jpg" class="rounded float-right">
+    <p>To access personal services, please log in through the button below</p>
+</div>
 
 @{
     var isLoggedIn = Context.Session.GetInt32(nameof(Customer.CustomerID)).HasValue;
@@ -15,6 +20,6 @@
 @if (!isLoggedIn)
 {
     <p>
-        <a asp-controller="Login" asp-action="Login" class="btn btn-primary">Login</a>
+        <a asp-controller="Login" asp-action="Login" class="btn btn-outline-dark">Login</a>
     </p>
 }

@@ -12,48 +12,49 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                    <a class="navbar-brand text-nowrap" asp-area="" asp-controller="Login" asp-action="Index">MCBA</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex ">
-                        @{
-                            var isLoggedIn = Context.Session.GetInt32(nameof(Customer.CustomerID)).HasValue;
-                        }
-                        @if (isLoggedIn)
-                        {
-                            <ul class="navbar-nav mr-auto p-2 justify-content-start">
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Transaction" asp-action="Index">Move Money</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="FILLMEIN" asp-action="Index">My Statements</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="FILLMEIN" asp-action="Index">My Profile</a>
-                                </li>
-                            </ul>
-                            <ul class="navbar-nav ml-auto p-2 justify-content-end">
-                                <li class="nav-item">
-                                    <span class="nav-link text-dark">
-                                        Logged in as @Context.Session.GetString(nameof(Customer.Name))
-                                    </span>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Logout</a>
-                                </li>
-                            </ul>
-                        }
-                        else
-                        {
-                            <ul class="navbar-nav flex-grow-1 ml-auto p-2 justify-content-end">
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Login" asp-action="Login">Login</a>
-                                </li>
-                            </ul>
-                        }
-                    </div>
+                
+                <a class="navbar-brand text-nowrap" asp-area="" asp-controller="Login" asp-action="Index"><img src="~/img/logo.jpg" class="rounded float-left">MCBA</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex ">
+                    @{
+                        var isLoggedIn = Context.Session.GetInt32(nameof(Customer.CustomerID)).HasValue;
+                    }
+                    @if (isLoggedIn)
+                    {
+                        <ul class="navbar-nav mr-auto p-2 justify-content-start">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Transaction" asp-action="Index">Move Money</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="FILLMEIN" asp-action="Index">My Statements</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="FILLMEIN" asp-action="Index">My Profile</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto p-2 justify-content-end">
+                            <li class="nav-item">
+                                <span class="nav-link text-dark">
+                                    Logged in as @Context.Session.GetString(nameof(Customer.Name))
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="navbar-nav flex-grow-1 ml-auto p-2 justify-content-end">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Login" asp-action="Login">Login</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
             </div>
         </nav>
     </header>
