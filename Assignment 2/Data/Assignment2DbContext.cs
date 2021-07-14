@@ -22,7 +22,6 @@ namespace Assignment_2.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
             // Set check constraints (cannot be expressed with data annotations).
             builder.Entity<Login>().HasCheckConstraint("CH_Login_LoginID", "len(LoginID) = 8").
                 HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");

@@ -37,16 +37,15 @@ namespace Assignment_2.Models
         [StringLength(40)]
         public string Suburb { get; set; }
 
-        [StringLength(3)]
         [Column(TypeName = "nvarchar")]
         public AusStates State { get; set; }
 
         [StringLength(4)]
-        [RegularExpression(@"/\d{4}/", ErrorMessage = "Postcodes are 4 digit numbers")]
+        [Range(1000, 9999, ErrorMessage = "Enter a Valid Postcode")]
         public string PostCode { get; set; }
 
         [StringLength(12)]
-        [RegularExpression(@"/^\(?(?:\+?61|0)[2-478]\)?(?:[ -]?[0-9]){8}$/", ErrorMessage = "Please enter an Australian Phone Number")]
+        [RegularExpression(@"04[0-9]{2}\s?[0-9]{3}\s?[0-9]{3}", ErrorMessage = "Please enter an Australian Phone Number")]
         public string Mobile { get; set; }
 
         public virtual List<Account> Accounts { get; set; }

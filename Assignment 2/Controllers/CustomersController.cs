@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Assignment_2.Data;
 using Assignment_2.Models;
+using Assignment_2.Authorise;
+using Microsoft.AspNetCore.Http;
 
 namespace Assignment_2.Controllers
 {
+    [SecureContent]
     public class CustomersController : Controller
     {
         private readonly Assignment2DbContext _context;
@@ -26,13 +29,9 @@ namespace Assignment_2.Controllers
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
+            var id = HttpContext.Session.GetInt32(nameof(Customer.CustomerID));
             var customer = await _context.Customers
                 .FirstOrDefaultAsync(m => m.CustomerID == id);
             if (customer == null)
@@ -111,7 +110,7 @@ namespace Assignment_2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details));
             }
             return View(customer);
         }
