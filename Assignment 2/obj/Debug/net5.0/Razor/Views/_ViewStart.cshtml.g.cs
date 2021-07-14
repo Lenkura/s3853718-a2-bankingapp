@@ -26,8 +26,22 @@ using Assignment_2.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "D:\Git\s3853718-a2\Assignment 2\Views\_ViewImports.cshtml"
+using Assignment_2.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "D:\Git\s3853718-a2\Assignment 2\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"eba48026f3206873ad263ac9c727ea8ad18f17cf", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2e2cdb6d67eb628c5661e6193887e5a252f3f0d6", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

@@ -35,6 +35,7 @@ namespace Assignment_2.Controllers
                 return View(new Login { LoginID = loginID });
             }
             // Login customer.
+            HttpContext.Session.SetString(nameof(Models.Login.LoginID), login.LoginID);
             HttpContext.Session.SetInt32(nameof(Customer.CustomerID), login.CustomerID);
             HttpContext.Session.SetString(nameof(Customer.Name), login.Customer.Name);
 
