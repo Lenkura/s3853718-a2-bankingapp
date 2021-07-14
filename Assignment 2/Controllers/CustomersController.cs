@@ -157,7 +157,7 @@ namespace Assignment_2.Controllers
                     throw;
                 }
             }
-            return RedirectToAction(nameof(Details));
+            return RedirectToAction("Logout", "Login");
 
         }
 
