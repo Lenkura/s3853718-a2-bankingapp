@@ -2,7 +2,9 @@
 @{
     ViewData["Title"] = "Landing";
 }
-
+@{
+    var isLoggedIn = Context.Session.GetInt32(nameof(Customer.CustomerID)).HasValue;
+}
 <div>
     <h1 class="display-4">Most Common Bank of Australia</h1>
 </div>
@@ -11,12 +13,19 @@
     <h2>Welcome</h2>
     <p></p>
     <img src="~/img/bank.jpg" class="rounded float-right">
-    <p>To access personal services, please log in through the button below</p>
+    <p>
+        To access personal services,     
+        @if (!isLoggedIn)
+        {
+            <span>please log in through the button below</span>
+        }
+        else
+        {
+            <span>Click one of the links in the navigation bar above</span>}
+    </p>
 </div>
 
-@{
-    var isLoggedIn = Context.Session.GetInt32(nameof(Customer.CustomerID)).HasValue;
-}
+
 @if (!isLoggedIn)
 {
     <p>

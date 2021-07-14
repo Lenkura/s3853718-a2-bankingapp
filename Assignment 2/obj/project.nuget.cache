@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hlZffYEf+mRAbtcnjZ7GoWdNxEaGsI4tMXSNLZZF9bga+O5eZFLSaUTrfVuqBqOwIxXuc8rOt5WP/KW7fQEmhw==",
+  "dgSpecHash": "tpAEa7gcC1HUYZzLprLHLcGn+XRATomiBHo4C3gNNIBwP65Grb1GEQ+t0rYUwAEqwJ4EuD9v+D5b6xZFkHzPHw==",
   "success": true,
   "projectFilePath": "D:\\Git\\s3853718-a2\\Assignment 2\\Assignment 2.csproj",
   "expectedPackageFiles": [
@@ -37,6 +37,7 @@
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\5.0.7\\microsoft.entityframeworkcore.tools.5.0.7.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\5.0.0\\microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.extensions.caching.memory\\5.0.0\\microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",
+    "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.extensions.caching.sqlserver\\5.0.1\\microsoft.extensions.caching.sqlserver.5.0.1.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.1\\microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",

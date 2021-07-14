@@ -41,6 +41,7 @@
           "Microsoft.EntityFrameworkCore.Proxies": "5.0.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.7",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.7",
+          "Microsoft.Extensions.Caching.SqlServer": "5.0.1",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "5.0.2",
           "SimpleHashing": "2.0.0.1",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
@@ -930,6 +931,22 @@
           "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
           "Microsoft.Extensions.Options": "5.0.0",
           "Microsoft.Extensions.Primitives": "5.0.0"
+        }
+      },
+      "Microsoft.Extensions.Caching.SqlServer/5.0.1": {
+        "dependencies": {
+          "Microsoft.Data.SqlClient": "3.0.0",
+          "Microsoft.Extensions.Caching.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Options": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Caching.SqlServer.dll": {
+            "assemblyVersion": "5.0.1.0",
+            "fileVersion": "5.0.120.58002"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Caching.SqlServer.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.Abstractions/5.0.0": {
@@ -4150,6 +4167,13 @@
       "sha512": "sha512-/1qPCleFOkJe0O+xmFqCNLFYQZTJz965sVw8CUB/BQgsApBwzAUsL2BUkDvQW+geRUVTXUS9zLa0pBjC2VJ1gA==",
       "path": "microsoft.extensions.caching.memory/5.0.0",
       "hashPath": "microsoft.extensions.caching.memory.5.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Caching.SqlServer/5.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JQgH2x7U94InnzGdqcaz0Ebj7Ohl98rbzbcSZj09TxkpoBjouCDTlK2iirfGLfT8ne2rQngVTb/VJEIq26Nt0g==",
+      "path": "microsoft.extensions.caching.sqlserver/5.0.1",
+      "hashPath": "microsoft.extensions.caching.sqlserver.5.0.1.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration.Abstractions/5.0.0": {
       "type": "package",

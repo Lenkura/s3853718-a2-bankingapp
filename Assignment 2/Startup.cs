@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Assignment_2
 {
@@ -29,12 +30,22 @@ namespace Assignment_2
                 options.UseLazyLoadingProxies();
             });
 
+            //Session storage options:
             // Store session into Web-Server memory.
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
+            //Store session into database
+            services.AddDistributedSqlServerCache(options =>
+            {
+                options.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+                options.SchemaName = "dotnet";
+                options.TableName = "SessionCache";
+            });
+
             services.AddSession(options =>
             {
                 // Make the session cookie essential.
                 options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromDays(2);
             });
             services.AddDatabaseDeveloperPageExceptionFilter();
 
