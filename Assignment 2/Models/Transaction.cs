@@ -10,10 +10,15 @@ namespace Assignment_2.Models
 {
     public enum TransactionType
     {
+        [Display(Name = "Deposit")]
         D = 1,
+        [Display(Name = "Withdraw")]
         W = 2,
+        [Display(Name = "Transfer")]
         T = 3,
+        [Display(Name = "Service")]
         S = 4,
+        [Display(Name = "BillPay")]
         B = 5
     }
     public class Transaction

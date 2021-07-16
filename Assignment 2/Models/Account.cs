@@ -11,7 +11,9 @@ namespace Assignment_2.Models
 {
     public enum AccountType
 {
+        [Display(Name ="Checking")]
         C = 1,
+        [Display(Name = "Savings")]
         S = 2
     }
     public class Account
