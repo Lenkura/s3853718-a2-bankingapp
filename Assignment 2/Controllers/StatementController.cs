@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -26,6 +27,13 @@ namespace Assignment_2.Controllers
         {
             var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
             return View(customer);
+        }
+
+        public async Task<IActionResult> History(int accountNumber)
+        {
+            var account = await _context.Accounts.FindAsync(accountNumber);
+            var transactions = account.Transactions;
+            return View(transactions);
         }
     }
 }

@@ -175,3 +175,5 @@ D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Login\Login.cshtml.
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\Microsoft.Extensions.Caching.SqlServer.dll
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Customers\Password.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Statement\Index.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Statement\View.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Statement\History.cshtml.g.cs

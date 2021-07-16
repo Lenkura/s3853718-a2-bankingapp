@@ -1,37 +1,30 @@
-﻿@model Assignment_2.Models.Customer
-
+﻿@model Customer
 @{
-    ViewData["Title"] = "Transactions";
+    ViewData["Title"] = "Accounts";
 }
-<h1>Account History</h1>
 
-<h4>Transactions</h4>
-<hr />
+<div>
+    <h1 class="display-4">Welcome, @Model.Name</h1>
 
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(x => x.Accounts[0].Transactions[0].TransactionID)</th>
-        <th>@Html.DisplayNameFor(x => x.Accounts[0].Transactions[0].TransactionType)</th>
-        <th>@Html.DisplayNameFor(x => x.Accounts[0].Transactions[0].AccountNumber)</th>
-        <th>@Html.DisplayNameFor(x => x.Accounts[0].Transactions[0].DestinationAccountNumber)</th>
-        <th>@Html.DisplayNameFor(x => x.Accounts[0].Transactions[0].Amount)</th>
-        <th>@Html.DisplayNameFor(x => x.Accounts[0].Transactions[0].Comment)</th>
-        <th>@Html.DisplayNameFor(x => x.Accounts[0].Transactions[0].TransactionTimeUtc)</th>
-    </tr>
-    @foreach (var account in Model.Accounts)
-    {
-        @foreach (var transaction in account.Transactions)
+    <h3>Your Accounts</h3>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountType)</th>
+            <th>@Html.DisplayNameFor(x => x.Accounts[0].Balance)</th>
+            <th></th>
+        </tr>
+        @foreach (var account in Model.Accounts)
         {
             <tr>
-                <td>@Html.DisplayFor(x=>transaction.TransactionID)</td>
-                <td>@Html.DisplayFor(x => transaction.TransactionType)</td>
-                <td>@Html.DisplayFor(x => transaction.AccountNumber)</td>
-                <td>@Html.DisplayFor(x => transaction.DestinationAccountNumber)</td>
-                <td>@Html.DisplayFor(x => transaction.Amount)</td>
-                <td>@Html.DisplayFor(x => transaction.Comment)</td>
-                <td>@Html.DisplayFor(x => transaction.TransactionTimeUtc)</td>
+                <td>@Html.DisplayFor(x => account.AccountNumber)</td>
+                <td>@Html.DisplayFor(x => account.AccountType)</td>
+                <td>@Html.DisplayFor(x => account.Balance)</td>
+                <td>
+                    <a class="btn btn-primary"
+                       asp-action="History" asp-route-accountNumber="@account.AccountNumber">History</a>
+                </td>
             </tr>
         }
-    }
-</table>
-
+    </table>
+</div>
