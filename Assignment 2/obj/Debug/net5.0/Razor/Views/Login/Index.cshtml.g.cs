@@ -40,6 +40,13 @@ using System.Collections.Generic;
 #line hidden
 #nullable disable
 #nullable restore
+#line 6 "D:\Git\s3853718-a2\Assignment 2\Views\_ViewImports.cshtml"
+using DataValidator;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "D:\Git\s3853718-a2\Assignment 2\Views\Login\Index.cshtml"
 using Microsoft.AspNetCore.Http;
 
@@ -47,7 +54,7 @@ using Microsoft.AspNetCore.Http;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"08b27f3e6eff3ce65fddcbeca473a3196e00c81e", @"/Views/Login/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1ae31c3db91048975ba78e028204ddc06b22dbc1", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"54a0fa103075b1457c40a4bcf723ea4a90e668c1", @"/Views/_ViewImports.cshtml")]
     public class Views_Login_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/img/bank.jpg"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -97,7 +104,7 @@ using Microsoft.AspNetCore.Http;
 #line hidden
 #nullable disable
             WriteLiteral("<div>\r\n    <h1 class=\"display-4\">Most Common Bank of Australia</h1>\r\n</div>\r\n\r\n<div>\r\n    <h2>Welcome</h2>\r\n    <p></p>\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "08b27f3e6eff3ce65fddcbeca473a3196e00c81e5853", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "08b27f3e6eff3ce65fddcbeca473a3196e00c81e6013", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -148,7 +155,7 @@ using Microsoft.AspNetCore.Http;
 #line hidden
 #nullable disable
             WriteLiteral("    <p>\r\n        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "08b27f3e6eff3ce65fddcbeca473a3196e00c81e8064", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "08b27f3e6eff3ce65fddcbeca473a3196e00c81e8224", async() => {
                 WriteLiteral("Login");
             }
             );

@@ -1,4 +1,4 @@
-﻿@model List<Transaction>
+﻿@model StatementViewModel
 
 @{
     ViewData["Title"] = "History";
@@ -10,26 +10,42 @@
 
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(x => x[0].TransactionID)</th>
-        <th>@Html.DisplayNameFor(x => x[0].TransactionType)</th>
-        <th>@Html.DisplayNameFor(x => x[0].AccountNumber)</th>
-        <th>@Html.DisplayNameFor(x => x[0].DestinationAccountNumber)</th>
-        <th>@Html.DisplayNameFor(x => x[0].Amount)</th>
-        <th>@Html.DisplayNameFor(x => x[0].Comment)</th>
-        <th>@Html.DisplayNameFor(x => x[0].TransactionTimeUtc)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionID)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionType)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].AccountNumber)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].DestinationAccountNumber)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].Amount)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].Comment)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionTimeUtc)</th>
     </tr>
-    @for(var i = 0; i < 4; i++)
+    @{int a = Model.PageNumber * 4; }
+    @for (int i = a; i < a + 4; i++)
     {
         <tr>
-            <td>@Html.DisplayFor(x => x[i].TransactionID)</td>
-            <td>@Html.DisplayFor(x => x[i].TransactionType)</td>
-            <td>@Html.DisplayFor(x => x[i].AccountNumber)</td>
-            <td>@Html.DisplayFor(x => x[i].DestinationAccountNumber)</td>
-            <td>@Html.DisplayFor(x => x[i].Amount)</td>
-            <td>@Html.DisplayFor(x => x[i].Comment)</td>
-            <td>@Html.DisplayFor(x => x[i].TransactionTimeUtc)</td>
+            <td>@Html.DisplayFor(x => x.Transactions[i].TransactionID)</td>
+            <td>@Html.DisplayFor(x => x.Transactions[i].TransactionType)</td>
+            <td>@Html.DisplayFor(x => x.Transactions[i].AccountNumber)</td>
+            <td>@Html.DisplayFor(x => x.Transactions[i].DestinationAccountNumber)</td>
+            <td>@Html.DisplayFor(x => x.Transactions[i].Amount)</td>
+            <td>@Html.DisplayFor(x => x.Transactions[i].Comment)</td>
+            <td>@Html.DisplayFor(x => x.Transactions[i].TransactionTimeUtc)</td>
         </tr>
     }
-
 </table>
+@{int pageup = Model.PageNumber + 1;
+    int pagedown = Model.PageNumber - 1;}
+<form asp-action="History">
+    <div class="form-group">
+        <input type="hidden" asp-for="AccountNumber" value="@Model.AccountNumber" />
+        <input type="hidden" asp-for="PageNumber" value="@pagedown" />
+        <input type="submit" value="Previous Page" class="btn btn-primary" />
+    </div>
+</form>
+<form asp-action="History">
+    <div class="form-group">
+        <input type="hidden" asp-for="AccountNumber" value="@Model.AccountNumber" />
+        <input type="hidden" asp-for="PageNumber" value="@pageup" />
+        <input type="submit" value="Next Page" class="btn btn-primary" />
+    </div>
+</form>
 

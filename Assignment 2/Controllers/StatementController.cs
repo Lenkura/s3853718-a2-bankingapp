@@ -32,8 +32,24 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> History(int accountNumber)
         {
             var account = await _context.Accounts.FindAsync(accountNumber);
-            var transactions = account.Transactions;
-            return View(transactions);
+            return View(new StatementViewModel
+            {
+                AccountNumber = accountNumber,
+                PageNumber = 0,
+                Transactions = account.Transactions,
+            });
         }
+        [HttpPost]
+        public async Task<IActionResult> History(StatementViewModel viewmodel)
+        {
+            var account = await _context.Accounts.FindAsync(viewmodel.AccountNumber);
+            return View(new StatementViewModel
+            {
+                AccountNumber = viewmodel.AccountNumber,
+                PageNumber = viewmodel.PageNumber,
+                Transactions = account.Transactions,
+            });
+        }
+
     }
 }
