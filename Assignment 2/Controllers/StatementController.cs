@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Assignment_2.Controllers
@@ -32,22 +33,24 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> History(int accountNumber)
         {
             var account = await _context.Accounts.FindAsync(accountNumber);
+            var transactions = account.Transactions.OrderByDescending(x => x.TransactionTimeUtc).ToList();
             return View(new StatementViewModel
             {
                 AccountNumber = accountNumber,
                 PageNumber = 0,
-                Transactions = account.Transactions,
+                Transactions = transactions,
             });
         }
         [HttpPost]
         public async Task<IActionResult> History(StatementViewModel viewmodel)
         {
             var account = await _context.Accounts.FindAsync(viewmodel.AccountNumber);
+            var transactions = account.Transactions.OrderByDescending(x => x.TransactionTimeUtc).ToList();
             return View(new StatementViewModel
             {
                 AccountNumber = viewmodel.AccountNumber,
                 PageNumber = viewmodel.PageNumber,
-                Transactions = account.Transactions,
+                Transactions = transactions,
             });
         }
 
