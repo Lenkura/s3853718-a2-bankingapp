@@ -21,35 +21,35 @@ namespace Assignment_2.Models
         [Display(Name = "BillPay")]
         B = 5
     }
-    public class Transaction
+    public record Transaction
     {
         [Required]
         [Display(Name = "ID")]
-        public int TransactionID { get; set; }
+        public int TransactionID { get; init; }
         [Required]
         [Column(TypeName = "char")]
         [Display(Name = "Type")]
-        public TransactionType TransactionType { get; set; }
+        public TransactionType TransactionType { get; init; }
         [Required]
         [ForeignKey("Account")]
         [Display(Name = "Account Number")]
-        public int AccountNumber { get; set; }
-        public virtual Account Account { get; set; }
+        public int AccountNumber { get; init; }
+        public virtual Account Account { get; init; }
         [ForeignKey("DestinationAccount")]
         [Display(Name = "Destination Account")]
-        public int? DestinationAccountNumber { get; set; }
-        public virtual Account DestinationAccount { get; set; }
+        public int? DestinationAccountNumber { get; init; }
+        public virtual Account DestinationAccount { get; init; }
 
         [Required]
         [Range(0.01, double.MaxValue)]
         [Column(TypeName = "money")]
-        public decimal Amount { get; set; }
+        public decimal Amount { get; init; }
 
         [StringLength(30)]
-        public string Comment { get; set; }
+        public string Comment { get; init; }
         [Required]
         [Column(TypeName = "datetime2")]
         [Display(Name = "Time")]
-        public DateTime TransactionTimeUtc { get; set; }
+        public DateTime TransactionTimeUtc { get; init; }
     }
 }
