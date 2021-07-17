@@ -4,26 +4,30 @@
 }
 
 <div>
-    <h1 class="display-4">Welcome, @Model.Name</h1>
+    <h1 class="display-4">Transaction History</h1>
 
-    <h3>Your Accounts</h3>
+    <h3>Choose an account</h3>
     <table class="table">
         <tr>
             <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountNumber)</th>
             <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountType)</th>
             <th>@Html.DisplayNameFor(x => x.Accounts[0].Balance)</th>
+            <th>Transaction Count</th>
             <th></th>
         </tr>
         @foreach (var account in Model.Accounts)
         {
+
             <tr>
                 <td>@Html.DisplayFor(x => account.AccountNumber)</td>
                 <td>@Html.DisplayFor(x => account.AccountType)</td>
                 <td>@Html.DisplayFor(x => account.Balance)</td>
+                <td>@account.Transactions.Count</td>
                 <td>
-                    <a class="btn btn-primary"
+                    <a class="btn btn-outline-info"
                        asp-action="History" asp-route-accountNumber="@account.AccountNumber">History</a>
                 </td>
+
             </tr>
         }
     </table>

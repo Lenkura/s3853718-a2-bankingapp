@@ -5,10 +5,8 @@
     int pagedisplay = 4;
 }
 <h1>Account History</h1>
-
-<h4>Transactions</h4>
+<a asp-action="Index">Back to Accounts</a>
 <hr />
-
 <table class="table">
     <tr>
         <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionID)</th>
@@ -41,19 +39,19 @@
 <div class="d-flex">
     @if (Model.PageNumber > 0)
     {
-            <form asp-action="History" class="mr-auto">
-                <input type="hidden" asp-for="AccountNumber" value="@Model.AccountNumber" />
-                <input type="hidden" asp-for="PageNumber" value="@pagedown" />
-                <input type="submit" value="Previous Page" class="btn btn-primary" />
-            </form>
+        <form asp-action="History" class="mr-auto">
+            <input type="hidden" asp-for="AccountNumber" value="@Model.AccountNumber" />
+            <input type="hidden" asp-for="PageNumber" value="@pagedown" />
+            <input type="submit" value="Previous Page" class="btn btn-primary" />
+        </form>
     }
     @if (a < Model.Transactions.Count - pagedisplay)
     {
-            <form asp-action="History" class="ml-auto">
-                <input type="hidden" asp-for="AccountNumber" value="@Model.AccountNumber" />
-                <input type="hidden" asp-for="PageNumber" value="@pageup" />
-                <input type="submit" value="Next Page" class="btn btn-primary" />
-            </form>
+        <form asp-action="History" class="ml-auto">
+            <input type="hidden" asp-for="AccountNumber" value="@Model.AccountNumber" />
+            <input type="hidden" asp-for="PageNumber" value="@pageup" />
+            <input type="submit" value="Next Page" class="btn btn-primary" />
+        </form>
     }
 </div>
 
