@@ -24,17 +24,20 @@
                     }
                     @if (isLoggedIn)
                     {
-                        <ul class="navbar-nav mr-auto p-2 justify-content-start">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Transaction" asp-action="Index">Move Money</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Statement" asp-action="Index">My Statements</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Customers" asp-action="Details">My Profile</a>
-                            </li>
-                        </ul>
+                    <ul class="navbar-nav mr-auto p-2 justify-content-start">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Transaction" asp-action="Index">Move Money</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Statement" asp-action="Index">My Statements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Customers" asp-action="Details">My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="BillPay" asp-action="List">BillPay</a>
+                        </li>
+                    </ul>
                         <ul class="navbar-nav ml-auto p-2 justify-content-end">
                             <li class="nav-item">
                                 <span class="nav-link text-dark">
