@@ -16,7 +16,7 @@ namespace Assignment_2.Models
         QLD = 3,
         NT = 4,
         ACT = 5,
-        SA =6,
+        SA = 6,
         WA = 7
     }
     public record Customer

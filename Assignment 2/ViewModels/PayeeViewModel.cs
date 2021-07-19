@@ -7,23 +7,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Assignment_2.Models
 {
-    public class Payee
+    public class PayeeViewModel
     {
         [Required]
         public int PayeeID { get; set; }
         [Required, StringLength(50)]
         public string Name { get; set; }
-        [Required,StringLength(50)]
+        [Required, StringLength(50)]
         public string Address { get; set; }
 
-        [Required,StringLength(40)]
+        [Required, StringLength(40)]
         public string Suburb { get; set; }
 
-        [Required,StringLength(3)]
+        [Required, StringLength(3)]
         [Column(TypeName = "nvarchar")]
-        public AusStates State { get; set; }
+        public string State { get; set; }
 
-        [Required,StringLength(4)]
+        [Required, StringLength(4)]
         [Range(1000, 9999, ErrorMessage = "Enter a Valid Postcode")]
         public string PostCode { get; set; }
         [Required]

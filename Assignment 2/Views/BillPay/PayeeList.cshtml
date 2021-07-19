@@ -1,0 +1,45 @@
+﻿@model List<Payee>
+@{
+    ViewData["Title"] = "New BillPay";
+}
+<h1>Schedule a new BillPay Payment</h1>
+<h4>Select a payee from below</h4>
+<a asp-action="NewPayee" class="btn btn-primary">Add New Payee</a>
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(x => Model[0].PayeeID)</th>
+            <th>@Html.DisplayNameFor(x => Model[0].Name)</th>
+            <th>@Html.DisplayNameFor(x => Model[0].Address)</th>
+            <th>@Html.DisplayNameFor(x => Model[0].Suburb)</th>
+            <th>@Html.DisplayNameFor(x => Model[0].State)</th>
+            <th>@Html.DisplayNameFor(x => Model[0].PostCode)</th>
+            <th>@Html.DisplayNameFor(x => Model[0].Phone)</th>
+            <th></th>
+        </tr>
+        @foreach (var payee in Model)
+        {   
+    <tr>
+        <td>@Html.DisplayFor(x => payee.Name)</td>
+        <td>@Html.DisplayFor(x => payee.Address)</td>
+        <td>@Html.DisplayFor(x => payee.Suburb)</td>
+        <td>@Html.DisplayFor(x => payee.State)</td>
+        <td>@Html.DisplayFor(x => payee.PostCode)</td>
+        <td>@Html.DisplayFor(x => payee.Phone)</td>
+        <td>
+            <a class="btn btn-primary"
+               asp-action="" asp-route-payeeid="@payee.PayeeID">Add New Payment</a>
+        </td>
+        <td>
+            <a class="btn btn-primary"
+               asp-action="" asp-route-payeeid="@payee.PayeeID">Edit Payee</a>
+        </td>
+    </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No Payees, click the button above to make one</p>
+}

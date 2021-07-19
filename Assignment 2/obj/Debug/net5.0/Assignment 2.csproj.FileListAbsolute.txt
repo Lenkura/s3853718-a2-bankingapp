@@ -181,3 +181,6 @@ D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\BillPay\List.cshtml
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\JetBrains.Annotations.dll
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\X.PagedList.dll
 D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\X.PagedList.Mvc.Core.dll
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\BillPay\NewPayee.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\BillPay\PayeeList.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\BillPay\EditPayee.cshtml.g.cs
