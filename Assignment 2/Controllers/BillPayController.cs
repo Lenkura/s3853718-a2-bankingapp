@@ -71,7 +71,20 @@ namespace Assignment_2.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }
+        public async Task<IActionResult> Cancel(int billpayid)
+        {
+            var billpay = await _context.BillPays.FindAsync(billpayid);
+            return View(billpay);
+        }
 
+        [HttpPost, ActionName("Cancel")]
+        public async Task<IActionResult> CancelConfirmed(int billpayid)
+        {
+            var billpay = await _context.BillPays.FindAsync(billpayid);
+            _context.BillPays.Remove(billpay);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
+        }
 
 
     }

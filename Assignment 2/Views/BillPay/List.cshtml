@@ -30,9 +30,9 @@
                 <td>@Html.DisplayFor(x => billpay.Period)</td>
                 <td>
                     <a class="btn btn-primary"
-                       asp-action="" asp-route-billpayid="@billpay.BillPayID">Edit</a>
+                       asp-action="Edit" asp-route-billpayid="@billpay.BillPayID">Edit</a>
                     <a class="btn btn-primary"
-                       asp-action="" asp-route-billpayid="@billpay.BillPayID">Cancel</a>
+                       asp-action="Cancel" asp-route-billpayid="@billpay.BillPayID">Cancel</a>
                 </td>
             </tr>
         }
