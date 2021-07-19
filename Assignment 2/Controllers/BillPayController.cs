@@ -24,10 +24,15 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> List()
         {
             var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
-            //var billpay = await _context.BillPays.FromSqlRaw(@"select b.* from BillPay b where AccountNumber").ToListAsync();
-            var billpay = await _context.BillPays.Where(x => x.AccountNumber == customer.Accounts[0].AccountNumber).ToListAsync();
+            var billpay = new List<BillPay>();
+            foreach (var a in customer.Accounts)
+            {
+                var accountBillPays = await _context.BillPays.Where(x => x.AccountNumber == a.AccountNumber).ToListAsync();
+                billpay.AddRange(accountBillPays);
+            }
             return View(billpay);
         }
+
         public IActionResult NewPayment(int payeeid)
         {
             BillPayViewModel billpayModel = new()
@@ -53,7 +58,6 @@ namespace Assignment_2.Controllers
 
             if (!ModelState.IsValid)
                 return View(viewModel);
-            
 
             BillPay billpay = new()
             {
