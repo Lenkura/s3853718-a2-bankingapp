@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Assignment_2.Controllers
 {
@@ -21,25 +22,41 @@ namespace Assignment_2.Controllers
         private readonly Assignment2DbContext _context;
         public BillPayController(Assignment2DbContext context) => _context = context;
 
-        public async Task<IActionResult> List()
+        /*  public async Task<IActionResult> List()
+          {
+              var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
+              var billpay = new List<BillPay>();
+              foreach (var a in customer.Accounts)
+              {
+                  var accountBillPays = await _context.BillPays.Where(x => x.AccountNumber == a.AccountNumber).ToListAsync();
+                  billpay.AddRange(accountBillPays);
+              }
+              billpay = billpay.OrderBy(x => x.ScheduleTimeUtc).ToList();
+              return View(billpay);
+          }*/
+
+        public async Task<IActionResult> List(int? page = 1)
         {
             var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
-            var billpay = new List<BillPay>();
+            var accountNumber = new List<int>();
             foreach (var a in customer.Accounts)
             {
-                var accountBillPays = await _context.BillPays.Where(x => x.AccountNumber == a.AccountNumber).ToListAsync();
-                billpay.AddRange(accountBillPays);
+                accountNumber.Add(a.AccountNumber);
             }
-            billpay = billpay.OrderBy(x => x.ScheduleTimeUtc).ToList();
-            return View(billpay);
+
+            // Page the orders, maximum of X per page.
+            const int pageSize = 4;
+
+            var pagedList = await _context.BillPays.Where(x => accountNumber.Contains(x.AccountNumber)).OrderBy(x => x.ScheduleTimeUtc).ToPagedListAsync(page, pageSize);
+            return View(pagedList);
         }
 
         public IActionResult NewPayment(int payeeid)
         {
-           BillPayViewModel billpayModel = new()
-           {
-               PayeeID = payeeid,
-           };
+            BillPayViewModel billpayModel = new()
+            {
+                PayeeID = payeeid,
+            };
             return View(billpayModel);
         }
         [HttpPost]

@@ -6,11 +6,13 @@ using DataValidator;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Assignment_2.Controllers
 {
@@ -26,28 +28,45 @@ namespace Assignment_2.Controllers
             return View(customer);
         }
 
-        public async Task<IActionResult> History(int accountNumber)
+        /*   public async Task<IActionResult> History(int accountNumber)
+           {
+               var account = await _context.Accounts.FindAsync(accountNumber);
+               var transactions = account.Transactions.OrderByDescending(x => x.TransactionTimeUtc).ToList();
+               return View(new StatementViewModel
+               {
+                   AccountNumber = accountNumber,
+                   PageNumber = 0,
+                   Transactions = transactions,
+               });
+           }
+           [HttpPost]
+           public async Task<IActionResult> History(StatementViewModel viewmodel)
+           {
+               var account = await _context.Accounts.FindAsync(viewmodel.AccountNumber);
+               var transactions = account.Transactions.OrderByDescending(x => x.TransactionTimeUtc).ToList();
+               return View(new StatementViewModel
+               {
+                   AccountNumber = viewmodel.AccountNumber,
+                   PageNumber = viewmodel.PageNumber,
+                   Transactions = transactions,
+               });
+           }*/
+        
+        public IActionResult IndexingHistory(int accountNumber)
         {
-            var account = await _context.Accounts.FindAsync(accountNumber);
-            var transactions = account.Transactions.OrderByDescending(x => x.TransactionTimeUtc).ToList();
-            return View(new StatementViewModel
-            {
-                AccountNumber = accountNumber,
-                PageNumber = 0,
-                Transactions = transactions,
-            });
+            HttpContext.Session.SetInt32("AccountHistory", accountNumber);
+            return RedirectToAction(nameof(History));
         }
-        [HttpPost]
-        public async Task<IActionResult> History(StatementViewModel viewmodel)
+        public async Task<IActionResult> History(int? page = 1)
         {
-            var account = await _context.Accounts.FindAsync(viewmodel.AccountNumber);
-            var transactions = account.Transactions.OrderByDescending(x => x.TransactionTimeUtc).ToList();
-            return View(new StatementViewModel
-            {
-                AccountNumber = viewmodel.AccountNumber,
-                PageNumber = viewmodel.PageNumber,
-                Transactions = transactions,
-            });
+            var account = await _context.Accounts.FindAsync(HttpContext.Session.GetInt32("AccountHistory"));
+            ViewBag.Account = account;
+            // Page the orders, maximum of X per page.
+            const int pageSize = 4;
+            var pagedList = await _context.Transactions.Where(x => x.AccountNumber == account.AccountNumber).
+                OrderByDescending(x => x.TransactionTimeUtc).ToPagedListAsync(page, pageSize);
+
+            return View(pagedList);
         }
 
     }

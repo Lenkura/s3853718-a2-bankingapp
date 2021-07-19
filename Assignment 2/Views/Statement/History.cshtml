@@ -1,58 +1,52 @@
-﻿@model StatementViewModel
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model IPagedList<Transaction>
+
 
 @{
     ViewData["Title"] = "History";
-    int pagedisplay = 4;
+    var account = (Account)ViewBag.Account;
 }
-<h1>Account History</h1>
-<a asp-action="Index">Back to Accounts</a>
-<hr />
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionID)</th>
-        <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionType)</th>
-        <th>@Html.DisplayNameFor(x => x.Transactions[0].AccountNumber)</th>
-        <th>@Html.DisplayNameFor(x => x.Transactions[0].DestinationAccountNumber)</th>
-        <th>@Html.DisplayNameFor(x => x.Transactions[0].Amount)</th>
-        <th>@Html.DisplayNameFor(x => x.Transactions[0].Comment)</th>
-        <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionTimeUtc)</th>
-    </tr>
-    @{int a = Model.PageNumber * pagedisplay; }
-    @for (int i = a; i < a + pagedisplay; i++)
-    {
-        if (i + 1 > Model.Transactions.Count)
-            break;
+<div>
+    <h1>Account History</h1>
+    <h2>@account.AccountNumber</h2>
+    <a asp-action="Index">Back to Accounts</a>
+    <hr />
+    <table class="table">
         <tr>
-            <td>@Html.DisplayFor(x => x.Transactions[i].TransactionID)</td>
-            <td>@Html.DisplayFor(x => x.Transactions[i].TransactionType)</td>
-            <td>@Html.DisplayFor(x => x.Transactions[i].AccountNumber)</td>
-            <td>@Html.DisplayFor(x => x.Transactions[i].DestinationAccountNumber)</td>
-            <td>@Html.DisplayFor(x => x.Transactions[i].Amount)</td>
-            <td>@Html.DisplayFor(x => x.Transactions[i].Comment)</td>
-            <td>@Html.DisplayFor(x => x.Transactions[i].TransactionTimeUtc)</td>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionID)</th>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionType)</th>
+            <th>@Html.DisplayNameFor(x => x[0].AccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => x[0].DestinationAccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => x[0].Amount)</th>
+            <th>@Html.DisplayNameFor(x => x[0].Comment)</th>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionTimeUtc)</th>
         </tr>
-    }
-</table>
-@{int pageup = Model.PageNumber + 1;
-    int pagedown = Model.PageNumber - 1;}
+        @foreach (var transaction in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(x => transaction.TransactionID)</td>
+                <td>@Html.DisplayFor(x => transaction.TransactionType)</td>
+                <td>@Html.DisplayFor(x => transaction.AccountNumber)</td>
+                <td>@Html.DisplayFor(x => transaction.DestinationAccountNumber)</td>
+                <td>@Html.DisplayFor(x => transaction.Amount)</td>
+                <td>@Html.DisplayFor(x => transaction.Comment)</td>
+                <td>@Html.DisplayFor(x => transaction.TransactionTimeUtc)</td>
+            </tr>
+        }
+    </table>
 
-<div class="d-flex">
-    @if (Model.PageNumber > 0)
-    {
-        <form asp-action="History" class="mr-auto">
-            <input type="hidden" asp-for="AccountNumber" value="@Model.AccountNumber" />
-            <input type="hidden" asp-for="PageNumber" value="@pagedown" />
-            <input type="submit" value="Previous Page" class="btn btn-primary" />
-        </form>
-    }
-    @if (a < Model.Transactions.Count - pagedisplay)
-    {
-        <form asp-action="History" class="ml-auto">
-            <input type="hidden" asp-for="AccountNumber" value="@Model.AccountNumber" />
-            <input type="hidden" asp-for="PageNumber" value="@pageup" />
-            <input type="submit" value="Next Page" class="btn btn-primary" />
-        </form>
-    }
+    @Html.PagedListPager(Model, page => Url.Action("History", new { page }),
+        new PagedListRenderOptions
+            {
+            LiElementClasses = new[] { "page-item" },
+            PageClasses = new[] { "page-link" }
+        })
+</div>
+
+<div>
+    <a asp-action="Index">Back to Accounts</a>
 </div>
 
 

@@ -11,6 +11,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Assignment_2.Controllers
 {
@@ -18,10 +19,19 @@ namespace Assignment_2.Controllers
     {
         private readonly Assignment2DbContext _context;
         public PayeeController(Assignment2DbContext context) => _context = context;
-        public IActionResult PayeeList()
+        /* public IActionResult PayeeList()
+         {
+             var payees = _context.Set<Payee>().ToList();
+             return View(payees);
+         }*/
+
+        public async Task<IActionResult> PayeeList(int? page = 1)
         {
-            var payees = _context.Set<Payee>().ToList();
-            return View(payees);
+            // Page the orders, maximum of X per page.
+            const int pageSize = 4;
+
+            var pagedList = await _context.Set<Payee>().ToPagedListAsync(page, pageSize);
+            return View(pagedList);
         }
 
         public IActionResult NewPayee()
