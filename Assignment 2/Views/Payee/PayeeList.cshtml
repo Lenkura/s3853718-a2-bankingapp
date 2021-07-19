@@ -5,6 +5,7 @@
 <h1>Schedule a new BillPay Payment</h1>
 <h4>Select a payee from below</h4>
 <a asp-action="NewPayee" class="btn btn-primary">Add New Payee</a>
+<hr />
 @if (Model.Count > 0)
 {
     <table class="table">
@@ -29,11 +30,9 @@
         <td>@Html.DisplayFor(x => payee.Phone)</td>
         <td>
             <a class="btn btn-primary"
-               asp-action="" asp-route-payeeid="@payee.PayeeID">Add New Payment</a>
-        </td>
-        <td>
+               asp-action="" asp-route-payeeid="@payee.PayeeID">New Payment</a>
             <a class="btn btn-primary"
-               asp-action="" asp-route-payeeid="@payee.PayeeID">Edit Payee</a>
+               asp-action="EditPayee" asp-route-payeeid="@payee.PayeeID">Edit Payee</a>
         </td>
     </tr>
         }

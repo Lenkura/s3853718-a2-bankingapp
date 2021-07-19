@@ -26,36 +26,6 @@ namespace Assignment_2.Controllers
             var billpay = await _context.BillPays.Where(x => x.AccountNumber == customer.Accounts[0].AccountNumber).ToListAsync();
             return View(billpay);
         }
-        public IActionResult PayeeList()
-        {
-            var payees = _context.Set<Payee>().ToList();
-            return View(payees);
-        }
-
-        public IActionResult NewPayee()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> NewPayee([Bind("PayeeID,Name,Address,Suburb,State,PostCode,Phone")] PayeeViewModel payeeModel)
-        {
-            if (ModelState.IsValid)
-            {
-                var payee = new Payee
-                {
-                    Name = payeeModel.Name,
-                    Address = payeeModel.Address,
-                    Suburb = payeeModel.Suburb,
-                    State = Enum.Parse<AusStates>(payeeModel.State),
-                    PostCode = payeeModel.PostCode,
-                    Phone = payeeModel.Phone,
-                };
-                _context.Add(payee);
-                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(PayeeList));
-            }
-            return View(payeeModel);
-        }
+        
     }
 }
