@@ -22,6 +22,7 @@
         @foreach (var payee in Model)
         {   
     <tr>
+        <td>@Html.DisplayFor(x => payee.PayeeID)</td>
         <td>@Html.DisplayFor(x => payee.Name)</td>
         <td>@Html.DisplayFor(x => payee.Address)</td>
         <td>@Html.DisplayFor(x => payee.Suburb)</td>
@@ -30,7 +31,7 @@
         <td>@Html.DisplayFor(x => payee.Phone)</td>
         <td>
             <a class="btn btn-primary"
-               asp-action="" asp-route-payeeid="@payee.PayeeID">New Payment</a>
+               asp-controller="BillPay" asp-action="NewPayment" asp-route-payeeid="@payee.PayeeID">New Payment</a>
             <a class="btn btn-primary"
                asp-action="EditPayee" asp-route-payeeid="@payee.PayeeID">Edit Payee</a>
         </td>

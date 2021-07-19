@@ -4,27 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Assignment_2.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Assignment_2.Models
+namespace Assignment_2.ViewModels
 {
-    public enum PaymentPeriod
-    {
-        [Display(Name = "Monthly")]
-        M = 1,
-        [Display(Name = "Quarterly")]
-        Q = 2,
-        [Display(Name = "Annually")]
-        Y =3,
-        [Display(Name = "One-Off")]
-        O =4
-    }
-    public class BillPay
+    public class BillPayViewModel
     {
         [Required]
         public int BillPayID { get; set; }
         [Required]
         [Display(Name = "Account Number")]
         [Range(1000, 9999)]
+        [DataType(DataType.Text)]
         public int AccountNumber { get; set; }
         [Required]
         [Display(Name = "Payee ID")]
@@ -35,10 +28,11 @@ namespace Assignment_2.Models
         [DataType(DataType.Currency)]
         public decimal Amount { get; set; }
         [Required]
-        [Column(TypeName = "datetime2")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
         public DateTime ScheduleTimeUtc { get; set; }
         [Required]
         [Column(TypeName = "char")]
-        public PaymentPeriod Period { get; set; }
+        public string Period { get; set; }
     }
 }

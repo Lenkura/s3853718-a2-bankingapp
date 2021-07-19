@@ -184,3 +184,4 @@ D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\X.PagedList.Mvc.Core.dll
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Payee\EditPayee.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Payee\NewPayee.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Payee\PayeeList.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\BillPay\NewPayment.cshtml.g.cs
