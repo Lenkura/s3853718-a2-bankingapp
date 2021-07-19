@@ -178,3 +178,6 @@ D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Statement\Index.csh
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Statement\View.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Statement\History.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\BillPay\List.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\JetBrains.Annotations.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\X.PagedList.dll
+D:\Git\s3853718-a2\Assignment 2\bin\Debug\net5.0\X.PagedList.Mvc.Core.dll
