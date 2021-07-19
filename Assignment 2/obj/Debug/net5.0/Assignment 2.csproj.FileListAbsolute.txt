@@ -186,3 +186,4 @@ D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Payee\NewPayee.csht
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\Payee\PayeeList.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\BillPay\NewPayment.cshtml.g.cs
 D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\BillPay\Cancel.cshtml.g.cs
+D:\Git\s3853718-a2\Assignment 2\obj\Debug\net5.0\Razor\Views\BillPay\Edit.cshtml.g.cs

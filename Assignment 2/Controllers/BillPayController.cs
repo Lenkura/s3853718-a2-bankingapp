@@ -30,15 +30,16 @@ namespace Assignment_2.Controllers
                 var accountBillPays = await _context.BillPays.Where(x => x.AccountNumber == a.AccountNumber).ToListAsync();
                 billpay.AddRange(accountBillPays);
             }
+            billpay = billpay.OrderBy(x => x.ScheduleTimeUtc).ToList();
             return View(billpay);
         }
 
         public IActionResult NewPayment(int payeeid)
         {
-            BillPayViewModel billpayModel = new()
-            {
-                PayeeID = payeeid,
-            };
+           BillPayViewModel billpayModel = new()
+           {
+               PayeeID = payeeid,
+           };
             return View(billpayModel);
         }
         [HttpPost]
@@ -86,6 +87,41 @@ namespace Assignment_2.Controllers
             return RedirectToAction(nameof(List));
         }
 
+        public async Task<IActionResult> Edit(int billpayid)
+        {
+            var billpay = await _context.BillPays.FindAsync(billpayid);
+            return View(billpay);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(BillPay billpay)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(billpay);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!BillPayExists(billpay.BillPayID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(List));
+            }
+            return View(billpay);
+        }
+        private bool BillPayExists(int id)
+        {
+            return _context.BillPays.Any(e => e.BillPayID == id);
+        }
 
     }
 }

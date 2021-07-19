@@ -23,10 +23,12 @@ namespace Assignment_2.Models
         [Required]
         public int BillPayID { get; set; }
         [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "Account Number")]
         [Range(1000, 9999)]
         public int AccountNumber { get; set; }
         [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "Payee ID")]
         public int PayeeID { get; set; }
         public virtual Payee Payee { get; set; }
