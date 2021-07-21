@@ -68,7 +68,6 @@ namespace Assignment_2.Data
                     AccountType = AccountType.S,
                     CustomerID = 2100,
                     Balance = 100,
-                    FreeTransactions = AccountChecks.GetFreeTransacionLimit()
                 },
                 new Account
                 {
@@ -76,7 +75,6 @@ namespace Assignment_2.Data
                     AccountType = AccountType.C,
                     CustomerID = 2100,
                     Balance = 500,
-                    FreeTransactions = AccountChecks.GetFreeTransacionLimit()
 
                 },
                 new Account
@@ -85,7 +83,6 @@ namespace Assignment_2.Data
                     AccountType = AccountType.S,
                     CustomerID = 2200,
                     Balance = 500.95m,
-                    FreeTransactions = AccountChecks.GetFreeTransacionLimit()
                 },
                 new Account
                 {
@@ -93,7 +90,6 @@ namespace Assignment_2.Data
                     AccountType = AccountType.C,
                     CustomerID = 2300,
                     Balance = 1250.50m,
-                    FreeTransactions = AccountChecks.GetFreeTransacionLimit()
                 });
 
             const string format = "dd/MM/yyyy hh:mm:ss tt";

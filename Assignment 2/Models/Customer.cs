@@ -37,6 +37,7 @@ namespace Assignment_2.Models
         [StringLength(40)]
         public string Suburb { get; init; }
 
+        [StringLength(3)]
         [Column(TypeName = "nvarchar")]
         public AusStates State { get; init; }
 

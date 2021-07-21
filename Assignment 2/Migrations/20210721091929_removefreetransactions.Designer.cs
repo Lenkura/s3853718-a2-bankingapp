@@ -4,14 +4,16 @@ using Assignment_2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Assignment_2.Migrations
 {
     [DbContext(typeof(Assignment2DbContext))]
-    partial class Assignment2DbContextModelSnapshot : ModelSnapshot
+    [Migration("20210721091929_removefreetransactions")]
+    partial class removefreetransactions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,8 +99,7 @@ namespace Assignment_2.Migrations
 
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
+                        .HasColumnType("nvarchar");
 
                     b.Property<string>("Suburb")
                         .HasMaxLength(40)
