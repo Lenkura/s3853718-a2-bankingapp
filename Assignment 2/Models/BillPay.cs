@@ -18,6 +18,11 @@ namespace Assignment_2.Models
         [Display(Name = "One-Off")]
         O =4
     }
+    public enum BillPayStatus
+    {
+        Ready = 1,
+        Error = 2,
+    }
     public class BillPay
     {
         [Required]
@@ -42,5 +47,9 @@ namespace Assignment_2.Models
         [Required]
         [Column(TypeName = "char")]
         public PaymentPeriod Period { get; set; }
+
+        [StringLength(10)]
+        [Column(TypeName = "nvarchar")]
+        public BillPayStatus Status { get; set; }
     }
 }

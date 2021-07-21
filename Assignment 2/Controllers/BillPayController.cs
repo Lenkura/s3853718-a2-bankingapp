@@ -84,6 +84,7 @@ namespace Assignment_2.Controllers
                 Amount = viewModel.Amount,
                 ScheduleTimeUtc = viewModel.ScheduleTimeUtc.ToUniversalTime(),
                 Period = Enum.Parse<PaymentPeriod>(viewModel.Period),
+                Status = BillPayStatus.Ready,
             };
             _context.Add(billpay);
             await _context.SaveChangesAsync();

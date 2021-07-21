@@ -40,7 +40,7 @@ namespace DataValidator
             else
                 return false;
         }
-        public static decimal GetAccountTypeMin(string accountType)
+        public static decimal GetAccountTypeMin(this string accountType)
         {
             return accountType switch
             {

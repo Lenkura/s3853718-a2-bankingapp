@@ -4,14 +4,16 @@ using Assignment_2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Assignment_2.Migrations
 {
     [DbContext(typeof(Assignment2DbContext))]
-    partial class Assignment2DbContextModelSnapshot : ModelSnapshot
+    [Migration("20210721152746_billpaystatus")]
+    partial class billpaystatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,10 +68,8 @@ namespace Assignment_2.Migrations
                     b.Property<DateTime>("ScheduleTimeUtc")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("BillPayID");
 
