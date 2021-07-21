@@ -49,7 +49,6 @@ namespace Assignment_2.Controllers
         {
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
             viewModel = SingleAccountValidation(viewModel);
-            await HasFreeTransactions(viewModel.Account);
             if (!ModelState.IsValid)
                 return View(viewModel);
             return RedirectToAction(nameof(Confirm), viewModel);
@@ -71,14 +70,13 @@ namespace Assignment_2.Controllers
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
             viewModel = SingleAccountValidation(viewModel);
 
-            viewModel.Fees = AccountChecks.GetATMFee();
-            if (viewModel.Account.FreeTransactions > 0)
+            var fees = AccountChecks.GetATMFee();
+            if (await HasFreeTransactions(viewModel.Account))
             {
-                viewModel.Fees = 0;
-                viewModel.Account.FreeTransactions -= 1;
+                fees = 0;
             }
 
-            if (viewModel.Account.Balance - viewModel.Amount - viewModel.Fees < AccountChecks.GetAccountTypeMin(viewModel.Account.AccountType.ToString()))
+            if (viewModel.Account.Balance - viewModel.Amount - fees < AccountChecks.GetAccountTypeMin(viewModel.Account.AccountType.ToString()))
             {
                 ModelState.AddModelError(nameof(viewModel.Amount), "Insufficient Funds for Withdrawal");
             }
@@ -104,14 +102,14 @@ namespace Assignment_2.Controllers
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
             viewModel.DestinationAccount = await _context.Accounts.FindAsync(viewModel.DestinationAccountNumber);
             viewModel = TwoAccountValidation(viewModel);
-            viewModel.Fees = AccountChecks.GetTransferFee();
-            if (viewModel.Account.FreeTransactions > 0)
+
+            var fees = AccountChecks.GetTransferFee();
+            if (await HasFreeTransactions(viewModel.Account))
             {
-                viewModel.Fees = 0;
-                viewModel.Account.FreeTransactions -= 1;
+                fees = 0;
             }
 
-            if (viewModel.Account.Balance - viewModel.Amount - viewModel.Fees < AccountChecks.GetAccountTypeMin(viewModel.Account.AccountType.ToString()))
+            if (viewModel.Account.Balance - viewModel.Amount - fees < AccountChecks.GetAccountTypeMin(viewModel.Account.AccountType.ToString()))
             {
                 ModelState.AddModelError(nameof(viewModel.Amount), "Insufficient Funds for Transfer");
             }
@@ -146,7 +144,12 @@ namespace Assignment_2.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 case ("Withdrawal"):
-                    viewModel.Account.Balance = viewModel.Account.Balance - viewModel.Amount - viewModel.Fees;
+                    var fees = AccountChecks.GetATMFee();
+                    if (await HasFreeTransactions(viewModel.Account))
+                    {
+                        fees = 0;
+                    }
+                    viewModel.Account.Balance = viewModel.Account.Balance - viewModel.Amount - fees;
                     viewModel.Account.Transactions.Add(
                     new Transaction
                     {
@@ -155,18 +158,23 @@ namespace Assignment_2.Controllers
                         Comment = viewModel.Comment,
                         TransactionTimeUtc = DateTime.UtcNow
                     });
-                    if (viewModel.Fees > 0)
+                    if (fees > 0)
                         viewModel.Account.Transactions.Add(new Transaction
                         {
                             TransactionType = TransactionType.S,
-                            Amount = viewModel.Fees,
+                            Amount = fees,
                             Comment = "Withdrawal Service Fee",
                             TransactionTimeUtc = DateTime.UtcNow
                         });
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 case ("Transfer"):
-                    viewModel.Account.Balance = viewModel.Account.Balance - viewModel.Amount - viewModel.Fees;
+                    fees = AccountChecks.GetTransferFee();
+                    if (await HasFreeTransactions(viewModel.Account))
+                    {
+                        fees = 0;
+                    }
+                    viewModel.Account.Balance = viewModel.Account.Balance - viewModel.Amount - fees;
                     viewModel.DestinationAccount.Balance += viewModel.Amount;
                     viewModel.Account.Transactions.Add(
                     new Transaction
@@ -186,11 +194,11 @@ namespace Assignment_2.Controllers
                         TransactionTimeUtc = DateTime.UtcNow
                     });
 
-                    if (viewModel.Fees > 0)
+                    if (fees > 0)
                         viewModel.Account.Transactions.Add(new Transaction
                         {
                             TransactionType = TransactionType.S,
-                            Amount = viewModel.Fees,
+                            Amount = fees,
                             Comment = "Transfer Service Fee",
                             TransactionTimeUtc = DateTime.UtcNow
                         });

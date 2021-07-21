@@ -20,6 +20,5 @@ namespace Assignment_2.ViewModels
         [StringLength(30)]
         public string Comment { get; set; }
         public string TransactionType { get; set; }
-        public decimal Fees { get; set; }
     }
 }
