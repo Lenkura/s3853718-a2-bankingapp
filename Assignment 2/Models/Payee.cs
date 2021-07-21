@@ -28,7 +28,7 @@ namespace Assignment_2.Models
         public string PostCode { get; set; }
         [Required]
         [StringLength(12)]
-        [RegularExpression(@"04[0-9]{2}\s?[0-9]{3}\s?[0-9]{3}", ErrorMessage = "Please enter an Australian Phone Number")]
+        [RegularExpression(@"\(0[0-9]\)\s[0-9]{4}\s[0-9]{4}", ErrorMessage = "Please enter an Australian Phone Number")]
         public string Phone { get; set; }
     }
 }

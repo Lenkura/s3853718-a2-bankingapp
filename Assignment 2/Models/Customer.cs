@@ -45,7 +45,7 @@ namespace Assignment_2.Models
         public string PostCode { get; init; }
 
         [StringLength(12)]
-        [RegularExpression(@"04[0-9]{2}\s?[0-9]{3}\s?[0-9]{3}", ErrorMessage = "Please enter an Australian Phone Number")]
+        [RegularExpression(@"04[0-9]{2}\s[0-9]{3}\s[0-9]{3}", ErrorMessage = "Please enter an Australian Phone Number")]
         public string Mobile { get; init; }
 
         public virtual List<Account> Accounts { get; init; }
