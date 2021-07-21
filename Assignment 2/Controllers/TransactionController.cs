@@ -5,9 +5,11 @@ using Assignment_2.ViewModels;
 using DataValidator;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Assignment_2.Controllers
@@ -15,7 +17,7 @@ namespace Assignment_2.Controllers
     [SecureContent]
     public class TransactionController : Controller
     {
-  
+
         private readonly ILogger<TransactionController> _logger;
         private readonly Assignment2DbContext _context;
         public TransactionController(ILogger<TransactionController> logger, Assignment2DbContext context)
@@ -24,7 +26,7 @@ namespace Assignment_2.Controllers
             _context = context;
         }
 
-     
+
         public async Task<IActionResult> Index()
         {
 
@@ -46,9 +48,8 @@ namespace Assignment_2.Controllers
         public async Task<IActionResult> Deposit(TransactionViewModel viewModel)
         {
             viewModel.Account = await _context.Accounts.FindAsync(viewModel.AccountNumber);
-
             viewModel = SingleAccountValidation(viewModel);
-
+            await HasFreeTransactions(viewModel.Account);
             if (!ModelState.IsValid)
                 return View(viewModel);
             return RedirectToAction(nameof(Confirm), viewModel);
@@ -241,6 +242,17 @@ namespace Assignment_2.Controllers
                 ModelState.AddModelError(nameof(tvm.Amount), "Enter a dollar amount");
             }
             return tvm;
+        }
+
+        private async Task<bool> HasFreeTransactions(Account a)
+        {
+            var withdrawals = await _context.Transactions.Where(x => x.AccountNumber == a.AccountNumber).Where(x => x.TransactionType == TransactionType.W).CountAsync();
+            var transfers = await _context.Transactions.Where(x => x.AccountNumber == a.AccountNumber).Where(x => x.TransactionType == TransactionType.T).Where(x => x.DestinationAccountNumber != null).CountAsync();
+            Console.WriteLine(withdrawals + transfers);
+            if (withdrawals + transfers > AccountChecks.GetFreeTransacionLimit())
+                return false;
+            else
+                return true;
         }
     }
 }
