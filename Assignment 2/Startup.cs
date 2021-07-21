@@ -1,3 +1,4 @@
+using Assignment_2.Background_Services;
 using Assignment_2.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,7 +49,7 @@ namespace Assignment_2
                 options.IdleTimeout = TimeSpan.FromDays(2);
             });
             services.AddDatabaseDeveloperPageExceptionFilter();
-
+            services.AddHostedService<BillPayBackgroundService>();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<Assignment2DbContext>();
