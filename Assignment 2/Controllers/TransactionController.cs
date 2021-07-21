@@ -257,7 +257,7 @@ namespace Assignment_2.Controllers
             var withdrawals = await _context.Transactions.Where(x => x.AccountNumber == a.AccountNumber).Where(x => x.TransactionType == TransactionType.W).CountAsync();
             var transfers = await _context.Transactions.Where(x => x.AccountNumber == a.AccountNumber).Where(x => x.TransactionType == TransactionType.T).Where(x => x.DestinationAccountNumber != null).CountAsync();
             Console.WriteLine(withdrawals + transfers);
-            if (withdrawals + transfers > AccountChecks.GetFreeTransacionLimit())
+            if (withdrawals + transfers >= AccountChecks.GetFreeTransacionLimit())
                 return false;
             else
                 return true;
