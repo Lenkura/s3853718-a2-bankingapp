@@ -27,7 +27,7 @@ namespace Assignment_2.Models
         [Range(1000, 9999, ErrorMessage = "Enter a Valid Postcode")]
         public string PostCode { get; set; }
         [Required]
-        [StringLength(12)]
+        [StringLength(14)]
         [RegularExpression(@"\(0[0-9]\)\s[0-9]{4}\s[0-9]{4}", ErrorMessage = "Please enter an Australian Phone Number")]
         public string Phone { get; set; }
     }

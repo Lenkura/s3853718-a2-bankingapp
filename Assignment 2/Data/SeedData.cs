@@ -143,6 +143,35 @@ namespace Assignment_2.Data
                     Comment = null,
                     TransactionTimeUtc = DateTime.ParseExact("19/05/2021 10:00:00 PM", format, null)
                 });
+            context.Payees.AddRange(
+                new Payee
+                {
+                    Name = "Mr. Baker",
+                    Address = "1 Oven Lane",
+                    Suburb = "Yeast Alley",
+                    State = AusStates.VIC,
+                    PostCode = "3500",
+                    Phone = "(03) 1234 4568",
+                },
+                new Payee
+                {
+                    Name = "Mr. Butcher",
+                    Address = "1 Cleaver Way",
+                    Suburb = "Mutton Mound",
+                    State = AusStates.SA,
+                    PostCode = "2516",
+                    Phone = "(02) 4286 4894",
+                },
+                new Payee
+                {
+                    Name = "Mr. Post",
+                    Address = "1 Envelope Street",
+                    Suburb = "Parcel Place",
+                    State = AusStates.NSW,
+                    PostCode = "9999",
+                    Phone = "(09) 9999 9999",
+                }
+                );
 
             context.SaveChanges();
         }
