@@ -15,7 +15,7 @@ namespace Assignment_2.ViewModels
         public int DestinationAccountNumber { get; set; }
         public Account DestinationAccount { get; set; }
         [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Enter a positive amount")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Enter a dollar amount")]
         public decimal Amount { get; set; }
         [StringLength(30)]
         public string Comment { get; set; }

@@ -46,7 +46,7 @@ namespace Assignment_2.Controllers
 
             // Page the orders, maximum of X per page.
             const int pageSize = 4;
-
+   
             var pagedList = await _context.BillPays.Where(x => accountNumber.Contains(x.AccountNumber)).OrderBy(x => x.ScheduleTimeUtc).ToPagedListAsync(page, pageSize);
             return View(pagedList);
         }
@@ -68,11 +68,13 @@ namespace Assignment_2.Controllers
                 if (a.AccountNumber == viewModel.AccountNumber)
                     ownAccount = true;
             if (!ownAccount)
-                ModelState.AddModelError(nameof(viewModel.AccountNumber), "Account not Found");
+                ModelState.AddModelError(nameof(viewModel.AccountNumber), "Enter one of your Accounts");
             if (DateTime.Compare(viewModel.ScheduleTimeUtc, DateTime.Now) < 0)
-            {
                 ModelState.AddModelError(nameof(viewModel.ScheduleTimeUtc), "Set a future time");
-            }
+            if (!viewModel.Amount.ToString().IsDollarAmount())
+                ModelState.AddModelError(nameof(viewModel.Amount), "Enter a dollar amount");
+            
+
 
             if (!ModelState.IsValid)
                 return View(viewModel);

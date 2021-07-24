@@ -41,7 +41,6 @@ namespace Assignment_2.Models
         public virtual Account DestinationAccount { get; init; }
 
         [Required]
-        [Range(0.01, double.MaxValue)]
         [Column(TypeName = "money")]
         public decimal Amount { get; init; }
 

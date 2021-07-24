@@ -25,6 +25,7 @@ namespace Assignment_2.ViewModels
         public virtual Payee Payee { get; set; }
         [Required]
         [Column(TypeName = "money")]
+        [Range(0.01, 99999999999999.99)]
         [DataType(DataType.Currency)]
         public decimal Amount { get; set; }
         [Required]
