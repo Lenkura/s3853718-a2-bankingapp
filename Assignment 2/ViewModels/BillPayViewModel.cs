@@ -18,7 +18,7 @@ namespace Assignment_2.ViewModels
         [Display(Name = "Account Number")]
         [Range(1000, 9999)]
         [DataType(DataType.Text)]
-        public int AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
         [Required]
         [Display(Name = "Payee ID")]
         public int PayeeID { get; set; }
@@ -35,5 +35,6 @@ namespace Assignment_2.ViewModels
         [Required]
         [Column(TypeName = "char")]
         public string Period { get; set; }
+        public List<SelectListItem> AccountNumberList { get; set; }
     }
 }

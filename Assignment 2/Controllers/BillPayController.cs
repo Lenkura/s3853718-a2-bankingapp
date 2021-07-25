@@ -51,11 +51,18 @@ namespace Assignment_2.Controllers
             return View(pagedList);
         }
 
-        public IActionResult NewPayment(int payeeid)
+        public async Task<IActionResult> NewPayment(int payeeid)
         {
+            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
+            var accountNumber = new List<SelectListItem>();
+            foreach (var a in customer.Accounts)
+            {
+                accountNumber.Add(new SelectListItem { Value = a.AccountNumber.ToString(), Text = a.AccountNumber.ToString() });
+            }
             BillPayViewModel billpayModel = new()
             {
                 PayeeID = payeeid,
+                AccountNumberList = accountNumber
             };
             return View(billpayModel);
         }
@@ -65,7 +72,7 @@ namespace Assignment_2.Controllers
             var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
             bool ownAccount = false;
             foreach (var a in customer.Accounts)
-                if (a.AccountNumber == viewModel.AccountNumber)
+                if (a.AccountNumber == Int32.Parse(viewModel.AccountNumber))
                     ownAccount = true;
             if (!ownAccount)
                 ModelState.AddModelError(nameof(viewModel.AccountNumber), "Enter one of your Accounts");
@@ -81,7 +88,7 @@ namespace Assignment_2.Controllers
 
             BillPay billpay = new()
             {
-                AccountNumber = viewModel.AccountNumber,
+                AccountNumber = Int32.Parse(viewModel.AccountNumber),
                 PayeeID = viewModel.PayeeID,
                 Amount = viewModel.Amount,
                 ScheduleTimeUtc = viewModel.ScheduleTimeUtc.ToUniversalTime(),

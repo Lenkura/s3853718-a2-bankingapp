@@ -14,9 +14,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="AccountNumber" class="control-label"></label>
-                <input asp-for="AccountNumber" class=" form-control" />
-                <span asp-validation-for=" AccountNumber" class="text-danger">
-                </span>
+                <select asp-for="AccountNumber" asp-items="Model.AccountNumberList" class="form-control"></select>
+                <span asp-validation-for="Period" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="hidden" asp-for="PayeeID" class="form-control" value="@Model.PayeeID" />
