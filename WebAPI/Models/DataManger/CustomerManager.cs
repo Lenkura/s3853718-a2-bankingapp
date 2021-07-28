@@ -44,11 +44,13 @@ namespace WebAPI.Models.DataManger
             return id;
         }
 
-        public int Update(int id, Customer movie)
+        public int Update(int id, Customer customer)
         {
-            _context.Update(movie);
-            _context.SaveChanges();
-
+            if (_context.Customers.Find(id) != null)
+            {
+                _context.Update(customer);
+                _context.SaveChanges();
+            }
             return id;
         }
     }

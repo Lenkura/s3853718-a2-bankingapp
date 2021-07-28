@@ -25,6 +25,9 @@ namespace WebAPI
                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<CustomerManager>();
+            services.AddScoped<AccountManager>();
+            services.AddScoped<BillPayManager>();
+            services.AddScoped<PayeeManager>();
 
             services.AddControllers();
         }
