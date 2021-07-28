@@ -7,7 +7,7 @@ using WebAPI.Models.Repository;
 
 namespace WebAPI.Models.DataManger
 {
-    public class LoginManager : IBankDataRepository<Login, int>
+    public class LoginManager
     {
         private readonly MCBAContext _context;
 
@@ -16,7 +16,7 @@ namespace WebAPI.Models.DataManger
             _context = context;
         }
 
-        public Login Get(int id)
+        public Login Get(string id)
         {
             return _context.Logins.Find(id);
         }
@@ -34,7 +34,7 @@ namespace WebAPI.Models.DataManger
             return Int32.Parse(login.LoginID);
         }
 
-        public int Delete(int id)
+        public int Delete(string id)
         {
             if (_context.Logins.Find(id) != null)
             {
@@ -42,14 +42,14 @@ namespace WebAPI.Models.DataManger
                 _context.SaveChanges();
             }
 
-            return id;
+            return Int32.Parse(id);
         }
 
-        public int Update(int id, Login login)
+        public int Update(string id, Login login)
         {
             _context.Update(login);
             _context.SaveChanges();
-            return id;
+            return Int32.Parse(id);
         }
     }
 }
