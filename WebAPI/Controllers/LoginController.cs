@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Assignment_2.Models;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Models;
 using WebAPI.Models.DataManger;
 
 namespace WebAPI.Controllers

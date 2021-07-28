@@ -1,4 +1,4 @@
-using Assignment_2.Data;
+using MvcMCBA.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Assignment_2
+namespace MvcMCBA
 {
     public class Program
     {

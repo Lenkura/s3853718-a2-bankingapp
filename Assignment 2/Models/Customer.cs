@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
-namespace Assignment_2.Models
+namespace MvcMCBA.Models
 {
     public enum AusStates
     {

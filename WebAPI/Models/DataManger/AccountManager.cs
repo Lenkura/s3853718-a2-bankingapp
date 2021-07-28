@@ -1,5 +1,5 @@
-﻿using Assignment_2.Data;
-using Assignment_2.Models;
+﻿using WebAPI.Data;
+using WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,11 +46,8 @@ namespace WebAPI.Models.DataManger
 
         public int Update(int id, Account account)
         {
-            if (_context.Accounts.Find(id) != null)
-            {
-                _context.Update(account);
-                _context.SaveChanges();
-            }
+            _context.Update(account);
+            _context.SaveChanges();
             return id;
         }
     }

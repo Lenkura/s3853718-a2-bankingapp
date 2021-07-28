@@ -13,21 +13,21 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
 #line 1 "D:\Git\s3853718-a2\Assignment 2\Views\_ViewImports.cshtml"
-using Assignment_2;
+using MvcMCBA;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 2 "D:\Git\s3853718-a2\Assignment 2\Views\_ViewImports.cshtml"
-using Assignment_2.Models;
+using MvcMCBA.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 3 "D:\Git\s3853718-a2\Assignment 2\Views\_ViewImports.cshtml"
-using Assignment_2.ViewModels;
+using MvcMCBA.ViewModels;
 
 #line default
 #line hidden
@@ -54,7 +54,7 @@ using DataValidator;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"54a0fa103075b1457c40a4bcf723ea4a90e668c1", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"04f5cf2f76426794ebda9a4ed47d5d0b94c5b4b3", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

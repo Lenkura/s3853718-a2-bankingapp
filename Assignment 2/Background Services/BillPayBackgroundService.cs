@@ -1,5 +1,5 @@
-﻿using Assignment_2.Data;
-using Assignment_2.Models;
+﻿using MvcMCBA.Data;
+using MvcMCBA.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DataValidator;
 
-namespace Assignment_2.Background_Services
+namespace MvcMCBA.Background_Services
 {
     public class BillPayBackgroundService : BackgroundService
     {

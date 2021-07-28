@@ -1,11 +1,11 @@
-﻿using Assignment_2.Models;
+﻿using WebAPI.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Assignment_2.Data
+namespace WebAPI.Data
 {
     public class SeedData
     {

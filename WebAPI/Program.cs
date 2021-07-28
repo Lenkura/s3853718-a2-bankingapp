@@ -1,4 +1,4 @@
-using Assignment_2.Data;
+using WebAPI.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

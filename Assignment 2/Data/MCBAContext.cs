@@ -1,11 +1,11 @@
-﻿using Assignment_2.Models;
+﻿using MvcMCBA.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Assignment_2.Data
+namespace MvcMCBA.Data
 {
     public class MCBAContext : IdentityDbContext
     {

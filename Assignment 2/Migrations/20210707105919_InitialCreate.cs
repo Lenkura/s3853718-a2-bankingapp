@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Assignment_2.Migrations
+namespace MvcMCBA.Migrations
 {
     public partial class InitialCreate : Migration
     {

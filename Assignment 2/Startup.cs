@@ -1,5 +1,5 @@
-using Assignment_2.Background_Services;
-using Assignment_2.Data;
+using MvcMCBA.Background_Services;
+using MvcMCBA.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -8,8 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Net.Http.Headers;
 
-namespace Assignment_2
+namespace MvcMCBA
 {
     public class Startup
     {
@@ -29,6 +30,11 @@ namespace Assignment_2
                     Configuration.GetConnectionString("DefaultConnection"));
                  // Enable lazy loading.
                 options.UseLazyLoadingProxies();
+            });
+            services.AddHttpClient("api", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:44398");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
             //Session storage options:

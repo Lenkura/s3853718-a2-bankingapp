@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Assignment_2.Models
+namespace WebAPI.Models
 {
     public class Payee
     {
@@ -19,7 +19,7 @@ namespace Assignment_2.Models
         [Required,StringLength(40)]
         public string Suburb { get; set; }
 
-        [Required,StringLength(3)]
+        [Required]
         [Column(TypeName = "nvarchar")]
         public AusStates State { get; set; }
 

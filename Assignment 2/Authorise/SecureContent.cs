@@ -1,10 +1,10 @@
-﻿using Assignment_2.Models;
+﻿using MvcMCBA.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 
-    namespace Assignment_2.Authorise
+    namespace MvcMCBA.Authorise
     {
     public class SecureContentAttribute : Attribute, IAuthorizationFilter
     { 

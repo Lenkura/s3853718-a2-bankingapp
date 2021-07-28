@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Assignment_2.Models
+namespace WebAPI.Models
 {
     public enum AccountType
 {

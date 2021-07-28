@@ -1,11 +1,11 @@
-﻿using Assignment_2.Models;
+﻿using MvcMCBA.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Assignment_2.ViewModels
+namespace MvcMCBA.ViewModels
 {
     public class TransactionViewModel
     {

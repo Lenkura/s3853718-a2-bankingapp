@@ -1,6 +1,6 @@
 using System;
 
-namespace Assignment_2.Models
+namespace MvcMCBA.Models
 {
     public class ErrorViewModel
     {

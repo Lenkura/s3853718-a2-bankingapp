@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Assignment_2.Models;
+using WebAPI.Models;
 
-namespace Assignment_2.Data
+namespace WebAPI.Data
 {
     public class MCBAContext : IdentityDbContext
     {

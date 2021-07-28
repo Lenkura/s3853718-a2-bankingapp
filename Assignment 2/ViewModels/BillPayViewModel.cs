@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Assignment_2.Models;
+using MvcMCBA.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Assignment_2.ViewModels
+namespace MvcMCBA.ViewModels
 {
     public class BillPayViewModel
     {

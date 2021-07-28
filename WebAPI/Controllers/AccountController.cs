@@ -1,4 +1,4 @@
-﻿using Assignment_2.Models;
+﻿using WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

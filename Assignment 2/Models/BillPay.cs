@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Assignment_2.Models
+namespace MvcMCBA.Models
 {
     public enum PaymentPeriod
     {

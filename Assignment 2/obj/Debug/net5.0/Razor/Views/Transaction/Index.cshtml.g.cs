@@ -13,21 +13,21 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
 #line 1 "D:\Git\s3853718-a2\Assignment 2\Views\_ViewImports.cshtml"
-using Assignment_2;
+using MvcMCBA;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 2 "D:\Git\s3853718-a2\Assignment 2\Views\_ViewImports.cshtml"
-using Assignment_2.Models;
+using MvcMCBA.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 3 "D:\Git\s3853718-a2\Assignment 2\Views\_ViewImports.cshtml"
-using Assignment_2.ViewModels;
+using MvcMCBA.ViewModels;
 
 #line default
 #line hidden
@@ -54,7 +54,7 @@ using DataValidator;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1037bb604e4118ba29d1c6b1818c8de28a43ebf5", @"/Views/Transaction/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"54a0fa103075b1457c40a4bcf723ea4a90e668c1", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"04f5cf2f76426794ebda9a4ed47d5d0b94c5b4b3", @"/Views/_ViewImports.cshtml")]
     public class Views_Transaction_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Customer>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("btn btn-primary"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -159,7 +159,7 @@ using DataValidator;
 #line hidden
 #nullable disable
             WriteLiteral("</td>\r\n                <td>\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1037bb604e4118ba29d1c6b1818c8de28a43ebf57442", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1037bb604e4118ba29d1c6b1818c8de28a43ebf57427", async() => {
                 WriteLiteral("Deposit");
             }
             );
@@ -191,7 +191,7 @@ using DataValidator;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1037bb604e4118ba29d1c6b1818c8de28a43ebf59754", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1037bb604e4118ba29d1c6b1818c8de28a43ebf59739", async() => {
                 WriteLiteral("Withdraw");
             }
             );
@@ -223,7 +223,7 @@ using DataValidator;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1037bb604e4118ba29d1c6b1818c8de28a43ebf512068", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1037bb604e4118ba29d1c6b1818c8de28a43ebf512053", async() => {
                 WriteLiteral("Transfer");
             }
             );
