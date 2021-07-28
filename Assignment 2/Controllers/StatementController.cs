@@ -19,8 +19,8 @@ namespace Assignment_2.Controllers
     public class StatementController : Controller
     {
 
-        private readonly Assignment2DbContext _context;
-        public StatementController( Assignment2DbContext context) => _context = context;
+        private readonly MCBAContext _context;
+        public StatementController( MCBAContext context) => _context = context;
 
         public async Task<IActionResult> Index()
         {

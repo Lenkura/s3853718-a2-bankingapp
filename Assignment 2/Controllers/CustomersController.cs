@@ -17,9 +17,9 @@ namespace Assignment_2.Controllers
     [SecureContent]
     public class CustomersController : Controller
     {
-        private readonly Assignment2DbContext _context;
+        private readonly MCBAContext _context;
 
-        public CustomersController(Assignment2DbContext context)
+        public CustomersController(MCBAContext context)
         {
             _context = context;
         }

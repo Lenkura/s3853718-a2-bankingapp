@@ -19,8 +19,8 @@ namespace Assignment_2.Controllers
 {
     public class BillPayController : Controller
     {
-        private readonly Assignment2DbContext _context;
-        public BillPayController(Assignment2DbContext context) => _context = context;
+        private readonly MCBAContext _context;
+        public BillPayController(MCBAContext context) => _context = context;
 
         /*  public async Task<IActionResult> List()
           {

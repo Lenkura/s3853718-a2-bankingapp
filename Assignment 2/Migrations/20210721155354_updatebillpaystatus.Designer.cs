@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Assignment_2.Migrations
 {
-    [DbContext(typeof(Assignment2DbContext))]
+    [DbContext(typeof(MCBAContext))]
     [Migration("20210721155354_updatebillpaystatus")]
     partial class updatebillpaystatus
     {

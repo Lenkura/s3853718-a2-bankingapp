@@ -12,9 +12,9 @@ namespace Assignment_2.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly Assignment2DbContext _context;
+        private readonly MCBAContext _context;
 
-        public LoginController(Assignment2DbContext context) => _context = context;
+        public LoginController(MCBAContext context) => _context = context;
         public IActionResult Index()
         {
             return View();

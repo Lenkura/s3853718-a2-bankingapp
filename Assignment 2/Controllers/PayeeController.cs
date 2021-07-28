@@ -17,8 +17,8 @@ namespace Assignment_2.Controllers
 {
     public class PayeeController : Controller
     {
-        private readonly Assignment2DbContext _context;
-        public PayeeController(Assignment2DbContext context) => _context = context;
+        private readonly MCBAContext _context;
+        public PayeeController(MCBAContext context) => _context = context;
         /* public IActionResult PayeeList()
          {
              var payees = _context.Set<Payee>().ToList();

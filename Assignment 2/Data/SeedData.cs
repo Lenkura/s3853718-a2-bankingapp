@@ -12,7 +12,7 @@ namespace Assignment_2.Data
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            var context = serviceProvider.GetRequiredService<Assignment2DbContext>();
+            var context = serviceProvider.GetRequiredService<MCBAContext>();
 
             // Look for customers.
             if (context.Customers.Any())

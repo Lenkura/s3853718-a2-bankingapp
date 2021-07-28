@@ -23,7 +23,7 @@ namespace Assignment_2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Assignment2DbContext>(options =>
+            services.AddDbContext<MCBAContext>(options =>
             {
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"));
@@ -52,7 +52,7 @@ namespace Assignment_2
             services.AddHostedService<BillPayBackgroundService>();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<Assignment2DbContext>();
+                .AddEntityFrameworkStores<MCBAContext>();
             services.AddControllersWithViews();
         }
 

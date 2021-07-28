@@ -9105,9 +9105,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Git\\s3853718-a2\\Assignment 2\\Assignment 2.csproj",
-      "projectName": "Assignment 2",
-      "projectPath": "D:\\Git\\s3853718-a2\\Assignment 2\\Assignment 2.csproj",
+      "projectUniqueName": "D:\\Git\\s3853718-a2\\Assignment 2\\MvcMCBA.csproj",
+      "projectName": "MvcMCBA",
+      "projectPath": "D:\\Git\\s3853718-a2\\Assignment 2\\MvcMCBA.csproj",
       "packagesPath": "C:\\Users\\Raymond\\.nuget\\packages\\",
       "outputPath": "D:\\Git\\s3853718-a2\\Assignment 2\\obj\\",
       "projectStyle": "PackageReference",

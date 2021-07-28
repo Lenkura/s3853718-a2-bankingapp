@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Assignment_2.Data
 {
-    public class Assignment2DbContext : IdentityDbContext
+    public class MCBAContext : IdentityDbContext
     {
-        public Assignment2DbContext(DbContextOptions<Assignment2DbContext> options)
+        public MCBAContext(DbContextOptions<MCBAContext> options)
             : base(options)
         { }
 

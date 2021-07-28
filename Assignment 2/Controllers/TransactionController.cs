@@ -19,8 +19,8 @@ namespace Assignment_2.Controllers
     {
 
         private readonly ILogger<TransactionController> _logger;
-        private readonly Assignment2DbContext _context;
-        public TransactionController(ILogger<TransactionController> logger, Assignment2DbContext context)
+        private readonly MCBAContext _context;
+        public TransactionController(ILogger<TransactionController> logger, MCBAContext context)
         {
             _logger = logger;
             _context = context;

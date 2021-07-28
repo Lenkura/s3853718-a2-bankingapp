@@ -29,7 +29,7 @@ namespace Assignment_2.Background_Services
         private async Task PayScheduledBills(CancellationToken stoppingToken)
         {
             using var scope = _services.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<Assignment2DbContext>();
+            var context = scope.ServiceProvider.GetRequiredService<MCBAContext>();
 
             var billpays = await context.BillPays.ToListAsync(stoppingToken);
             foreach (var bill in billpays)
