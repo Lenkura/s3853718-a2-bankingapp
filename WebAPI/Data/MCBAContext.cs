@@ -1,9 +1,10 @@
-﻿using Assignment_2.Models;
+﻿using WebAPI.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Assignment_2.Models;
 
 namespace Assignment_2.Data
 {

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebAPI.Models.DataManger;
 
 namespace WebAPI
 {
@@ -21,7 +22,9 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MCBAContext>(options =>
-                 options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<CustomerManager>();
 
             services.AddControllers();
         }

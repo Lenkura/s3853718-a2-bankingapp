@@ -1,5 +1,4 @@
 ﻿using Assignment_2.Models;
-using DataValidator;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

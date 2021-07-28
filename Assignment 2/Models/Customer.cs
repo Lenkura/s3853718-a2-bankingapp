@@ -19,37 +19,36 @@ namespace Assignment_2.Models
         SA = 6,
         WA = 7
     }
-    public record Customer
+    public class Customer
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Range(1000, 9999)]
         public int CustomerID { get; init; }
 
         [Required, StringLength(50)]
-        public string Name { get; init; }
+        public string Name { get; set; }
 
         [StringLength(11)]
-        public string TFN { get; init; }
+        public string TFN { get; set; }
 
         [StringLength(50)]
-        public string Address { get; init; }
+        public string Address { get; set; }
 
         [StringLength(40)]
-        public string Suburb { get; init; }
+        public string Suburb { get; set; }
 
-        [StringLength(3)]
         [Column(TypeName = "nvarchar")]
-        public AusStates State { get; init; }
+        public AusStates State { get; set; }
 
         [StringLength(4)]
         [Range(1000, 9999, ErrorMessage = "Enter a Valid Postcode")]
-        public string PostCode { get; init; }
+        public string PostCode { get; set; }
 
         [StringLength(12)]
         [RegularExpression(@"04[0-9]{2}\s[0-9]{3}\s[0-9]{3}", ErrorMessage = "Please enter an Australian Phone Number")]
-        public string Mobile { get; init; }
+        public string Mobile { get; set; }
 
-        public virtual List<Account> Accounts { get; init; }
-        public virtual Login Login { get; init; }
+        public virtual List<Account> Accounts { get; set; }
+        public virtual Login Login { get; set; }
     }
 }
