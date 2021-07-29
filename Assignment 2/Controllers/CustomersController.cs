@@ -90,7 +90,7 @@ namespace MvcMCBA.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  IActionResult Edit(int id, [Bind("CustomerID,Name,TFN,Address,Suburb,State,PostCode,Mobile")] Customer customer)
+        public IActionResult Edit(int id, [Bind("CustomerID,Name,TFN,Address,Suburb,State,PostCode,Mobile")] Customer customer)
         {
             if (id != customer.CustomerID)
                 return NotFound();
@@ -112,40 +112,35 @@ namespace MvcMCBA.Controllers
         [HttpPost]
         public async Task<IActionResult> Password(ChangePasswordViewModel viewModel)
         {
-            /* var loginID = HttpContext.Session.GetString(nameof(Login.LoginID));
-             var login = await _context.Logins.FindAsync(loginID);
-             if (login == null || !PBKDF2.Verify(login.PasswordHash, viewModel.OldPasswordHash))
-             {
-                 ModelState.AddModelError(nameof(viewModel.OldPasswordHash), "Incorrect Password");
-                 return View();
-             }
+            var loginID = HttpContext.Session.GetString(nameof(Login.LoginID));
+            //var login = await _context.Logins.FindAsync(loginID);
+            var response = await Client.GetAsync($"api/Login/{loginID}");
+            var result = await response.Content.ReadAsStringAsync();
+            var login = JsonConvert.DeserializeObject<Login>(result);
+            if (login == null || !PBKDF2.Verify(login.PasswordHash, viewModel.OldPasswordHash))
+            {
+                ModelState.AddModelError(nameof(viewModel.OldPasswordHash), "Incorrect Password");
+                return View();
+            }
 
-             if (viewModel.NewPasswordHash1 != viewModel.NewPasswordHash2)
-             {
-                 ModelState.AddModelError("PasswordChange", "New Passwords did not Match");
-                 return View();
-             }
-             if (!ModelState.IsValid)
-                 return View();
-             login.PasswordHash = PBKDF2.Hash(viewModel.NewPasswordHash1);
-             try
-             {
-                 _context.Update(login);
-                 await _context.SaveChangesAsync();
-             }
-             catch (DbUpdateConcurrencyException)
-             {
-                 if (_context.Logins.Any(x => x.LoginID == login.LoginID))
-                 {
-                     return NotFound();
-                 }
-                 else
-                 {
-                     throw;
-                 }
-             }*/
-            return RedirectToAction("Logout", "Login");
-           
+            if (viewModel.NewPasswordHash1 != viewModel.NewPasswordHash2)
+            {
+                ModelState.AddModelError("PasswordChange", "New Passwords did not Match");
+                return View();
+            }
+            if (!ModelState.IsValid)
+                return View();
+            login.PasswordHash = PBKDF2.Hash(viewModel.NewPasswordHash1);
+            var content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
+            var update = Client.PutAsync("api/Login", content).Result;
+            if (update.IsSuccessStatusCode)
+                return RedirectToAction("Logout", "Login");
+            else
+            {
+                ModelState.AddModelError("PasswordChange", "Error Updating, try again later");
+                return View();
+            }
+
         }
 
         // GET: Customers/Delete/5
@@ -155,7 +150,7 @@ namespace MvcMCBA.Controllers
                 return NotFound();
 
             var response = await Client.GetAsync($"api/Customer/{id}");
-           // if (!response.IsSuccessStatusCode)
+            // if (!response.IsSuccessStatusCode)
             var result = await response.Content.ReadAsStringAsync();
             var customer = JsonConvert.DeserializeObject<Customer>(result);
 
@@ -169,7 +164,7 @@ namespace MvcMCBA.Controllers
         {
             var response = Client.DeleteAsync($"api/Customer/{id}").Result;
             if (response.IsSuccessStatusCode)
-                return RedirectToAction("Index","Transaction");
+                return RedirectToAction("Index", "Transaction");
             return NotFound();
         }
     }
