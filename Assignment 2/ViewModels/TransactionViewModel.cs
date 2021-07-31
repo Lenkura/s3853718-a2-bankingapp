@@ -19,6 +19,6 @@ namespace MvcMCBA.ViewModels
         public decimal Amount { get; set; }
         [StringLength(30)]
         public string Comment { get; set; }
-        public string TransactionType { get; set; }
+        public TransactionType TransactionType { get; set; }
     }
 }
