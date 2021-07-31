@@ -59,7 +59,6 @@ namespace MvcMCBA.Controllers
         {
             // Logout customer.
             HttpContext.Session.Clear();
-
             return RedirectToAction("Index", "Login");
         }
     }

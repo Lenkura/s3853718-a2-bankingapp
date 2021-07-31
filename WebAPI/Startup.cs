@@ -32,6 +32,7 @@ namespace WebAPI
             services.AddScoped<BillPayManager>();
             services.AddScoped<PayeeManager>();
             services.AddScoped<LoginManager>();
+            services.AddScoped<TransactionManager>();
 
             services.AddControllers();
         }

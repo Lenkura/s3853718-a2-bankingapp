@@ -113,7 +113,6 @@ namespace MvcMCBA.Controllers
         public async Task<IActionResult> Password(ChangePasswordViewModel viewModel)
         {
             var loginID = HttpContext.Session.GetString(nameof(Login.LoginID));
-            //var login = await _context.Logins.FindAsync(loginID);
             var response = await Client.GetAsync($"api/Login/{loginID}");
             var result = await response.Content.ReadAsStringAsync();
             var login = JsonConvert.DeserializeObject<Login>(result);
