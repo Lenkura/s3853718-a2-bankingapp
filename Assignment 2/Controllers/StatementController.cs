@@ -13,18 +13,26 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
+using System.Net.Http;
 
 namespace MvcMCBA.Controllers
 {
     public class StatementController : Controller
     {
-
-        private readonly MCBAContext _context;
-        public StatementController( MCBAContext context) => _context = context;
+        private readonly IHttpClientFactory _clientFactory;
+        private HttpClient Client => _clientFactory.CreateClient("api");
+        public StatementController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
 
         public async Task<IActionResult> Index()
         {
-            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
+           // var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
+            var id = HttpContext.Session.GetInt32(nameof(Customer.CustomerID));
+            var response = await Client.GetAsync($"api/Customer/{id}");
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
+
+            var result = await response.Content.ReadAsStringAsync();
+            var customer = JsonConvert.DeserializeObject<Customer>(result);
             return View(customer);
         }
 
@@ -51,7 +59,7 @@ namespace MvcMCBA.Controllers
                    Transactions = transactions,
                });
            }*/
-        
+
         public IActionResult IndexingHistory(int accountNumber)
         {
             HttpContext.Session.SetInt32("AccountHistory", accountNumber);
@@ -59,12 +67,26 @@ namespace MvcMCBA.Controllers
         }
         public async Task<IActionResult> History(int? page = 1)
         {
-            var account = await _context.Accounts.FindAsync(HttpContext.Session.GetInt32("AccountHistory"));
+            var id = HttpContext.Session.GetInt32("AccountHistory");
+            var response = await Client.GetAsync($"api/Account/{id}");
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
+            var result = await response.Content.ReadAsStringAsync();
+            var account = JsonConvert.DeserializeObject<Account>(result);
             ViewBag.Account = account;
+
+            response = await Client.GetAsync($"api/Transaction/{id}");
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
+            result = await response.Content.ReadAsStringAsync();
+            var accountTransaction = JsonConvert.DeserializeObject<List<Transaction>>(result);
+
             // Page the orders, maximum of X per page.
             const int pageSize = 4;
-            var pagedList = await _context.Transactions.Where(x => x.AccountNumber == account.AccountNumber).
-                OrderByDescending(x => x.TransactionTimeUtc).ToPagedListAsync(page, pageSize);
+            var pagedList = accountTransaction.ToPagedList((int)page, pageSize);
+
+            //var pagedList = await _context.Transactions.Where(x => x.AccountNumber == account.AccountNumber).
+            //  OrderByDescending(x => x.TransactionTimeUtc).ToPagedListAsync(page, pageSize);
 
             return View(pagedList);
         }

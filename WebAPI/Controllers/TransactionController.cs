@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
         }
 
         // GET{value}
-        [HttpGet("{id}")]
+        [HttpGet("{accountNumber}")]
         public IEnumerable<Transaction> Get(int accountNumber)
         {
             return _repo.GetAccount(accountNumber);

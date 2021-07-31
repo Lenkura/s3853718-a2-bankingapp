@@ -1,8 +1,8 @@
 ﻿using WebAPI.Data;
-using WebAPI.Models;
 using System.Collections.Generic;
 using System.Linq;
 using WebAPI.Models.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI.Models.DataManger
 {
@@ -17,14 +17,15 @@ namespace WebAPI.Models.DataManger
 
         public Customer Get(int id)
         {
-            return _context.Customers.Find(id);
+            return _context.Customers.Include(c => c.Accounts).ThenInclude(a=>a.Transactions).FirstOrDefault(c=>c.CustomerID==id);
+           // return _context.Customers.Find(id);
         }
 
         public IEnumerable<Customer> GetAll()
         {
             return _context.Customers.ToList();
         }
-
+            
         public int Add(Customer customer)
         {
             _context.Customers.Add(customer);

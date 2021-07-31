@@ -42,6 +42,7 @@ namespace WebAPI.Models
 
         [Required]
         [Column(TypeName = "money")]
+        [DataType(DataType.Currency)]
         public decimal Amount { get; init; }
 
         [StringLength(30)]
