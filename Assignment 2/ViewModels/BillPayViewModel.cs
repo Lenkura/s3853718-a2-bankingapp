@@ -31,6 +31,7 @@ namespace MvcMCBA.ViewModels
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Payment Time (Local Time)")]
         public DateTime ScheduleTimeUtc { get; set; }
         [Required]
         [Column(TypeName = "char")]

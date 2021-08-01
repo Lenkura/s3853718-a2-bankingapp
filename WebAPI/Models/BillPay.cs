@@ -43,12 +43,12 @@ namespace WebAPI.Models
         public decimal Amount { get; set; }
         [Required]
         [Column(TypeName = "datetime2")]
+        [Display(Name = "Scheduled Time (Utc)")]
         public DateTime ScheduleTimeUtc { get; set; }
         [Required]
         [Column(TypeName = "char")]
         public PaymentPeriod Period { get; set; }
 
-        [StringLength(10)]
         [Column(TypeName = "nvarchar")]
         public BillPayStatus Status { get; set; }
     }

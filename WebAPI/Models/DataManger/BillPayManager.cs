@@ -24,12 +24,12 @@ namespace WebAPI.Models.DataManger
             return _context.BillPays.ToList();
         }
 
-        public int Add(BillPay customer)
+        public int Add(BillPay billpay)
         {
-            _context.BillPays.Add(customer);
+            _context.BillPays.Add(billpay);
             _context.SaveChanges();
 
-            return customer.BillPayID;
+            return billpay.BillPayID;
         }
 
         public int Delete(int id)

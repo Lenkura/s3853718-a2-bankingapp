@@ -7,7 +7,7 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BillPayController : ControllerBase
+    public class BillPayController : ControllerBase 
     {
         private readonly BillPayManager _repo;
 
