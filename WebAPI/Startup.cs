@@ -34,7 +34,6 @@ namespace WebAPI
             services.AddScoped<LoginManager>();
             services.AddScoped<TransactionManager>();
 
-
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
