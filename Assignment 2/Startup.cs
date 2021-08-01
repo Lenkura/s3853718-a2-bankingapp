@@ -1,5 +1,4 @@
 using MvcMCBA.Background_Services;
-using MvcMCBA.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -24,13 +23,6 @@ namespace MvcMCBA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MCBAContext>(options =>
-            {
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"));
-                 // Enable lazy loading.
-                options.UseLazyLoadingProxies();
-            });
             services.AddHttpClient("api", client =>
             {
                 client.BaseAddress = new Uri("https://localhost:44398");
@@ -57,8 +49,8 @@ namespace MvcMCBA
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddHostedService<BillPayBackgroundService>();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<MCBAContext>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<MCBAContext>();
             services.AddControllersWithViews();
         }
 
@@ -89,7 +81,6 @@ namespace MvcMCBA
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Login}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
             });
         }
     }

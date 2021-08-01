@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MvcMCBA.Migrations
+namespace WebAPI.Migrations
 {
     public partial class updatebillpaystatus : Migration
     {

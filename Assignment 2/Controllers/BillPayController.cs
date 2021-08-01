@@ -1,16 +1,11 @@
-﻿using MvcMCBA.Authorise;
-using MvcMCBA.Data;
-using MvcMCBA.Models;
+﻿using MvcMCBA.Models;
 using MvcMCBA.ViewModels;
 using DataValidator;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
