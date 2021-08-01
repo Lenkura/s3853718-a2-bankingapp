@@ -28,7 +28,7 @@ namespace WebAPI.Models
         public string PostCode { get; set; }
         [Required]
         [StringLength(14)]
-        [RegularExpression(@"\(0[0-9]\)\s[0-9]{4}\s[0-9]{4}", ErrorMessage = "Please enter an Australian Phone Number")]
+        [RegularExpression(@"\(0[0-9]\)\s[0-9]{4}\s[0-9]{4}", ErrorMessage = "Please enter an Australian Phone Number in the format (0X) XXXX XXXX")]
         public string Phone { get; set; }
     }
 }

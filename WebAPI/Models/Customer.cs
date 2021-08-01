@@ -45,7 +45,7 @@ namespace WebAPI.Models
         public string PostCode { get; set; }
 
         [StringLength(12)]
-        [RegularExpression(@"04[0-9]{2}\s[0-9]{3}\s[0-9]{3}", ErrorMessage = "Please enter an Australian Phone Number")]
+        [RegularExpression(@"04[0-9]{2}\s[0-9]{3}\s[0-9]{3}", ErrorMessage = "Please enter an Australian Phone Number in the format 04XX XXX XXX")]
         public string Mobile { get; set; }
 
         public virtual List<Account> Accounts { get; set; }

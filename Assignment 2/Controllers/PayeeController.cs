@@ -12,25 +12,30 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Text;
 
 namespace MvcMCBA.Controllers
 {
     public class PayeeController : Controller
     {
-        private readonly MCBAContext _context;
-        public PayeeController(MCBAContext context) => _context = context;
-        /* public IActionResult PayeeList()
-         {
-             var payees = _context.Set<Payee>().ToList();
-             return View(payees);
-         }*/
+        private readonly IHttpClientFactory _clientFactory;
+        private HttpClient Client => _clientFactory.CreateClient("api");
+        public PayeeController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
 
         public async Task<IActionResult> PayeeList(int? page = 1)
         {
             // Page the orders, maximum of X per page.
             const int pageSize = 4;
 
-            var pagedList = await _context.Set<Payee>().ToPagedListAsync(page, pageSize);
+            var response = await Client.GetAsync("api/Payee");
+            var result = await response.Content.ReadAsStringAsync();
+            var payees = JsonConvert.DeserializeObject<List<Payee>>(result);
+
+            //var pagedList = await _context.Set<Payee>().ToPagedListAsync(page, pageSize);
+            var pagedList = payees.ToPagedList((int)page, pageSize);
             return View(pagedList);
         }
 
@@ -40,73 +45,41 @@ namespace MvcMCBA.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> NewPayee([Bind("PayeeID,Name,Address,Suburb,State,PostCode,Phone")] PayeeViewModel payeeModel)
+        public IActionResult NewPayee([Bind("PayeeID,Name,Address,Suburb,State,PostCode,Phone")] Payee payee)
         {
             if (ModelState.IsValid)
             {
-                var payee = new Payee
-                {
-                    Name = payeeModel.Name,
-                    Address = payeeModel.Address,
-                    Suburb = payeeModel.Suburb,
-                    State = Enum.Parse<AusStates>(payeeModel.State),
-                    PostCode = payeeModel.PostCode,
-                    Phone = payeeModel.Phone,
-                };
-                _context.Add(payee);
-                await _context.SaveChangesAsync();
+                var content = new StringContent(JsonConvert.SerializeObject(payee), Encoding.UTF8, "application/json");
+                var response = Client.PostAsync("api/Payee", content).Result;
+                if (!response.IsSuccessStatusCode)
+                    return View(payee);
                 return RedirectToAction(nameof(PayeeList));
             }
-            return View(payeeModel);
+            return View(payee);
         }
         public async Task<IActionResult> EditPayee(int? payeeid)
         {
-            if (payeeid == null)
-            {
-                return NotFound();
-            }
-
-            var payee = await _context.Payees.FindAsync(payeeid);
+            var response = await Client.GetAsync($"api/Payee/{payeeid}");
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
+            var result = await response.Content.ReadAsStringAsync();
+            var payee = JsonConvert.DeserializeObject<Payee>(result);
             if (payee == null)
-            {
                 return NotFound();
-            }
             return View(payee);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPayee(int id, [Bind("CustomerID,Name,TFN,Address,Suburb,State,PostCode,Mobile")] Payee payee)
+        public IActionResult EditPayee(int id, [Bind("PayeeID,Name,Address,Suburb,State,PostCode,Phone")] Payee payee)
         {
-            if (id != payee.PayeeID)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(payee);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PayeeExists(payee.PayeeID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(PayeeList));
+                var content = new StringContent(JsonConvert.SerializeObject(payee), Encoding.UTF8, "application/json");
+                var response = Client.PutAsync("api/Payee", content).Result;
+                if (response.IsSuccessStatusCode)
+                    return RedirectToAction(nameof(PayeeList));
             }
             return View(payee);
-        }
-        private bool PayeeExists(int id)
-        {
-            return _context.Payees.Any(e => e.PayeeID == id);
         }
     }
 }
