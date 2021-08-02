@@ -24,7 +24,8 @@ namespace WebAPI.Data
                     Name = "Matthew Bolger",
                     Address = "123 Fake Street",
                     Suburb = "Melbourne",
-                    PostCode = "3000"
+                    PostCode = "3000",
+                    Status = CustomerStatus.Available
                 },
                 new Customer
                 {
@@ -32,12 +33,14 @@ namespace WebAPI.Data
                     Name = "Rodney Cocker",
                     Address = "456 Real Road",
                     Suburb = "Melbourne",
-                    PostCode = "3005"
+                    PostCode = "3005",
+                    Status = CustomerStatus.Available
                 },
                 new Customer
                 {
                     CustomerID = 2300,
-                    Name = "Shekhar Kalra"
+                    Name = "Shekhar Kalra",
+                    Status = CustomerStatus.Available
                 });
 
             context.Logins.AddRange(

@@ -19,6 +19,13 @@ namespace WebAPI.Models
         SA = 6,
         WA = 7
     }
+
+    public enum CustomerStatus
+    {
+        Available = 0,
+        Blocked = 1,
+    }
+
     public class Customer
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -38,6 +45,7 @@ namespace WebAPI.Models
         public string Suburb { get; set; }
 
         [Column(TypeName = "nvarchar")]
+        [MaxLength(3)]
         public AusStates State { get; set; }
 
         [StringLength(4)]
@@ -48,6 +56,9 @@ namespace WebAPI.Models
         [RegularExpression(@"04[0-9]{2}\s[0-9]{3}\s[0-9]{3}", ErrorMessage = "Please enter an Australian Phone Number in the format 04XX XXX XXX")]
         public string Mobile { get; set; }
 
+        [Column(TypeName = "nvarchar")]
+        [MaxLength(10)]
+        public CustomerStatus Status { get; set; }
         public virtual List<Account> Accounts { get; set; }
         public virtual Login Login { get; set; }
     }

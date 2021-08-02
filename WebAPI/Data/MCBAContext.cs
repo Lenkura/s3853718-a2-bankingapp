@@ -28,7 +28,6 @@ namespace WebAPI.Data
                 HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");
             builder.Entity<Account>().HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
             builder.Entity<Transaction>().HasCheckConstraint("CH_Transaction_Amount", "Amount > 0");
-
             // Configure ambiguous Account.Transactions navigation property relationship.
             builder.Entity<Transaction>().
                 HasOne(x => x.Account).WithMany(x => x.Transactions).HasForeignKey(x => x.AccountNumber);

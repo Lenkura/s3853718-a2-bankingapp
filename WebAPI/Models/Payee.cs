@@ -21,6 +21,7 @@ namespace WebAPI.Models
 
         [Required]
         [Column(TypeName = "nvarchar")]
+        [MaxLength(10)]
         public AusStates State { get; set; }
 
         [Required,StringLength(4)]
