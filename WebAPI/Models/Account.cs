@@ -10,7 +10,7 @@ using System.Xml.Linq;
 namespace WebAPI.Models
 {
     public enum AccountType
-{
+    {
         [Display(Name ="Checking")]
         C = 1,
         [Display(Name = "Savings")]
