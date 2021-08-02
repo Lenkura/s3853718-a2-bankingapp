@@ -27,7 +27,7 @@ namespace AdminPortal.Controllers
             else
             {
                 ModelState.AddModelError("LoginFailed", "Incorrect Username or Password (admin/admin)");
-                return View();
+                return View("Index");
             }
 
 
