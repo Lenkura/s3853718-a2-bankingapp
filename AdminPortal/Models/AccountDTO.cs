@@ -1,3 +1,4 @@
+using AdminPortal.Models.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,13 +7,6 @@ namespace AdminPortal.Models
 {
     public class AccountDTO
     {
-        public enum AccountType
-        {
-            [Display(Name = "Checking")]
-            C = 1,
-            [Display(Name = "Savings")]
-            S = 2
-        }
         public class Account
         {
             [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
