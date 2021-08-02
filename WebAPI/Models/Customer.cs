@@ -19,7 +19,6 @@ namespace WebAPI.Models
         SA = 6,
         WA = 7
     }
-
     public enum CustomerStatus
     {
         Available = 0,
@@ -45,7 +44,6 @@ namespace WebAPI.Models
         public string Suburb { get; set; }
 
         [Column(TypeName = "nvarchar")]
-        [MaxLength(3)]
         public AusStates State { get; set; }
 
         [StringLength(4)]
@@ -57,7 +55,6 @@ namespace WebAPI.Models
         public string Mobile { get; set; }
 
         [Column(TypeName = "nvarchar")]
-        [MaxLength(10)]
         public CustomerStatus Status { get; set; }
         public virtual List<Account> Accounts { get; set; }
         public virtual Login Login { get; set; }

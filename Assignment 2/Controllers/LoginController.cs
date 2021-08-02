@@ -47,6 +47,11 @@ namespace MvcMCBA.Controllers
                 throw new Exception();
             var b = await a.Content.ReadAsStringAsync();
             var customer = JsonConvert.DeserializeObject<Customer>(b);
+            if (customer.Status == CustomerStatus.Blocked)
+            {
+                ModelState.AddModelError("LoginFailed", "Account Locked - Please contact us");
+                return View(new Login { LoginID = loginID });
+            }
 
             HttpContext.Session.SetString(nameof(Models.Login.LoginID), login.LoginID);
             HttpContext.Session.SetInt32(nameof(Customer.CustomerID), login.CustomerID);

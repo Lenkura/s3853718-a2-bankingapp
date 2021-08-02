@@ -19,6 +19,14 @@ namespace MvcMCBA.Models
         SA = 6,
         WA = 7
     }
+    public enum CustomerStatus
+    {
+        [Display(Name = "Available")]
+        Available = 0,
+        [Display(Name = "Blocked")]
+        Blocked = 1,
+    }
+
     public class Customer
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -47,7 +55,8 @@ namespace MvcMCBA.Models
         [StringLength(12)]
         [RegularExpression(@"04[0-9]{2}\s[0-9]{3}\s[0-9]{3}", ErrorMessage = "Please enter an Australian Phone Number")]
         public string Mobile { get; set; }
-
+        [Column(TypeName = "nvarchar")]
+        public CustomerStatus Status { get; set; }
         public virtual List<Account> Accounts { get; set; }
         public virtual Login Login { get; set; }
     }

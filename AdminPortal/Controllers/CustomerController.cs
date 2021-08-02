@@ -1,5 +1,6 @@
 ﻿using AdminPortal.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace AdminPortal.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("CustomerID,Name,TFN,Address,Suburb,State,PostCode,Mobile")] CustomerDTO customer)
+        public async Task<IActionResult> EditAsync(int id, [Bind("CustomerID,Name,TFN,Address,Suburb,State,PostCode,Mobile,Status")] CustomerDTO customer)
         {
             if (id != customer.CustomerID)
                 return NotFound();
@@ -46,9 +47,12 @@ namespace AdminPortal.Controllers
             {
                 var content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json");
                 var response = Client.PutAsync("api/Customer", content).Result;
+                string s = await response.Content.ReadAsStringAsync();
                 if (response.IsSuccessStatusCode)
                     return RedirectToAction(nameof(Index));
+                ModelState.AddModelError(nameof(customer.Name), s);
             }
+            //ModelState.AddModelError(nameof(customer.Name), "Oh dear");
             return View(customer);
         }
     }
