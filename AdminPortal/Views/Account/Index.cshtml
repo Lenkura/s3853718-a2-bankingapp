@@ -41,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.Balance)
             </td>
             <td>
-                <a asp-controller="Transaction" asp-action="Index" asp-route-id="@item.AccountNumber">Transactions</a>
+                <a asp-controller="Transaction" asp-action="IndexingOneAccount" asp-route-accountNumber="@item.AccountNumber">Transactions</a>
             </td>
         </tr>
         }
