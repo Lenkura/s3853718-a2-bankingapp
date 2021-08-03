@@ -1,0 +1,36 @@
+﻿@model DateFilterViewModel
+
+@{
+    ViewData["Title"] = "Date Filter";
+    var account = ViewBag.Account;
+}
+
+<h1>Account Transaction Filter</h1>
+<h2>@account</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DateFilter">
+            <div class="form-group">
+                <label asp-for="Start" class="control-label"></label>
+                <input type="datetime-local" asp-for="Start" class="form-control" value="" />
+                <span asp-validation-for="Start" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="End" class="control-label"></label>
+                <input type="datetime-local" asp-for="End" class="form-control" value="" />
+                <span asp-validation-for="End" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="IndexingOneAccount" asp-route-accountNumber="@account" class="btn btn-secondary">Cancel Changes</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

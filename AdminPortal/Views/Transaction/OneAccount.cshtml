@@ -6,11 +6,16 @@
 
 @{
     ViewData["Title"] = "Transaction List";
-    var account = (AccountDTO)ViewBag.Account;
+    var account = ViewBag.Account;
+    var filterenabled = "";
+    @if ((Context.Session.GetString("FilterStart") != null) || Context.Session.GetString("FilterEnd") != null)
+        filterenabled = "Filter currently active";
 }
 <div>
     <h1>Transaction List</h1>
-    <h2>@account.AccountNumber</h2>
+    <h2>@account</h2>
+    <p><a class="btn btn-primary"
+   asp-action="DateFilter">Filter</a> @filterenabled </p>
     <hr />
     <table class="table">
         <tr>
