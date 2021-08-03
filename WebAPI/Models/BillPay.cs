@@ -50,7 +50,6 @@ namespace WebAPI.Models
         public PaymentPeriod Period { get; set; }
 
         [Column(TypeName = "nvarchar")]
-        [MaxLength(10)]
         public BillPayStatus Status { get; set; }
     }
 }
