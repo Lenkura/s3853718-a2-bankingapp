@@ -12,9 +12,11 @@ using X.PagedList;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using MvcMCBA.Authorise;
 
 namespace MvcMCBA.Controllers
 {
+    [SecureContent]
     public class BillPayController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;

@@ -1,4 +1,5 @@
-﻿using AdminPortal.Models;
+﻿using AdminPortal.Authorise;
+using AdminPortal.Models;
 using AdminPortal.Models.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -13,6 +14,7 @@ using X.PagedList;
 
 namespace AdminPortal.Controllers
 {
+    [SecureContent]
     public class BillPayController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;

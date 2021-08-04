@@ -16,6 +16,7 @@ using System.Net.Http;
 
 namespace MvcMCBA.Controllers
 {
+    [SecureContent]
     public class StatementController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;

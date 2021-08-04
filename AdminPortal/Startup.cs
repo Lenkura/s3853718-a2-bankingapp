@@ -59,7 +59,7 @@ namespace AdminPortal
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseSession();
 

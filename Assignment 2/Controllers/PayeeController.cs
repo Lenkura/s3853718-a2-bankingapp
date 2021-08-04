@@ -18,6 +18,7 @@ using System.Text;
 
 namespace MvcMCBA.Controllers
 {
+    [SecureContent]
     public class PayeeController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;

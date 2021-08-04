@@ -1,4 +1,5 @@
-﻿using AdminPortal.Models;
+﻿using AdminPortal.Authorise;
+using AdminPortal.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -10,6 +11,7 @@ using X.PagedList;
 
 namespace AdminPortal.Controllers
 {
+    [SecureContent]
     public class PayeeController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;

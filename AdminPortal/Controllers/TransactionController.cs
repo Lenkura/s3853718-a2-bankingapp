@@ -1,4 +1,5 @@
-﻿using AdminPortal.Models;
+﻿using AdminPortal.Authorise;
+using AdminPortal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -13,6 +14,7 @@ using X.PagedList;
 
 namespace AdminPortal.Controllers
 {
+    [SecureContent]
     public class TransactionController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;
