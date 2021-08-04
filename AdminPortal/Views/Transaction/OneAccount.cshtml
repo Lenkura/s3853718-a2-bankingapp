@@ -7,15 +7,24 @@
 @{
     ViewData["Title"] = "Transaction List";
     var account = ViewBag.Account;
-    var filterenabled = "";
+    var filterEnabled = "";
+    DateTime start;
+    DateTime end;
     @if ((Context.Session.GetString("FilterStart") != null) || Context.Session.GetString("FilterEnd") != null)
-        filterenabled = "Filter currently active";
+        filterEnabled = "Filter currently active: " + Context.Session.GetString("FilterStart")+ " - " + Context.Session.GetString("FilterEnd");
+
 }
 <div>
     <h1>Transaction List</h1>
     <h2>@account</h2>
-    <p><a class="btn btn-primary"
-   asp-action="DateFilter">Filter</a> @filterenabled </p>
+    <form asp-controller="Transaction" asp-action="OneAccount" method="get">
+        <p>
+            Start Date: <input type="datetime-local" name="DateFilterStart"/>
+            End Date: <input type="datetime-local" name="DateFilterEnd"/>
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
+    <p>@filterEnabled</p>
     <hr />
     <table class="table">
         <tr>
@@ -47,7 +56,9 @@
             LiElementClasses = new[] { "page-item" },
             PageClasses = new[] { "page-link" }
         })
+    <div>  <a asp-controller="Account" asp-action="Index">Back to Accounts</a></div>
 </div>
+
 
 
 
