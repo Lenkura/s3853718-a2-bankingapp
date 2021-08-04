@@ -22,6 +22,7 @@ namespace WebAPI.Models
     {
         Ready = 1,
         Error = 2,
+        Blocked = 3,
     }
     public class BillPay
     {

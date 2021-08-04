@@ -9,5 +9,6 @@ namespace AdminPortal.Models.Enums
     {
         Ready = 1,
         Error = 2,
+        Blocked =3,
     }
 }

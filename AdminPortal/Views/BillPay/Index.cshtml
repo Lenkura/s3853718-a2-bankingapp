@@ -1,0 +1,76 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model IPagedList<BillPayDTO>
+
+@{
+    ViewData["Title"] = "BillPay List";
+}
+
+<h1>List of Scheduled BillPays</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].BillPayID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].PayeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].ScheduleTimeUtc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Period)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BillPayID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayeeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScheduleTimeUtc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Period)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                <td>
+                    @if (!(item.Status.Equals(BillPayStatus.Blocked)))
+                    {
+                    <a class="btn btn-danger" asp-action="BillPayStatusChange" asp-route-id="@item.BillPayID" asp-route-target="@BillPayStatus.Blocked">Block</a>
+                    } else
+                    {
+                    <a class="btn btn-success" asp-action="BillPayStatusChange" asp-route-id="@item.BillPayID" asp-route-target="@BillPayStatus.Ready">Unblock</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
