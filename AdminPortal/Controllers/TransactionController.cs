@@ -19,15 +19,49 @@ namespace AdminPortal.Controllers
         private HttpClient Client => _clientFactory.CreateClient("api");
         public TransactionController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
 
-        public async Task<IActionResult> Index(int? page = 1)
+        public async Task<IActionResult> Index(string amountMin, string amountMax, int? page = 0)
         {
             var response = await Client.GetAsync($"api/Transaction");
             if (!response.IsSuccessStatusCode)
                 throw new Exception();
             var result = await response.Content.ReadAsStringAsync();
             var transactions = JsonConvert.DeserializeObject<List<TransactionDTO>>(result);
+            var filteredList = new List<TransactionDTO>();
+
+            decimal min = 0;
+            decimal max = decimal.MaxValue;
+
+            if (page == 0 && HttpContext.Session.GetInt32("FilterPageNumber").HasValue)
+            {
+                HttpContext.Session.Remove("AmountMin");
+                HttpContext.Session.Remove("AmountMax");
+            }
+
+            HttpContext.Session.SetInt32("FilterPageNumber", page.Value);
+
+            if (HttpContext.Session.GetString("AmountMin") != null)
+                min = Decimal.Parse(HttpContext.Session.GetString("AmountMin"));
+            if (HttpContext.Session.GetString("AmountMax") != null)
+                max = Decimal.Parse(HttpContext.Session.GetString("AmountMax"));
+
+            if (decimal.TryParse(amountMin, out _))
+            {
+                min = decimal.Parse(amountMin);
+                HttpContext.Session.SetString("AmountMin", min.ToString());
+            }
+            if (decimal.TryParse(amountMax, out _))
+            {
+                max = decimal.Parse(amountMax);
+                HttpContext.Session.SetString("AmountMax", max.ToString());
+            }
+
+            foreach (var t in transactions)
+                if (t.Amount > min && t.Amount < max)
+                    filteredList.Add(t);
+            if (page == 0)
+                page = 1;
             const int pageSize = 4;
-            var pagedList = transactions.ToPagedList((int)page, pageSize);
+            var pagedList = filteredList.ToPagedList((int)page, pageSize);
             return View(pagedList);
         }
 
@@ -41,7 +75,7 @@ namespace AdminPortal.Controllers
             return RedirectToAction(nameof(OneAccount));
         }
 
-        public async Task<IActionResult> OneAccount(DateTime? DateFilterStart, DateTime? DateFilterEnd, int? page = 1)
+        public async Task<IActionResult> OneAccount(DateTime? DateFilterStart, DateTime? DateFilterEnd, int? page = 0)
         {
             var accountNumber = HttpContext.Session.GetInt32("AccountTransactions");
             ViewBag.Account = accountNumber;
@@ -56,7 +90,7 @@ namespace AdminPortal.Controllers
             var start = DateTime.MinValue;
             var end = DateTime.Now;
 
-            if (page == 1 && HttpContext.Session.GetInt32("FilterPageNumber").HasValue)
+            if (page == 0 && HttpContext.Session.GetInt32("FilterPageNumber").HasValue)
             {
                 HttpContext.Session.Remove("FilterStart");
                 HttpContext.Session.Remove("FilterEnd");
@@ -83,7 +117,8 @@ namespace AdminPortal.Controllers
             foreach (var t in transactions)
                 if (start.CompareTo(t.TransactionTimeUtc) < 0 && end.CompareTo(t.TransactionTimeUtc) > 0)
                     filteredList.Add(t);
-
+            if (page == 0)
+                page = 1;
             const int pageSize = 4;
             var pagedList = filteredList.ToPagedList((int)page, pageSize);
             return View(pagedList);

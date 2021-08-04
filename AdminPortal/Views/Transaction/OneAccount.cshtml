@@ -8,8 +8,6 @@
     ViewData["Title"] = "Transaction List";
     var account = ViewBag.Account;
     var filterEnabled = "";
-    DateTime start;
-    DateTime end;
     @if ((Context.Session.GetString("FilterStart") != null) || Context.Session.GetString("FilterEnd") != null)
         filterEnabled = "Filter currently active: " + Context.Session.GetString("FilterStart")+ " - " + Context.Session.GetString("FilterEnd");
 

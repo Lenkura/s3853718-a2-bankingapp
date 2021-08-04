@@ -6,9 +6,20 @@
 
 @{
     ViewData["Title"] = "Transaction List";
+    var filterEnabled = "";
+    @if ((Context.Session.GetString("AmountMin") != null) || Context.Session.GetString("AmountMax") != null)
+        filterEnabled = "Filter currently active: " + "$" + Context.Session.GetString("AmountMin") + " - " + "$" + Context.Session.GetString("AmountMax");
 }
 <div>
     <h1>Transaction List</h1>
+    <form asp-controller="Transaction" asp-action="Index" method="get">
+        <p>
+            Min Amount: <input type="text" name="amountMin" />
+            Max Amount: <input type="text" name="amountMax" />
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
+    <p>@filterEnabled</p>
     <hr />
     <table class="table">
         <tr>
