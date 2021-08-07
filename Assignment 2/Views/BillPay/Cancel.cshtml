@@ -30,10 +30,10 @@
             @Html.DisplayFor(model => model.Amount)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ScheduleTimeUtc)
+            @Html.DisplayNameFor(model => model.ScheduleTimeUtc.ToLocalTime())
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ScheduleTimeUtc)
+            @Html.DisplayFor(model => model.ScheduleTimeUtc.ToLocalTime())
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Period)

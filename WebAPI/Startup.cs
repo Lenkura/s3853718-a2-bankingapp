@@ -28,6 +28,7 @@ namespace WebAPI
             });
 
             services.AddScoped<CustomerManager>();
+            //services.AddTransient<>();
             services.AddScoped<AccountManager>();
             services.AddScoped<BillPayManager>();
             services.AddScoped<PayeeManager>();

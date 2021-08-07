@@ -16,34 +16,35 @@ namespace WebAPI.Controllers
             _repo = repo;
         }
 
+        // Get - Retrieve all customers
         [HttpGet]
         public IEnumerable<Customer> Get()
         {
             return _repo.GetAll();
         }
 
-        // GET{value}
+        // GET{value} - Retrieve a specific customer based on customer ID
         [HttpGet("{id}")]
         public Customer Get(int id)
         {
             return _repo.Get(id);
         }
 
-        // POST 
+        // POST - Add a new customer
         [HttpPost]
         public void Post([FromBody] Customer customer)
         {
             _repo.Add(customer);
         }
 
-        // PUT 
+        // PUT - update a customers details
         [HttpPut]
         public void Put([FromBody] Customer customer)
         {
             _repo.Update(customer.CustomerID, customer);
         }
 
-        // DELETE 
+        // DELETE - delete a customer
         [HttpDelete("{id}")]
         public long Delete(int id)
         {

@@ -19,34 +19,35 @@ namespace WebAPI.Controllers
             _repo = repo;
         }
 
+        // Get - Retrieves all Accounts
         [HttpGet]
         public IEnumerable<Account> Get()
         {
             return _repo.GetAll();
         }
 
-        // GET{value}
+        // GET{value} - Retrieves a specific account with the given account number
         [HttpGet("{id}")]
         public Account Get(int id)
         {
             return _repo.Get(id);
         }
 
-        // POST 
+        // POST - Adds an account
         [HttpPost]
         public void Post([FromBody] Account account)
         {
             _repo.Add(account);
         }
 
-        // PUT 
+        // PUT - Updates an account with new details
         [HttpPut]
         public void Put([FromBody] Account account)
         {
             _repo.Update(account.AccountNumber, account);
         }
 
-        // DELETE 
+        // DELETE - Deletes an account with the given account number
         [HttpDelete("{id}")]
         public long Delete(int id)
         {

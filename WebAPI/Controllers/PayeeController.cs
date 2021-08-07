@@ -16,34 +16,35 @@ namespace WebAPI.Controllers
             _repo = repo;
         }
 
+        //Get - Retrieve all Payees
         [HttpGet]
         public IEnumerable<Payee> Get()
         {
             return _repo.GetAll();
         }
 
-        // GET{value}
+        // GET{value} - Retrieve a specific payee based on payee ID
         [HttpGet("{id}")]
         public Payee Get(int id)
         {
             return _repo.Get(id);
         }
 
-        // POST 
+        // POST - Add a new payee
         [HttpPost]
         public void Post([FromBody] Payee payee)
         {
             _repo.Add(payee);
         }
 
-        // PUT 
+        // PUT - update an existing payee
         [HttpPut]
         public void Put([FromBody] Payee payee)
         {
             _repo.Update(payee.PayeeID, payee);
         }
 
-        // DELETE 
+        // DELETE - remove an existing payee
         [HttpDelete("{id}")]
         public long Delete(int id)
         {

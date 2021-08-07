@@ -16,34 +16,35 @@ namespace WebAPI.Controllers
             _repo = repo;
         }
 
+        //Get - Retrieve all transactions
         [HttpGet]
         public IEnumerable<Transaction> Get()
         {
             return _repo.GetAll();
         }
 
-        // GET{value}
+        // GET{value} - Retrieve all transactions of a specfic account, specified by the account number
         [HttpGet("{accountNumber}")]
         public IEnumerable<Transaction> Get(int accountNumber)
         {
             return _repo.GetAccount(accountNumber);
         }
 
-        // POST 
+        // POST - Add a new transaction
         [HttpPost]
         public void Post([FromBody] Transaction transaction)
         {
             _repo.Add(transaction);
         }
 
-        // PUT 
+        // PUT - update an existing transaction
         [HttpPut]
         public void Put([FromBody] Transaction transaction)
         {
             _repo.Update(transaction.TransactionID, transaction);
         }
 
-        // DELETE 
+        // DELETE - delete an existing transaction 
         [HttpDelete("{id}")]
         public long Delete(int id)
         {

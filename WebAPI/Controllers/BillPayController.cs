@@ -15,35 +15,35 @@ namespace WebAPI.Controllers
         {
             _repo = repo;
         }
-
+        //Get - Retrieve all billpays
         [HttpGet]
         public IEnumerable<BillPay> Get()
         {
             return _repo.GetAll();
         }
 
-        // GET{value}
+        // GET{value} - Retrieve a specific billpay based on billpay id
         [HttpGet("{id}")]
         public BillPay Get(int id)
         {
             return _repo.Get(id);
         }
 
-        // POST 
+        // POST - Adds a new billpay
         [HttpPost]
         public void Post([FromBody] BillPay billpay)
         {
             _repo.Add(billpay);
         }
 
-        // PUT 
+        // PUT - Update a billpay
         [HttpPut]
         public void Put([FromBody] BillPay billpay)
         {
             _repo.Update(billpay.BillPayID, billpay);
         }
 
-        // DELETE 
+        // DELETE - Deletes a billpay based on billpay id
         [HttpDelete("{id}")]
         public long Delete(int id)
         {
