@@ -107,13 +107,13 @@ namespace AdminPortal.Controllers
             if (DateFilterStart != null)
             {
                 start = DateFilterStart.Value;
-                HttpContext.Session.SetString("FilterStart", DateFilterStart.Value.ToString());
+                HttpContext.Session.SetString("FilterStart", DateFilterStart.Value.ToShortDateString());
             }
 
             if (DateFilterEnd != null)
             {
                 end = DateFilterEnd.Value;
-                HttpContext.Session.SetString("FilterEnd", DateFilterEnd.Value.ToString());
+                HttpContext.Session.SetString("FilterEnd", DateFilterEnd.Value.ToShortDateString());
             }
 
             foreach (var t in transactions)

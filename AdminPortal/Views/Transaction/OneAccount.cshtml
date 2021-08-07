@@ -16,11 +16,11 @@
     <h1>Transaction List</h1>
     <h2>@account</h2>
     <form asp-controller="Transaction" asp-action="OneAccount" method="get">
-        <p>
-            Start Date: <input type="datetime-local" name="DateFilterStart"/>
-            End Date: <input type="datetime-local" name="DateFilterEnd"/>
+        <div >
+            Start Date: <input type="date" name="DateFilterStart" />
+            End Date: <input type="date" name="DateFilterEnd" />
             <input type="submit" value="Filter" />
-        </p>
+        </div>
     </form>
     <p>@filterEnabled</p>
     <hr />
