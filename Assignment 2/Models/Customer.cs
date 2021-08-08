@@ -22,9 +22,9 @@ namespace MvcMCBA.Models
     public enum CustomerStatus
     {
         [Display(Name = "Available")]
-        Available = 0,
+        A = 0,
         [Display(Name = "Blocked")]
-        Blocked = 1,
+        B = 1,
     }
 
     public class Customer
@@ -46,6 +46,7 @@ namespace MvcMCBA.Models
         public string Suburb { get; set; }
 
         [Column(TypeName = "nvarchar")]
+        [StringLength(3)]
         public AusStates State { get; set; }
 
         [StringLength(4)]

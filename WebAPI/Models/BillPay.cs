@@ -20,9 +20,12 @@ namespace WebAPI.Models
     }
     public enum BillPayStatus
     {
-        Ready = 1,
-        Error = 2,
-        Blocked = 3,
+        [Display(Name = "Ready")]
+        R = 1,
+        [Display(Name = "Error")]
+        E = 2,
+        [Display(Name = "Blocked")]
+        B = 3,
     }
     public class BillPay
     {

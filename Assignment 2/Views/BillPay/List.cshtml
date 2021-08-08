@@ -24,7 +24,7 @@
     </tr>
     @foreach (var billpay in Model)
     {
-        @if (billpay.Status == BillPayStatus.Error)
+        @if (billpay.Status == BillPayStatus.E)
         {
             <tr class="table-danger">
                 <td>@Html.DisplayFor(x => billpay.BillPayID)</td>
@@ -42,7 +42,7 @@
                 </td>
             </tr>
         }
-        @if (billpay.Status == BillPayStatus.Blocked)
+        @if (billpay.Status == BillPayStatus.B)
         {
             <tr class="table-secondary">
                 <td>@Html.DisplayFor(x => billpay.BillPayID)</td>
@@ -58,7 +58,7 @@
                 </td>
             </tr>
         }
-        @if (billpay.Status == BillPayStatus.Ready)
+        @if (billpay.Status == BillPayStatus.R)
         {
             <tr>
                 <td>@Html.DisplayFor(x => billpay.BillPayID)</td>

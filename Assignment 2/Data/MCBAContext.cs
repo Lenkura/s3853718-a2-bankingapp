@@ -7,7 +7,7 @@ using MvcMCBA.Models;
 
 namespace MvcMCBA.Data
 {
-    public class MCBAContext : IdentityDbContext
+    public class MCBAContext : IdentityDbContext<ApplicationUser>
     {
         public MCBAContext(DbContextOptions<MCBAContext> options)
             : base(options)

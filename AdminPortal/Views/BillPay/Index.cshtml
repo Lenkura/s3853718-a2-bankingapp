@@ -62,13 +62,13 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Status)
                     <td>
-                        @if (!(item.Status.Equals(BillPayStatus.Blocked)))
+                        @if (!(item.Status.Equals(BillPayStatus.B)))
                         {
-                            <a class="btn btn-danger" asp-action="BillPayStatusChange" asp-route-id="@item.BillPayID" asp-route-target="@BillPayStatus.Blocked">Block</a>
+                            <a class="btn btn-danger" asp-action="BillPayStatusChange" asp-route-id="@item.BillPayID" asp-route-target="@BillPayStatus.B">Block</a>
                         }
                         else
                         {
-                            <a class="btn btn-success" asp-action="BillPayStatusChange" asp-route-id="@item.BillPayID" asp-route-target="@BillPayStatus.Ready">Unblock</a>
+                            <a class="btn btn-success" asp-action="BillPayStatusChange" asp-route-id="@item.BillPayID" asp-route-target="@BillPayStatus.R">Unblock</a>
                         }
                     </td>
                 </tr>

@@ -9,9 +9,9 @@ namespace AdminPortal.Models.Enums
     public enum CustomerStatus
     {
         [Display(Name = "Available")]
-        Available = 0,
+        A = 0,
         [Display(Name = "Blocked")]
-        Blocked = 1,
+        B = 1,
     }
 
 }

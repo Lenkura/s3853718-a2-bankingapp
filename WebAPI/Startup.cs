@@ -26,7 +26,7 @@ namespace WebAPI
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"));
             });
-
+            
             services.AddScoped<CustomerManager>();
             //services.AddTransient<>();
             services.AddScoped<AccountManager>();

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Net.Http.Headers;
 using MvcMCBA.Data;
+using MvcMCBA.Models;
 
 namespace MvcMCBA
 {
@@ -55,7 +56,7 @@ namespace MvcMCBA
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddHostedService<BillPayBackgroundService>();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<MCBAContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();

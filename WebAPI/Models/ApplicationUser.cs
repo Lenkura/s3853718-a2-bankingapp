@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MvcMCBA.Models
+namespace WebAPI.Models
 {
     public class ApplicationUser : IdentityUser
     {

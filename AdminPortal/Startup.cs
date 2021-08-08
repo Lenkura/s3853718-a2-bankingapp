@@ -30,6 +30,7 @@ namespace AdminPortal
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
             services.AddControllersWithViews();
+            services.AddSession();
         }
 
 

@@ -10,15 +10,15 @@ using MvcMCBA.Data;
 namespace MvcMCBA.Migrations
 {
     [DbContext(typeof(MCBAContext))]
-    [Migration("20210802133004_customerstatus")]
-    partial class customerstatus
+    [Migration("20210808114412_customidentity")]
+    partial class customidentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -72,7 +72,115 @@ namespace MvcMCBA.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("MvcMCBA.Models.Account", b =>
+                {
+                    b.Property<int>("AccountNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AccountType")
+                        .IsRequired()
+                        .HasColumnType("char");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("money");
+
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AccountNumber");
+
+                    b.HasIndex("CustomerID");
+
+                    b.ToTable("Accounts");
+
+                    b.HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
+                });
+
+            modelBuilder.Entity("MvcMCBA.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -96,6 +204,9 @@ namespace MvcMCBA.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LoginID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -137,111 +248,7 @@ namespace MvcMCBA.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("WebAPI.Models.Account", b =>
-                {
-                    b.Property<int>("AccountNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AccountType")
-                        .IsRequired()
-                        .HasColumnType("char");
-
-                    b.Property<decimal>("Balance")
-                        .HasColumnType("money");
-
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
-
-                    b.HasKey("AccountNumber");
-
-                    b.HasIndex("CustomerID");
-
-                    b.ToTable("Accounts");
-
-                    b.HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
-                });
-
-            modelBuilder.Entity("WebAPI.Models.BillPay", b =>
+            modelBuilder.Entity("MvcMCBA.Models.BillPay", b =>
                 {
                     b.Property<int>("BillPayID")
                         .ValueGeneratedOnAdd()
@@ -266,8 +273,7 @@ namespace MvcMCBA.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar");
 
                     b.HasKey("BillPayID");
 
@@ -276,7 +282,7 @@ namespace MvcMCBA.Migrations
                     b.ToTable("BillPays");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Customer", b =>
+            modelBuilder.Entity("MvcMCBA.Models.Customer", b =>
                 {
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
@@ -305,8 +311,7 @@ namespace MvcMCBA.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar");
 
                     b.Property<string>("Suburb")
                         .HasMaxLength(40)
@@ -321,7 +326,7 @@ namespace MvcMCBA.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Login", b =>
+            modelBuilder.Entity("MvcMCBA.Models.Login", b =>
                 {
                     b.Property<string>("LoginID")
                         .HasColumnType("nvarchar(450)");
@@ -346,7 +351,7 @@ namespace MvcMCBA.Migrations
                     b.HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Payee", b =>
+            modelBuilder.Entity("MvcMCBA.Models.Payee", b =>
                 {
                     b.Property<int>("PayeeID")
                         .ValueGeneratedOnAdd()
@@ -375,8 +380,8 @@ namespace MvcMCBA.Migrations
 
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
 
                     b.Property<string>("Suburb")
                         .IsRequired()
@@ -388,7 +393,7 @@ namespace MvcMCBA.Migrations
                     b.ToTable("Payees");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Transaction", b =>
+            modelBuilder.Entity("MvcMCBA.Models.Transaction", b =>
                 {
                     b.Property<int>("TransactionID")
                         .ValueGeneratedOnAdd()
@@ -437,7 +442,7 @@ namespace MvcMCBA.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MvcMCBA.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -446,7 +451,7 @@ namespace MvcMCBA.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MvcMCBA.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -461,7 +466,7 @@ namespace MvcMCBA.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MvcMCBA.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -470,16 +475,16 @@ namespace MvcMCBA.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MvcMCBA.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Account", b =>
+            modelBuilder.Entity("MvcMCBA.Models.Account", b =>
                 {
-                    b.HasOne("WebAPI.Models.Customer", "Customer")
+                    b.HasOne("MvcMCBA.Models.Customer", "Customer")
                         .WithMany("Accounts")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -488,9 +493,9 @@ namespace MvcMCBA.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.BillPay", b =>
+            modelBuilder.Entity("MvcMCBA.Models.BillPay", b =>
                 {
-                    b.HasOne("WebAPI.Models.Payee", "Payee")
+                    b.HasOne("MvcMCBA.Models.Payee", "Payee")
                         .WithMany()
                         .HasForeignKey("PayeeID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -499,26 +504,26 @@ namespace MvcMCBA.Migrations
                     b.Navigation("Payee");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Login", b =>
+            modelBuilder.Entity("MvcMCBA.Models.Login", b =>
                 {
-                    b.HasOne("WebAPI.Models.Customer", "Customer")
+                    b.HasOne("MvcMCBA.Models.Customer", "Customer")
                         .WithOne("Login")
-                        .HasForeignKey("WebAPI.Models.Login", "CustomerID")
+                        .HasForeignKey("MvcMCBA.Models.Login", "CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Transaction", b =>
+            modelBuilder.Entity("MvcMCBA.Models.Transaction", b =>
                 {
-                    b.HasOne("WebAPI.Models.Account", "Account")
+                    b.HasOne("MvcMCBA.Models.Account", "Account")
                         .WithMany("Transactions")
                         .HasForeignKey("AccountNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebAPI.Models.Account", "DestinationAccount")
+                    b.HasOne("MvcMCBA.Models.Account", "DestinationAccount")
                         .WithMany()
                         .HasForeignKey("DestinationAccountNumber");
 
@@ -527,12 +532,12 @@ namespace MvcMCBA.Migrations
                     b.Navigation("DestinationAccount");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Account", b =>
+            modelBuilder.Entity("MvcMCBA.Models.Account", b =>
                 {
                     b.Navigation("Transactions");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Customer", b =>
+            modelBuilder.Entity("MvcMCBA.Models.Customer", b =>
                 {
                     b.Navigation("Accounts");
 

@@ -117,7 +117,7 @@ namespace MvcMCBA.Controllers
                 Amount = viewModel.Amount,
                 ScheduleTimeUtc = viewModel.ScheduleTimeUtc.ToUniversalTime(),
                 Period = Enum.Parse<PaymentPeriod>(viewModel.Period),
-                Status = BillPayStatus.Ready,
+                Status = BillPayStatus.R,
             };
 
             var content = new StringContent(JsonConvert.SerializeObject(billpay), Encoding.UTF8, "application/json");
@@ -161,7 +161,7 @@ namespace MvcMCBA.Controllers
         {
             if (ModelState.IsValid)
             {
-                billpay.Status = BillPayStatus.Ready;
+                billpay.Status = BillPayStatus.R;
                 var content = new StringContent(JsonConvert.SerializeObject(billpay), Encoding.UTF8, "application/json");
                 var response = Client.PutAsync("api/BillPay", content).Result;
                 if (response.IsSuccessStatusCode)

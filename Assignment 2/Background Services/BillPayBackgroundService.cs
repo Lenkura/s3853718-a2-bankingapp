@@ -34,7 +34,7 @@ namespace MvcMCBA.Background_Services
 
             foreach (var bill in billpays)
             {
-                if (DateTime.Compare(bill.ScheduleTimeUtc, DateTime.Now) < 0 && bill.Status.Equals(BillPayStatus.Ready))
+                if (DateTime.Compare(bill.ScheduleTimeUtc, DateTime.Now) < 0 && bill.Status.Equals(BillPayStatus.R))
                 {
                     response = await Client.GetAsync($"api/Account/{bill.AccountNumber}", stoppingToken);
                     if (!response.IsSuccessStatusCode)
@@ -44,7 +44,7 @@ namespace MvcMCBA.Background_Services
 
                     if (account.Balance - bill.Amount < AccountChecks.GetAccountTypeMin(account.AccountType.ToString()))
                     {
-                        bill.Status = BillPayStatus.Error;
+                        bill.Status = BillPayStatus.E;
                         var content = new StringContent(JsonConvert.SerializeObject(bill), Encoding.UTF8, "application/json");
                         response = Client.PutAsync("api/BillPay", content, stoppingToken).Result;
                         if (response.IsSuccessStatusCode)

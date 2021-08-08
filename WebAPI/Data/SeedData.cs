@@ -25,7 +25,7 @@ namespace WebAPI.Data
                     Address = "123 Fake Street",
                     Suburb = "Melbourne",
                     PostCode = "3000",
-                    Status = CustomerStatus.Available
+                    Status = CustomerStatus.A
                 },
                 new Customer
                 {
@@ -34,15 +34,31 @@ namespace WebAPI.Data
                     Address = "456 Real Road",
                     Suburb = "Melbourne",
                     PostCode = "3005",
-                    Status = CustomerStatus.Available
+                    Status = CustomerStatus.A
                 },
                 new Customer
                 {
                     CustomerID = 2300,
                     Name = "Shekhar Kalra",
-                    Status = CustomerStatus.Available
+                    Status = CustomerStatus.A
                 });
-
+                context.Users.AddRange(
+                new ApplicationUser
+                {
+                    LoginID = "12345678",
+                    PasswordHash = "YBNbEL4Lk8yMEWxiKkGBeoILHTU7WZ9n8jJSy8TNx0DAzNEFVsIVNRktiQV+I8d2"
+                },
+                new ApplicationUser
+                {
+                    LoginID = "12345678",
+                    PasswordHash = "EehwB3qMkWImf/fQPlhcka6pBMZBLlPWyiDW6NLkAh4ZFu2KNDQKONxElNsg7V04"
+                },
+                new ApplicationUser
+                {
+                    LoginID = "12345678",
+                    PasswordHash = "LuiVJWbY4A3y1SilhMU5P00K54cGEvClx5Y+xWHq7VpyIUe5fe7m+WeI0iwid7GE"
+                }
+                );
             context.Logins.AddRange(
                 new Login
                 {

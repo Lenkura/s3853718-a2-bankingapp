@@ -21,8 +21,10 @@ namespace WebAPI.Models
     }
     public enum CustomerStatus
     {
-        Available = 0,
-        Blocked = 1,
+        [Display(Name = "Available")]
+        A = 0,
+        [Display(Name = "Blocked")]
+        B = 1,
     }
 
     public class Customer
