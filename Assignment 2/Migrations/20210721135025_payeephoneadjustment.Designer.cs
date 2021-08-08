@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAPI.Data;
+using MvcMCBA.Data;
 
-namespace WebAPI.Migrations
+namespace MvcMCBA.Migrations
 {
     [DbContext(typeof(MCBAContext))]
     [Migration("20210721135025_payeephoneadjustment")]

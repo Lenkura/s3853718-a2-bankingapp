@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace WebAPI.Migrations
+namespace MvcMCBA.Migrations
 {
-    public partial class AddFreetransactionCount : Migration
+    public partial class billpaystatus : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "FreeTransactions",
-                table: "Accounts",
+                name: "Status",
+                table: "BillPays",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
@@ -17,8 +17,8 @@ namespace WebAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "FreeTransactions",
-                table: "Accounts");
+                name: "Status",
+                table: "BillPays");
         }
     }
 }

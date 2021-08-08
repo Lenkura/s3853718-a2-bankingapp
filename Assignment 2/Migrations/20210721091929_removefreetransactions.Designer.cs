@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAPI.Data;
+using MvcMCBA.Data;
 
-namespace WebAPI.Migrations
+namespace MvcMCBA.Migrations
 {
     [DbContext(typeof(MCBAContext))]
-    [Migration("20210708134835_updatePayeetoSpec")]
-    partial class updatePayeetoSpec
+    [Migration("20210721091929_removefreetransactions")]
+    partial class removefreetransactions
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -99,8 +99,7 @@ namespace WebAPI.Migrations
 
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
+                        .HasColumnType("nvarchar");
 
                     b.Property<string>("Suburb")
                         .HasMaxLength(40)
@@ -159,8 +158,8 @@ namespace WebAPI.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
 
                     b.Property<string>("PostCode")
                         .IsRequired()
@@ -199,9 +198,6 @@ namespace WebAPI.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int?>("DestinationAccountAccountNumber")
-                        .HasColumnType("int");
-
                     b.Property<int?>("DestinationAccountNumber")
                         .HasColumnType("int");
 
@@ -216,7 +212,7 @@ namespace WebAPI.Migrations
 
                     b.HasIndex("AccountNumber");
 
-                    b.HasIndex("DestinationAccountAccountNumber");
+                    b.HasIndex("DestinationAccountNumber");
 
                     b.ToTable("Transactions");
 
@@ -466,7 +462,7 @@ namespace WebAPI.Migrations
 
                     b.HasOne("Assignment_2.Models.Account", "DestinationAccount")
                         .WithMany()
-                        .HasForeignKey("DestinationAccountAccountNumber");
+                        .HasForeignKey("DestinationAccountNumber");
 
                     b.Navigation("Account");
 

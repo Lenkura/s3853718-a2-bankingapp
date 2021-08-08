@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAPI.Data;
+using MvcMCBA.Data;
 
-namespace WebAPI.Migrations
+namespace MvcMCBA.Migrations
 {
     [DbContext(typeof(MCBAContext))]
-    [Migration("20210721152746_billpaystatus")]
-    partial class billpaystatus
+    [Migration("20210721092945_updatestatelength")]
+    partial class updatestatelength
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,9 +67,6 @@ namespace WebAPI.Migrations
 
                     b.Property<DateTime>("ScheduleTimeUtc")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.HasKey("BillPayID");
 
@@ -162,8 +159,8 @@ namespace WebAPI.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
 
                     b.Property<string>("PostCode")
                         .IsRequired()

@@ -3,221 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAPI.Data;
+using MvcMCBA.Data;
 
-namespace WebAPI.Migrations
+namespace MvcMCBA.Migrations
 {
     [DbContext(typeof(MCBAContext))]
-    [Migration("20210721091929_removefreetransactions")]
-    partial class removefreetransactions
+    partial class Assignment2DbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Assignment_2.Models.Account", b =>
-                {
-                    b.Property<int>("AccountNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AccountType")
-                        .IsRequired()
-                        .HasColumnType("char");
-
-                    b.Property<decimal>("Balance")
-                        .HasColumnType("money");
-
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
-
-                    b.HasKey("AccountNumber");
-
-                    b.HasIndex("CustomerID");
-
-                    b.ToTable("Accounts");
-
-                    b.HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
-                });
-
-            modelBuilder.Entity("Assignment_2.Models.BillPay", b =>
-                {
-                    b.Property<int>("BillPayID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AccountNumber")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("money");
-
-                    b.Property<int>("PayeeID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Period")
-                        .IsRequired()
-                        .HasColumnType("char");
-
-                    b.Property<DateTime>("ScheduleTimeUtc")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("BillPayID");
-
-                    b.HasIndex("PayeeID");
-
-                    b.ToTable("BillPays");
-                });
-
-            modelBuilder.Entity("Assignment_2.Models.Customer", b =>
-                {
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Mobile")
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("PostCode")
-                        .HasMaxLength(4)
-                        .HasColumnType("nvarchar(4)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar");
-
-                    b.Property<string>("Suburb")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("TFN")
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
-
-                    b.HasKey("CustomerID");
-
-                    b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("Assignment_2.Models.Login", b =>
-                {
-                    b.Property<string>("LoginID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
-                    b.HasKey("LoginID");
-
-                    b.HasIndex("CustomerID")
-                        .IsUnique();
-
-                    b.ToTable("Logins");
-
-                    b.HasCheckConstraint("CH_Login_LoginID", "len(LoginID) = 8");
-
-                    b.HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");
-                });
-
-            modelBuilder.Entity("Assignment_2.Models.Payee", b =>
-                {
-                    b.Property<int>("PayeeID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
-
-                    b.Property<string>("PostCode")
-                        .IsRequired()
-                        .HasMaxLength(4)
-                        .HasColumnType("nvarchar(4)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
-
-                    b.Property<string>("Suburb")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.HasKey("PayeeID");
-
-                    b.ToTable("Payees");
-                });
-
-            modelBuilder.Entity("Assignment_2.Models.Transaction", b =>
-                {
-                    b.Property<int>("TransactionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AccountNumber")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("money");
-
-                    b.Property<string>("Comment")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<int?>("DestinationAccountNumber")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("TransactionTimeUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TransactionType")
-                        .IsRequired()
-                        .HasColumnType("char");
-
-                    b.HasKey("TransactionID");
-
-                    b.HasIndex("AccountNumber");
-
-                    b.HasIndex("DestinationAccountNumber");
-
-                    b.ToTable("Transactions");
-
-                    b.HasCheckConstraint("CH_Transaction_Amount", "Amount > 0");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -362,12 +162,10 @@ namespace WebAPI.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -404,12 +202,10 @@ namespace WebAPI.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -419,54 +215,213 @@ namespace WebAPI.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Assignment_2.Models.Account", b =>
+            modelBuilder.Entity("WebAPI.Models.Account", b =>
                 {
-                    b.HasOne("Assignment_2.Models.Customer", "Customer")
-                        .WithMany("Accounts")
-                        .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("AccountNumber")
+                        .HasColumnType("int");
 
-                    b.Navigation("Customer");
+                    b.Property<string>("AccountType")
+                        .IsRequired()
+                        .HasColumnType("char");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("money");
+
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AccountNumber");
+
+                    b.HasIndex("CustomerID");
+
+                    b.ToTable("Accounts");
+
+                    b.HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
                 });
 
-            modelBuilder.Entity("Assignment_2.Models.BillPay", b =>
+            modelBuilder.Entity("WebAPI.Models.BillPay", b =>
                 {
-                    b.HasOne("Assignment_2.Models.Payee", "Payee")
-                        .WithMany()
-                        .HasForeignKey("PayeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("BillPayID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Navigation("Payee");
+                    b.Property<int>("AccountNumber")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("money");
+
+                    b.Property<int>("PayeeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Period")
+                        .IsRequired()
+                        .HasColumnType("char");
+
+                    b.Property<DateTime>("ScheduleTimeUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("BillPayID");
+
+                    b.HasIndex("PayeeID");
+
+                    b.ToTable("BillPays");
                 });
 
-            modelBuilder.Entity("Assignment_2.Models.Login", b =>
+            modelBuilder.Entity("WebAPI.Models.Customer", b =>
                 {
-                    b.HasOne("Assignment_2.Models.Customer", "Customer")
-                        .WithOne("Login")
-                        .HasForeignKey("Assignment_2.Models.Login", "CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
 
-                    b.Navigation("Customer");
+                    b.Property<string>("Address")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Mobile")
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PostCode")
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Suburb")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("TFN")
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.HasKey("CustomerID");
+
+                    b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Assignment_2.Models.Transaction", b =>
+            modelBuilder.Entity("WebAPI.Models.Login", b =>
                 {
-                    b.HasOne("Assignment_2.Models.Account", "Account")
-                        .WithMany("Transactions")
-                        .HasForeignKey("AccountNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<string>("LoginID")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasOne("Assignment_2.Models.Account", "DestinationAccount")
-                        .WithMany()
-                        .HasForeignKey("DestinationAccountNumber");
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
 
-                    b.Navigation("Account");
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
-                    b.Navigation("DestinationAccount");
+                    b.HasKey("LoginID");
+
+                    b.HasIndex("CustomerID")
+                        .IsUnique();
+
+                    b.ToTable("Logins");
+
+                    b.HasCheckConstraint("CH_Login_LoginID", "len(LoginID) = 8");
+
+                    b.HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.Payee", b =>
+                {
+                    b.Property<int>("PayeeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
+
+                    b.Property<string>("PostCode")
+                        .IsRequired()
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Suburb")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.HasKey("PayeeID");
+
+                    b.ToTable("Payees");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.Transaction", b =>
+                {
+                    b.Property<int>("TransactionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccountNumber")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("money");
+
+                    b.Property<string>("Comment")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int?>("DestinationAccountNumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TransactionTimeUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TransactionType")
+                        .IsRequired()
+                        .HasColumnType("char");
+
+                    b.HasKey("TransactionID");
+
+                    b.HasIndex("AccountNumber");
+
+                    b.HasIndex("DestinationAccountNumber");
+
+                    b.ToTable("Transactions");
+
+                    b.HasCheckConstraint("CH_Transaction_Amount", "Amount > 0");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -520,12 +475,62 @@ namespace WebAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Assignment_2.Models.Account", b =>
+            modelBuilder.Entity("WebAPI.Models.Account", b =>
+                {
+                    b.HasOne("WebAPI.Models.Customer", "Customer")
+                        .WithMany("Accounts")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.BillPay", b =>
+                {
+                    b.HasOne("WebAPI.Models.Payee", "Payee")
+                        .WithMany()
+                        .HasForeignKey("PayeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Payee");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.Login", b =>
+                {
+                    b.HasOne("WebAPI.Models.Customer", "Customer")
+                        .WithOne("Login")
+                        .HasForeignKey("WebAPI.Models.Login", "CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.Transaction", b =>
+                {
+                    b.HasOne("WebAPI.Models.Account", "Account")
+                        .WithMany("Transactions")
+                        .HasForeignKey("AccountNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAPI.Models.Account", "DestinationAccount")
+                        .WithMany()
+                        .HasForeignKey("DestinationAccountNumber");
+
+                    b.Navigation("Account");
+
+                    b.Navigation("DestinationAccount");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.Account", b =>
                 {
                     b.Navigation("Transactions");
                 });
 
-            modelBuilder.Entity("Assignment_2.Models.Customer", b =>
+            modelBuilder.Entity("WebAPI.Models.Customer", b =>
                 {
                     b.Navigation("Accounts");
 

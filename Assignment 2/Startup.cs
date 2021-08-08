@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Net.Http.Headers;
+using MvcMCBA.Data;
 
 namespace MvcMCBA
 {
@@ -27,6 +28,11 @@ namespace MvcMCBA
             {
                 client.BaseAddress = new Uri("https://localhost:44398");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
+            services.AddDbContext<MCBAContext>(options =>
+            {
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"));
             });
 
             //Session storage options:
@@ -49,9 +55,10 @@ namespace MvcMCBA
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddHostedService<BillPayBackgroundService>();
 
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<MCBAContext>();
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<MCBAContext>();
             services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,6 +88,7 @@ namespace MvcMCBA
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Login}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

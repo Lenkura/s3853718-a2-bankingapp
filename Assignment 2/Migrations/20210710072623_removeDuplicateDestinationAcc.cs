@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace WebAPI.Migrations
+namespace MvcMCBA.Migrations
 {
     public partial class removeDuplicateDestinationAcc : Migration
     {

@@ -29,14 +29,6 @@ namespace AdminPortal
                 client.BaseAddress = new Uri("https://localhost:44398");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
-
-            services.AddSession(options =>
-            {
-                // Make the session cookie essential.
-                options.Cookie.IsEssential = true;
-                options.IdleTimeout = TimeSpan.FromDays(2);
-            });
-
             services.AddControllersWithViews();
         }
 

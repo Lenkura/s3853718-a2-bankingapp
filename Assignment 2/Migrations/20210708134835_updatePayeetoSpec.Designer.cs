@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAPI.Data;
+using MvcMCBA.Data;
 
-namespace WebAPI.Migrations
+namespace MvcMCBA.Migrations
 {
     [DbContext(typeof(MCBAContext))]
-    [Migration("20210721092945_updatestatelength")]
-    partial class updatestatelength
+    [Migration("20210708134835_updatePayeetoSpec")]
+    partial class updatePayeetoSpec
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,8 +159,8 @@ namespace WebAPI.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("PostCode")
                         .IsRequired()
@@ -199,6 +199,9 @@ namespace WebAPI.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<int?>("DestinationAccountAccountNumber")
+                        .HasColumnType("int");
+
                     b.Property<int?>("DestinationAccountNumber")
                         .HasColumnType("int");
 
@@ -213,7 +216,7 @@ namespace WebAPI.Migrations
 
                     b.HasIndex("AccountNumber");
 
-                    b.HasIndex("DestinationAccountNumber");
+                    b.HasIndex("DestinationAccountAccountNumber");
 
                     b.ToTable("Transactions");
 
@@ -463,7 +466,7 @@ namespace WebAPI.Migrations
 
                     b.HasOne("Assignment_2.Models.Account", "DestinationAccount")
                         .WithMany()
-                        .HasForeignKey("DestinationAccountNumber");
+                        .HasForeignKey("DestinationAccountAccountNumber");
 
                     b.Navigation("Account");
 

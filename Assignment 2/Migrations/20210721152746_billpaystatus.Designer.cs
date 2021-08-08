@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAPI.Data;
+using MvcMCBA.Data;
 
-namespace WebAPI.Migrations
+namespace MvcMCBA.Migrations
 {
     [DbContext(typeof(MCBAContext))]
-    [Migration("20210707105919_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210721152746_billpaystatus")]
+    partial class billpaystatus
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,9 +55,6 @@ namespace WebAPI.Migrations
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AccountNumber1")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Amount")
                         .HasColumnType("money");
 
@@ -71,9 +68,10 @@ namespace WebAPI.Migrations
                     b.Property<DateTime>("ScheduleTimeUtc")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("BillPayID");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AccountNumber1");
+                    b.HasKey("BillPayID");
 
                     b.HasIndex("PayeeID");
 
@@ -204,9 +202,6 @@ namespace WebAPI.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int?>("DestinationAccountAccountNumber")
-                        .HasColumnType("int");
-
                     b.Property<int?>("DestinationAccountNumber")
                         .HasColumnType("int");
 
@@ -221,7 +216,7 @@ namespace WebAPI.Migrations
 
                     b.HasIndex("AccountNumber");
 
-                    b.HasIndex("DestinationAccountAccountNumber");
+                    b.HasIndex("DestinationAccountNumber");
 
                     b.ToTable("Transactions");
 
@@ -441,17 +436,11 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("Assignment_2.Models.BillPay", b =>
                 {
-                    b.HasOne("Assignment_2.Models.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountNumber1");
-
                     b.HasOne("Assignment_2.Models.Payee", "Payee")
                         .WithMany()
                         .HasForeignKey("PayeeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Account");
 
                     b.Navigation("Payee");
                 });
@@ -477,7 +466,7 @@ namespace WebAPI.Migrations
 
                     b.HasOne("Assignment_2.Models.Account", "DestinationAccount")
                         .WithMany()
-                        .HasForeignKey("DestinationAccountAccountNumber");
+                        .HasForeignKey("DestinationAccountNumber");
 
                     b.Navigation("Account");
 
