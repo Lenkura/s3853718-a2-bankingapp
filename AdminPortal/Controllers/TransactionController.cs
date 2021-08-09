@@ -117,7 +117,7 @@ namespace AdminPortal.Controllers
             }
 
             foreach (var t in transactions)
-                if (start.CompareTo(t.TransactionTimeUtc) <= 0 && end.CompareTo(t.TransactionTimeUtc) >= 0)
+                if (start.CompareTo(t.TransactionTimeUtc.Date) <= 0 && end.CompareTo(t.TransactionTimeUtc.Date) >= 0)
                     filteredList.Add(t);
             if (page == 0)
                 page = 1;
