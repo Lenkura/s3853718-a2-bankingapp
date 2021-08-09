@@ -10,16 +10,15 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using MvcMCBA.Data;
 
 namespace MvcMCBA.Controllers
 {
     [AllowAnonymous]
     public class LoginController : Controller
     {
-        private readonly IHttpClientFactory _clientFactory;
-        private HttpClient Client => _clientFactory.CreateClient("api");
-
-        public LoginController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
+        private readonly MCBAContext _context;
+        public LoginController(MCBAContext context) => _context = context;
         public IActionResult Index()
         {
             return View();
@@ -33,31 +32,22 @@ namespace MvcMCBA.Controllers
         [Route("RequestAccess")]
         public async Task<IActionResult> Login(string loginID, string password)
         {
-            var response = await Client.GetAsync($"api/Login/{loginID}");
-            var result = await response.Content.ReadAsStringAsync();
-            var login = JsonConvert.DeserializeObject<Login>(result);
-
-
+            var login = await _context.Logins.FindAsync(loginID);
             if (login == null || !PBKDF2.Verify(login.PasswordHash, password))
             {
                 ModelState.AddModelError("LoginFailed", "Incorrect Username or Password");
                 return View(new Login { LoginID = loginID });
             }
-            // Login customer.
-            var a = await Client.GetAsync($"api/Customer/{login.CustomerID}");
-            if (!response.IsSuccessStatusCode)
-                throw new Exception();
-            var b = await a.Content.ReadAsStringAsync();
-            var customer = JsonConvert.DeserializeObject<Customer>(b);
+            var customer = await _context.Customers.FindAsync(login.CustomerID);
             if (customer.Status == CustomerStatus.B)
             {
                 ModelState.AddModelError("LoginFailed", "Account Locked - Please contact us");
                 return View(new Login { LoginID = loginID });
             }
-
+            // Login customer.
             HttpContext.Session.SetString(nameof(Models.Login.LoginID), login.LoginID);
             HttpContext.Session.SetInt32(nameof(Customer.CustomerID), login.CustomerID);
-            HttpContext.Session.SetString(nameof(Customer.Name), customer.Name);
+            HttpContext.Session.SetString(nameof(Customer.Name), login.Customer.Name);
 
             return RedirectToAction("Index", "Transaction");
         }

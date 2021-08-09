@@ -10,36 +10,36 @@ using SimpleHashing;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using MvcMCBA.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace MvcMCBA.Controllers
 {
     [SecureContent]
     public class CustomersController : Controller
     {
-        private readonly IHttpClientFactory _clientFactory;
-        private HttpClient Client => _clientFactory.CreateClient("api");
-        public CustomersController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
+        private readonly MCBAContext _context;
+        public CustomersController(MCBAContext context) => _context = context;
 
 
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var response = await Client.GetAsync("api/Customer");
-            var result = await response.Content.ReadAsStringAsync();
-            var customers = JsonConvert.DeserializeObject<List<Customer>>(result);
-            return View(customers);
+            return View(await _context.Customers.ToListAsync());
         }
 
         // GET: Customers/Details/5
         public async Task<IActionResult> Details()
         {
             var id = HttpContext.Session.GetInt32(nameof(Customer.CustomerID));
-            var response = await Client.GetAsync($"api/Customer/{id}");
-            if (!response.IsSuccessStatusCode)
-                throw new Exception();
+            var customer = await _context.Customers
+                .FirstOrDefaultAsync(m => m.CustomerID == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
 
-            var result = await response.Content.ReadAsStringAsync();
-            var customer = JsonConvert.DeserializeObject<Customer>(result);
             return View(customer);
         }
 
@@ -54,14 +54,13 @@ namespace MvcMCBA.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("CustomerID,Name,TFN,Address,Suburb,State,PostCode,Mobile")] Customer customer)
+        public async Task<IActionResult> Create([Bind("CustomerID,Name,TFN,Address,Suburb,State,PostCode,Mobile")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                var content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json");
-                var response = Client.PostAsync("api/Customer", content).Result;
-                if (response.IsSuccessStatusCode)
-                    return RedirectToAction("Index");
+                _context.Add(customer);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(customer);
         }
@@ -70,14 +69,15 @@ namespace MvcMCBA.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
+            {
                 return NotFound();
+            }
 
-            var response = await Client.GetAsync($"api/Customer/{id}");
-            if (!response.IsSuccessStatusCode)
-                throw new Exception();
-            var result = await response.Content.ReadAsStringAsync();
-            var customer = JsonConvert.DeserializeObject<Customer>(result);
-
+            var customer = await _context.Customers.FindAsync(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
             return View(customer);
         }
 
@@ -86,16 +86,32 @@ namespace MvcMCBA.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("CustomerID,Name,TFN,Address,Suburb,State,PostCode,Mobile")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("CustomerID,Name,TFN,Address,Suburb,State,PostCode,Mobile")] Customer customer)
         {
             if (id != customer.CustomerID)
+            {
                 return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                var content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json");
-                var response = Client.PutAsync("api/Customer", content).Result;
-                if (response.IsSuccessStatusCode)
-                    return RedirectToAction(nameof(Details));
+                try
+                {
+                    _context.Update(customer);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CustomerExists(customer.CustomerID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Details));
             }
             return View(customer);
         }
@@ -109,9 +125,7 @@ namespace MvcMCBA.Controllers
         public async Task<IActionResult> Password(ChangePasswordViewModel viewModel)
         {
             var loginID = HttpContext.Session.GetString(nameof(Login.LoginID));
-            var response = await Client.GetAsync($"api/Login/{loginID}");
-            var result = await response.Content.ReadAsStringAsync();
-            var login = JsonConvert.DeserializeObject<Login>(result);
+            var login = await _context.Logins.FindAsync(loginID);
             if (login == null || !PBKDF2.Verify(login.PasswordHash, viewModel.OldPasswordHash))
             {
                 ModelState.AddModelError(nameof(viewModel.OldPasswordHash), "Incorrect Password");
@@ -126,41 +140,54 @@ namespace MvcMCBA.Controllers
             if (!ModelState.IsValid)
                 return View();
             login.PasswordHash = PBKDF2.Hash(viewModel.NewPasswordHash1);
-            var content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
-            var update = Client.PutAsync("api/Login", content).Result;
-            if (update.IsSuccessStatusCode)
-                return RedirectToAction("Logout", "Login");
-            else
+            try
             {
-                ModelState.AddModelError("PasswordChange", "Error Updating, try again later");
-                return View();
+                _context.Update(login);
+                await _context.SaveChangesAsync();
             }
-
+            catch (DbUpdateConcurrencyException)
+            {
+                if (_context.Logins.Any(x => x.LoginID == login.LoginID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction("Logout", "Login");
         }
 
         // GET: Customers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
+            {
                 return NotFound();
-
-            var response = await Client.GetAsync($"api/Customer/{id}");
-            // if (!response.IsSuccessStatusCode)
-            var result = await response.Content.ReadAsStringAsync();
-            var customer = JsonConvert.DeserializeObject<Customer>(result);
-
+            }
+            var customer = await _context.Customers
+                .FirstOrDefaultAsync(m => m.CustomerID == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
             return View(customer);
         }
 
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var response = Client.DeleteAsync($"api/Customer/{id}").Result;
-            if (response.IsSuccessStatusCode)
-                return RedirectToAction("Index", "Transaction");
-            return NotFound();
+            var customer = await _context.Customers.FindAsync(id);
+            _context.Customers.Remove(customer);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        private bool CustomerExists(int id)
+        {
+            return _context.Customers.Any(e => e.CustomerID == id);
         }
     }
 }

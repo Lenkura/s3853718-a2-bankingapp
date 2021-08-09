@@ -13,54 +13,34 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
 using MvcMCBA.Authorise;
+using MvcMCBA.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MvcMCBA.Controllers
 {
     [SecureContent]
     public class BillPayController : Controller
     {
-        private readonly IHttpClientFactory _clientFactory;
-        private HttpClient Client => _clientFactory.CreateClient("api");
-        public BillPayController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
+        private readonly MCBAContext _context;
+        public BillPayController(MCBAContext context) => _context = context;
 
         public async Task<IActionResult> List(int? page = 1)
         {
-            var response = await Client.GetAsync($"api/Customer/{HttpContext.Session.GetInt32(nameof(Customer.CustomerID))}");
-            if (!response.IsSuccessStatusCode)
-                throw new Exception();
-            var result = await response.Content.ReadAsStringAsync();
-            var customer = JsonConvert.DeserializeObject<Customer>(result);
-
+            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
             var accountNumber = new List<int>();
             foreach (var a in customer.Accounts)
             {
                 accountNumber.Add(a.AccountNumber);
             }
-
-            response = await Client.GetAsync("api/BillPay");
-            result = await response.Content.ReadAsStringAsync();
-            var billpay = JsonConvert.DeserializeObject<List<BillPay>>(result);
-
-            var accountBillPays = new List<BillPay>();
-            foreach (var b in billpay)
-            {
-                if (accountNumber.Contains(b.AccountNumber))
-                    accountBillPays.Add(b);
-            }
             // Page the orders, maximum of X per page.
             const int pageSize = 4;
-            var pagedList = accountBillPays.OrderBy(x => x.ScheduleTimeUtc).ToPagedList((int)page, pageSize);
+            var pagedList = await _context.BillPays.Where(x => accountNumber.Contains(x.AccountNumber)).OrderBy(x => x.ScheduleTimeUtc).ToPagedListAsync(page, pageSize);
             return View(pagedList);
         }
 
         public async Task<IActionResult> NewPayment(int payeeid)
         {
-            var response = await Client.GetAsync($"api/Customer/{HttpContext.Session.GetInt32(nameof(Customer.CustomerID))}");
-            if (!response.IsSuccessStatusCode)
-                throw new Exception();
-            var result = await response.Content.ReadAsStringAsync();
-            var customer = JsonConvert.DeserializeObject<Customer>(result);
-
+            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
             var accountNumber = new List<SelectListItem>();
             foreach (var a in customer.Accounts)
             {
@@ -76,12 +56,7 @@ namespace MvcMCBA.Controllers
         [HttpPost]
         public async Task<IActionResult> NewPayment(BillPayViewModel viewModel)
         {
-            var response = await Client.GetAsync($"api/Customer/{HttpContext.Session.GetInt32(nameof(Customer.CustomerID))}");
-            if (!response.IsSuccessStatusCode)
-                throw new Exception();
-            var result = await response.Content.ReadAsStringAsync();
-            var customer = JsonConvert.DeserializeObject<Customer>(result);
-
+            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
             bool ownAccount = false;
             foreach (var a in customer.Accounts)
                 if (a.AccountNumber == Int32.Parse(viewModel.AccountNumber))
@@ -93,22 +68,27 @@ namespace MvcMCBA.Controllers
             if (!viewModel.Amount.ToString().IsDollarAmount())
                 ModelState.AddModelError(nameof(viewModel.Amount), "Enter a dollar amount");
 
+
+
             if (!ModelState.IsValid)
             {
-                response = await Client.GetAsync($"api/Customer/{HttpContext.Session.GetInt32(nameof(Customer.CustomerID))}");
-                if (!response.IsSuccessStatusCode)
-                    throw new Exception();
-                result = await response.Content.ReadAsStringAsync();
-                customer = JsonConvert.DeserializeObject<Customer>(result);
-
                 var accountNumber = new List<SelectListItem>();
                 foreach (var a in customer.Accounts)
                 {
                     accountNumber.Add(new SelectListItem { Value = a.AccountNumber.ToString(), Text = a.AccountNumber.ToString() });
                 }
-                viewModel.AccountNumberList = accountNumber;
-                return View(viewModel);
+                BillPayViewModel billpayModel = new()
+                {
+                    AccountNumber = viewModel.AccountNumber,
+                    PayeeID = viewModel.PayeeID,
+                    Amount = viewModel.Amount,
+                    ScheduleTimeUtc = viewModel.ScheduleTimeUtc,
+                    Period = viewModel.Period,
+                    AccountNumberList = accountNumber
+                };
+                return View(billpayModel);
             }
+               
 
             BillPay billpay = new()
             {
@@ -119,55 +99,59 @@ namespace MvcMCBA.Controllers
                 Period = Enum.Parse<PaymentPeriod>(viewModel.Period),
                 Status = BillPayStatus.R,
             };
-
-            var content = new StringContent(JsonConvert.SerializeObject(billpay), Encoding.UTF8, "application/json");
-            response = Client.PostAsync("api/BillPay", content).Result;
-            if (response.IsSuccessStatusCode)
-                return RedirectToAction(nameof(List));
-            //return View(viewModel);
-            throw new Exception(billpay.PayeeID.ToString());
+            _context.Add(billpay);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
         }
         public async Task<IActionResult> Cancel(int billpayid)
         {
-            var response = await Client.GetAsync($"api/BillPay/{billpayid}");
-            if (!response.IsSuccessStatusCode)
-                throw new Exception();
-            var result = await response.Content.ReadAsStringAsync();
-            var billpay = JsonConvert.DeserializeObject<BillPay>(result);
+            var billpay = await _context.BillPays.FindAsync(billpayid);
             return View(billpay);
         }
 
         [HttpPost, ActionName("Cancel")]
-        public IActionResult CancelConfirmed(int billpayid)
+        public async Task<IActionResult> CancelConfirmed(int billpayid)
         {
-            var response = Client.DeleteAsync($"api/BillPay/{billpayid}").Result;
-            if (response.IsSuccessStatusCode)
-                return RedirectToAction(nameof(List));
-            return NotFound();
+            var billpay = await _context.BillPays.FindAsync(billpayid);
+            _context.BillPays.Remove(billpay);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
         }
 
         public async Task<IActionResult> Edit(int billpayid)
         {
-            var response = await Client.GetAsync($"api/BillPay/{billpayid}");
-            if (!response.IsSuccessStatusCode)
-                throw new Exception();
-            var result = await response.Content.ReadAsStringAsync();
-            var billpay = JsonConvert.DeserializeObject<BillPay>(result);
+            var billpay = await _context.BillPays.FindAsync(billpayid);
             return View(billpay);
         }
 
         [HttpPost]
-        public IActionResult Edit(BillPay billpay)
+        public async Task<IActionResult> Edit(BillPay billpay)
         {
             if (ModelState.IsValid)
             {
-                billpay.Status = BillPayStatus.R;
-                var content = new StringContent(JsonConvert.SerializeObject(billpay), Encoding.UTF8, "application/json");
-                var response = Client.PutAsync("api/BillPay", content).Result;
-                if (response.IsSuccessStatusCode)
-                    return RedirectToAction(nameof(List));
+                try
+                {
+                    _context.Update(billpay);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!BillPayExists(billpay.BillPayID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(List));
             }
             return View(billpay);
+        }
+        private bool BillPayExists(int id)
+        {
+            return _context.BillPays.Any(e => e.BillPayID == id);
         }
     }
 }

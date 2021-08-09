@@ -46,7 +46,7 @@ namespace MvcMCBA.Models
         public string Suburb { get; set; }
 
         [Column(TypeName = "nvarchar")]
-        [StringLength(3)]
+        //[StringLength(3)]
         public AusStates State { get; set; }
 
         [StringLength(4)]

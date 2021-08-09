@@ -13,7 +13,6 @@
 
 	<ItemGroup>
 		<Content Remove="Data\MCBAContext.cs" />
-		<Content Remove="Data\SeedData.cs" />
 	</ItemGroup>
 	
 	<ItemGroup>

@@ -21,7 +21,7 @@ namespace MvcMCBA.Models
 
         [Required]
         [Column(TypeName = "nvarchar")]
-        [StringLength(3)]
+        //[StringLength(3)]
         public AusStates State { get; set; }
 
         [Required,StringLength(4)]
