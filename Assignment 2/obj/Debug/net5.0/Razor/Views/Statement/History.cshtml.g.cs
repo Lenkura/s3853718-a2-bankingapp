@@ -54,6 +54,13 @@ using DataValidator;
 #line hidden
 #nullable disable
 #nullable restore
+#line 7 "D:\Git\s3853718-a2\Assignment 2\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "D:\Git\s3853718-a2\Assignment 2\Views\Statement\History.cshtml"
 using X.PagedList;
 
@@ -75,7 +82,7 @@ using X.PagedList.Web.Common;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f950a37a88397e4ac4530987146dab17b598e75d", @"/Views/Statement/History.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"04f5cf2f76426794ebda9a4ed47d5d0b94c5b4b3", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8d4dbeafe424f25e1cee2354f36454dd94398b3e", @"/Views/_ViewImports.cshtml")]
     public class Views_Statement_History : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IPagedList<Transaction>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Index", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -264,7 +271,7 @@ Write(Html.PagedListPager(Model, page => Url.Action("History", new { page }),
 #line hidden
 #nullable disable
             WriteLiteral("\r\n</div>\r\n\r\n<div>\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f950a37a88397e4ac4530987146dab17b598e75d9813", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f950a37a88397e4ac4530987146dab17b598e75d9989", async() => {
                 WriteLiteral("Back to Accounts");
             }
             );

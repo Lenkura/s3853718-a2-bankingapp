@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebAPI.Data
 {
@@ -12,7 +13,7 @@ namespace WebAPI.Data
         public static void Initialize(IServiceProvider serviceProvider)
         {
             var context = serviceProvider.GetRequiredService<MCBAContext>();
-
+            //var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
             // Look for customers.
             if (context.Customers.Any())
                 return; // DB has already been seeded.
@@ -42,23 +43,13 @@ namespace WebAPI.Data
                     Name = "Shekhar Kalra",
                     Status = CustomerStatus.A
                 });
-                context.Users.AddRange(
-                new ApplicationUser
-                {
-                    LoginID = "12345678",
-                    PasswordHash = "YBNbEL4Lk8yMEWxiKkGBeoILHTU7WZ9n8jJSy8TNx0DAzNEFVsIVNRktiQV+I8d2"
-                },
-                new ApplicationUser
-                {
-                    LoginID = "12345678",
-                    PasswordHash = "EehwB3qMkWImf/fQPlhcka6pBMZBLlPWyiDW6NLkAh4ZFu2KNDQKONxElNsg7V04"
-                },
-                new ApplicationUser
-                {
-                    LoginID = "12345678",
-                    PasswordHash = "LuiVJWbY4A3y1SilhMU5P00K54cGEvClx5Y+xWHq7VpyIUe5fe7m+WeI0iwid7GE"
-                }
-                );
+           // var user = new ApplicationUser { UserName = "12345678", Email = "12345678", EmailConfirmed = true };
+           // var result = userManager.CreateAsync(user, "abc123");
+            //user = new ApplicationUser { UserName = "38074569", Email = "38074569", EmailConfirmed = true };
+            //result = userManager.CreateAsync(user, "ilovermit2020");
+            //user = new ApplicationUser { UserName = "17963428", Email = "17963428", EmailConfirmed = true };
+            //result = userManager.CreateAsync(user, "youWill_n0tGuess-This!");
+
             context.Logins.AddRange(
                 new Login
                 {

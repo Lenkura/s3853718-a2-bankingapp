@@ -9,9 +9,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcMCBA.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;
