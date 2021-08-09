@@ -127,10 +127,23 @@ namespace MvcMCBA.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(BillPay billpay)
         {
+            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
+            bool ownAccount = false;
+            foreach (var a in customer.Accounts)
+                if (a.AccountNumber == billpay.AccountNumber)
+                    ownAccount = true;
+            if (!ownAccount)
+                ModelState.AddModelError(nameof(billpay.AccountNumber), "Enter one of your Accounts");
+            if (DateTime.Compare(billpay.ScheduleTimeUtc, DateTime.Now) < 0)
+                ModelState.AddModelError(nameof(billpay.ScheduleTimeUtc), "Set a future time");
+            if (!billpay.Amount.ToString().IsDollarAmount())
+                ModelState.AddModelError(nameof(billpay.Amount), "Enter a dollar amount");
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    billpay.Status = BillPayStatus.R;
                     _context.Update(billpay);
                     await _context.SaveChangesAsync();
                 }
@@ -147,6 +160,20 @@ namespace MvcMCBA.Controllers
                 }
                 return RedirectToAction(nameof(List));
             }
+            var accountNumber = new List<SelectListItem>();
+            foreach (var a in customer.Accounts)
+            {
+                accountNumber.Add(new SelectListItem { Value = a.AccountNumber.ToString(), Text = a.AccountNumber.ToString() });
+            }
+            BillPayViewModel billpayModel = new()
+            {
+                AccountNumber = billpay.AccountNumber.ToString(),
+                PayeeID = billpay.PayeeID,
+                Amount = billpay.Amount,
+                ScheduleTimeUtc = billpay.ScheduleTimeUtc,
+                Period = billpay.Period.ToString(),
+                AccountNumberList = accountNumber
+            };
             return View(billpay);
         }
         private bool BillPayExists(int id)

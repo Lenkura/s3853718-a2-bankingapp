@@ -47,7 +47,7 @@ namespace MvcMCBA.Models
         public decimal Amount { get; set; }
         [Required]
         [Column(TypeName = "datetime2")]
-        [Display(Name = "Scheduled Time (Utc)")]
+        [Display(Name = "Scheduled Time")]
         public DateTime ScheduleTimeUtc { get; set; }
         [Required]
         [Column(TypeName = "char")]
