@@ -10,25 +10,28 @@
 <h2>@Model.TransactionType.ToString().TransactionTypeExtender()</h2>
 <div class="row">
     <div class="col-md-4">
-        <div>
-            <label>Account</label>
-            <label>@Model.AccountNumber</label>
-        </div>
-        @if (Model.DestinationAccount != null)
-        {
-            <div>
-                <label>Destination Account</label>
-                <label>@Model.DestinationAccount.AccountNumber</label>
-            </div>
-        }
-        <div>
-            <label>Amount:</label>
-            <label>@Model.Amount</label>
-        </div>
-        <div>
-            <label>Comment:</label>
-            <label>@Model.Comment</label>
-        </div>
+        <table class="table">
+            <tr>
+                <td>Account Number</td>
+                <td>@Model.AccountNumber</td>
+            </tr>
+            @if (Model.DestinationAccount != null)
+            {
+                <tr>
+                    <td>Destination Account:</td>
+                    <td>@Model.DestinationAccount.AccountNumber</td>
+                </tr>
+            }
+            <tr>
+                <td>Amount:</td>
+                <td>@Model.Amount</td>
+            </tr>
+            <tr>
+                <td>Comment:</td>
+                <td>@Model.Comment</td>
+            </tr>
+        </table>
+        <hr />
         <form asp-action="Confirm">
             <div class="form-group">
                 <input type="hidden" asp-for="AccountNumber" value="@Model.AccountNumber" />
@@ -40,7 +43,9 @@
                 <a class="btn btn-primary" asp-action="Index">Cancel</a>
             </div>
         </form>
+
     </div>
+    </table>
 </div>
 
 

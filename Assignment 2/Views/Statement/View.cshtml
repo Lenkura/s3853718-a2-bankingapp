@@ -52,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.Comment)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TransactionTimeUtc.ToLocalTime())
+                @Html.DisplayFor(modelItem => item.TransactionTimeUtc.ToLocalTime().Date)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.TransactionID">Edit</a> |

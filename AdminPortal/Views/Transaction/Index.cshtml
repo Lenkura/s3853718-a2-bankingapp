@@ -40,7 +40,7 @@
                 <td>@Html.DisplayFor(x => transaction.DestinationAccountNumber)</td>
                 <td>@Html.DisplayFor(x => transaction.Amount)</td>
                 <td>@Html.DisplayFor(x => transaction.Comment)</td>
-                <td>@transaction.TransactionTimeUtc.ToLocalTime()</td>
+                <td>@transaction.TransactionTimeUtc.ToLocalTime().ToShortDateString()</td>
             </tr>
         }
     </table>

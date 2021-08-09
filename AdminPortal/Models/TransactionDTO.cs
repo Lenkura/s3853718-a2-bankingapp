@@ -27,7 +27,7 @@ namespace AdminPortal.Models
         public string Comment { get; init; }
         [Required]
         [Column(TypeName = "datetime2")]
-        [Display(Name = "Time")]
+        [Display(Name = "Date")]
         public DateTime TransactionTimeUtc { get; init; }
     }
 
