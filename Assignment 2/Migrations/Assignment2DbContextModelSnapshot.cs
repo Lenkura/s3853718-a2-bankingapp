@@ -190,6 +190,9 @@ namespace MvcMCBA.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -202,9 +205,6 @@ namespace MvcMCBA.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LoginID")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -235,7 +235,7 @@ namespace MvcMCBA.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LoginID");
+                    b.HasIndex("CustomerID");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -333,6 +333,11 @@ namespace MvcMCBA.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
                     b.HasKey("LoginID");
 
                     b.HasIndex("CustomerID")
@@ -341,6 +346,8 @@ namespace MvcMCBA.Migrations
                     b.ToTable("Logins");
 
                     b.HasCheckConstraint("CH_Login_LoginID", "len(LoginID) = 8");
+
+                    b.HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");
                 });
 
             modelBuilder.Entity("MvcMCBA.Models.Payee", b =>
@@ -487,11 +494,13 @@ namespace MvcMCBA.Migrations
 
             modelBuilder.Entity("MvcMCBA.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("MvcMCBA.Models.Login", "Login")
+                    b.HasOne("MvcMCBA.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("LoginID");
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Login");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("MvcMCBA.Models.BillPay", b =>

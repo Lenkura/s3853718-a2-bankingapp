@@ -38,7 +38,7 @@ namespace MvcMCBA.Controllers
         [Route("RequestAccess")]
         public async Task<IActionResult> Login(string loginID, string password)
         {
-           /* var login = await _context.Logins.FindAsync(loginID);
+            var login = await _context.Logins.FindAsync(loginID);
             if (login == null || !PBKDF2.Verify(login.PasswordHash, password))
             {
                 ModelState.AddModelError("LoginFailed", "Incorrect Username or Password");
@@ -54,7 +54,7 @@ namespace MvcMCBA.Controllers
             HttpContext.Session.SetString("LoginID", login.LoginID);
             HttpContext.Session.SetInt32("CustomerID", login.CustomerID);
             HttpContext.Session.SetString("Name", login.Customer.Name);
-           */
+
             return RedirectToAction("Index", "Transaction");
         }
 

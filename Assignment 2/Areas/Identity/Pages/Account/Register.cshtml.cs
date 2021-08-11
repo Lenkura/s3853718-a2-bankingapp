@@ -143,6 +143,7 @@ namespace Assignment_2.Areas.Identity.Pages.Account
                     TransactionTimeUtc = DateTime.UtcNow
 
                 });
+                await _context.SaveChangesAsync();
 
                 int loginID = 0;
                 while (loginID == 0)
@@ -152,18 +153,8 @@ namespace Assignment_2.Areas.Identity.Pages.Account
                     if (c == null)
                         loginID = attemptloginID;
                 }
-                _context.Add(
-                    new Login
-                    {
-                        LoginID = loginID.ToString(),
-                        CustomerID = customerID,
-                    }
-                    );
-                await _context.SaveChangesAsync();
 
-
-
-                var user = new ApplicationUser { UserName = loginID.ToString(), Email = Input.Name, EmailConfirmed = true, LoginID = loginID.ToString() };
+                var user = new ApplicationUser { UserName = loginID.ToString(), Email = Input.Name, EmailConfirmed = true, CustomerID = customerID };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -172,9 +163,8 @@ namespace Assignment_2.Areas.Identity.Pages.Account
                     _ = await _userManager.AddToRoleAsync(user, "Customer");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     HttpContext.Session.SetString("LoginID", user.UserName);
-                    HttpContext.Session.SetInt32("CustomerID", user.Login.CustomerID);
-                    var name = await _context.Customers.FindAsync(user.Login.CustomerID);
-                    HttpContext.Session.SetString("Name", name.Name);
+                    HttpContext.Session.SetInt32("CustomerID", user.CustomerID);
+                    HttpContext.Session.SetString("Name", user.Customer.Name);
                     return RedirectToAction("Registration", "Login");
 
                 }

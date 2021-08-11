@@ -47,19 +47,19 @@ namespace MvcMCBA.Data
             {
                 LoginID = "12345678",
                 CustomerID = 2100,
-                //PasswordHash = "YBNbEL4Lk8yMEWxiKkGBeoILHTU7WZ9n8jJSy8TNx0DAzNEFVsIVNRktiQV+I8d2"
+                PasswordHash = "YBNbEL4Lk8yMEWxiKkGBeoILHTU7WZ9n8jJSy8TNx0DAzNEFVsIVNRktiQV+I8d2"
             },
             new Login
             {
                 LoginID = "38074569",
                 CustomerID = 2200,
-                //PasswordHash = "EehwB3qMkWImf/fQPlhcka6pBMZBLlPWyiDW6NLkAh4ZFu2KNDQKONxElNsg7V04"
+                PasswordHash = "EehwB3qMkWImf/fQPlhcka6pBMZBLlPWyiDW6NLkAh4ZFu2KNDQKONxElNsg7V04"
             },
             new Login
             {
                 LoginID = "17963428",
                 CustomerID = 2300,
-                //PasswordHash = "LuiVJWbY4A3y1SilhMU5P00K54cGEvClx5Y+xWHq7VpyIUe5fe7m+WeI0iwid7GE"
+                PasswordHash = "LuiVJWbY4A3y1SilhMU5P00K54cGEvClx5Y+xWHq7VpyIUe5fe7m+WeI0iwid7GE"
             });
             var password = new PasswordHasher<ApplicationUser>();
             var user1 = new ApplicationUser
@@ -71,7 +71,7 @@ namespace MvcMCBA.Data
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString("D"),
-                LoginID = "12345678"
+                CustomerID = 2100
             };
             var passHash = password.HashPassword(user1, "abc123");
             user1.PasswordHash = passHash;
@@ -84,7 +84,7 @@ namespace MvcMCBA.Data
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString("D"),
-                LoginID = "38074569"
+                CustomerID = 2200
             };
             passHash = password.HashPassword(user2, "ilovermit2020");
             user2.PasswordHash = passHash;
@@ -98,7 +98,7 @@ namespace MvcMCBA.Data
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString("D"),
-                LoginID = "17963428"
+                CustomerID = 2300
             };
             passHash = password.HashPassword(user3, "youWill_n0tGuess-This!");
             user3.PasswordHash = passHash;

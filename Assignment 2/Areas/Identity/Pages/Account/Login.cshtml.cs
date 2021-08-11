@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using MvcMCBA.Models;
 using Microsoft.AspNetCore.Http;
-using MvcMCBA.Data;
 
 namespace Assignment_2.Areas.Identity.Pages.Account
 {
@@ -23,17 +22,14 @@ namespace Assignment_2.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-        private readonly MCBAContext _context;
 
         public LoginModel(SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger,
-            UserManager<ApplicationUser> userManager,
-            MCBAContext context)
+            UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _context = context;
         }
 
         [BindProperty]
@@ -96,9 +92,8 @@ namespace Assignment_2.Areas.Identity.Pages.Account
                     {
                         _logger.LogInformation("User logged in.");
                         HttpContext.Session.SetString("LoginID", user.UserName);
-                        HttpContext.Session.SetInt32("CustomerID", user.Login.CustomerID);
-                        var name = await _context.Customers.FindAsync(user.Login.CustomerID);
-                        HttpContext.Session.SetString("Name", name.Name);
+                        HttpContext.Session.SetInt32("CustomerID", user.CustomerID);
+                        HttpContext.Session.SetString("Name", user.Customer.Name);
                         return RedirectToAction("Index", "Transaction");
                     }
                     if (result.RequiresTwoFactor)
