@@ -49,7 +49,51 @@ namespace MvcMCBA.Data
             //result = userManager.CreateAsync(user, "ilovermit2020");
             //user = new ApplicationUser { UserName = "17963428", Email = "17963428", EmailConfirmed = true };
             //result = userManager.CreateAsync(user, "youWill_n0tGuess-This!");
+            var password = new PasswordHasher<ApplicationUser>();
+            var user1 = new ApplicationUser
+            {
+                Email = "12345678",
+                NormalizedEmail = "12345678",
+                UserName = "12345678",
+                NormalizedUserName = "12345678",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+                LoginID = "12345678"
+            };
+            var passHash = password.HashPassword(user1, "abc123");
+            user1.PasswordHash = passHash;
 
+            var user2 = new ApplicationUser
+            {
+                Email = "38074569",
+                NormalizedEmail = "38074569",
+                UserName = "38074569",
+                NormalizedUserName = "38074569",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+                LoginID = "38074569"
+            };
+            passHash = password.HashPassword(user2, "ilovermit2020");
+            user2.PasswordHash = passHash;
+
+            var user3 = new ApplicationUser
+            {
+                Email = "17963428",
+                NormalizedEmail = "17963428",
+                UserName = "17963428",
+                NormalizedUserName = "17963428",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+                LoginID = "17963428"
+            };
+            passHash = password.HashPassword(user3, "youWill_n0tGuess-This!");
+            user3.PasswordHash = passHash;
+
+            context.Users.AddRange(user1,user2,user3);
+ 
             context.Logins.AddRange(
                 new Login
                 {

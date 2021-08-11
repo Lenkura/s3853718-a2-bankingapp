@@ -90,7 +90,7 @@ namespace Assignment_2.Areas.Identity.Pages.Account
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");
-                        return RedirectToAction("Index", "Customer");
+                        return RedirectToAction("Index", "Login");
                     }
                     if (result.RequiresTwoFactor)
                     {

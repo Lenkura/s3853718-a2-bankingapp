@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace MvcMCBA.Controllers
 {
-    [SecureContent]
+
     public class CustomersController : Controller
     {
         private readonly MCBAContext _context;
