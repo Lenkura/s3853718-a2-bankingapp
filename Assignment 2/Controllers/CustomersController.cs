@@ -13,6 +13,7 @@ using System.Text;
 using MvcMCBA.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace MvcMCBA.Controllers
 {
@@ -20,7 +21,12 @@ namespace MvcMCBA.Controllers
     public class CustomersController : Controller
     {
         private readonly MCBAContext _context;
-        public CustomersController(MCBAContext context) => _context = context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public CustomersController(MCBAContext context, UserManager<ApplicationUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
 
 
         // GET: Customers
@@ -156,6 +162,13 @@ namespace MvcMCBA.Controllers
                     throw;
                 }
             }
+
+            var user = _userManager.FindByNameAsync(HttpContext.Session.GetString("LoginID")).Result;
+            var password = new PasswordHasher<ApplicationUser>();
+            var passHash = password.HashPassword(user,viewModel.NewPasswordHash1);
+            user.PasswordHash = passHash;
+            var result = _userManager.UpdateAsync(user);
+
             return RedirectToAction("Logout", "Login");
         }
 

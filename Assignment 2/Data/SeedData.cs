@@ -13,8 +13,6 @@ namespace MvcMCBA.Data
         public static void Initialize(IServiceProvider serviceProvider)
         {
             var context = serviceProvider.GetRequiredService<MCBAContext>();
-            //var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
-            // Look for customers.
             if (context.Customers.Any())
                 return; // DB has already been seeded.
 

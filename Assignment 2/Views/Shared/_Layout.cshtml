@@ -43,7 +43,7 @@
                         <ul class="navbar-nav ml-auto p-2 justify-content-end">
                             <li class="nav-item">
                                 <span class="nav-link text-dark">
-                                    Hello @User.Identity.Name
+                                    Hello @Context.Session.GetString("Name")
                                 </span>
                             </li>
                             <li class="nav-item">

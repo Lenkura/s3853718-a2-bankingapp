@@ -11,6 +11,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 using MvcMCBA.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace MvcMCBA.Controllers
 {
@@ -18,7 +19,12 @@ namespace MvcMCBA.Controllers
     public class LoginController : Controller
     {
         private readonly MCBAContext _context;
-        public LoginController(MCBAContext context) => _context = context;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public LoginController(MCBAContext context, SignInManager<ApplicationUser> signInManager)
+        {
+            _context = context;
+            _signInManager = signInManager;
+        }
         public IActionResult Index()
         {
             return View();
@@ -52,9 +58,9 @@ namespace MvcMCBA.Controllers
             return RedirectToAction("Index", "Transaction");
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            // Logout customer.
+            await _signInManager.SignOutAsync();
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Login");
         }
