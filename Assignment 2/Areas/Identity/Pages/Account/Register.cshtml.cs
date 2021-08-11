@@ -156,7 +156,7 @@ namespace Assignment_2.Areas.Identity.Pages.Account
                     HttpContext.Session.SetString("LoginID", user.UserName);
                     HttpContext.Session.SetInt32("CustomerID", user.CustomerID);
                     HttpContext.Session.SetString("Name", user.Customer.Name);
-                    return RedirectToAction("Registration", "Customers");
+                    return RedirectToAction("Registration", "Login");
 
                 }
                 foreach (var error in result.Errors)

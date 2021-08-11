@@ -64,5 +64,9 @@ namespace MvcMCBA.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Login");
         }
+        public IActionResult Registration()
+        {
+            return View();
+        }
     }
 }
