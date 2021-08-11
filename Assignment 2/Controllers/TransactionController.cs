@@ -15,10 +15,11 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Collections.Generic;
 using MvcMCBA.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcMCBA.Controllers
 {
-    [SecureContent]
+    [Authorize]
     public class TransactionController : Controller
     {
         private readonly MCBAContext _context;

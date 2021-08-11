@@ -15,10 +15,11 @@ using System.Text;
 using MvcMCBA.Authorise;
 using MvcMCBA.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcMCBA.Controllers
 {
-    [SecureContent]
+    [Authorize]
     public class BillPayController : Controller
     {
         private readonly MCBAContext _context;
