@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcMCBA.Data;
 
 namespace MvcMCBA.Migrations
 {
     [DbContext(typeof(MCBAContext))]
-    partial class Assignment2DbContextModelSnapshot : ModelSnapshot
+    [Migration("20210811161424_revertIdentitylinktoLoginID")]
+    partial class revertIdentitylinktoLoginID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -333,6 +335,11 @@ namespace MvcMCBA.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
                     b.HasKey("LoginID");
 
                     b.HasIndex("CustomerID")
@@ -341,6 +348,8 @@ namespace MvcMCBA.Migrations
                     b.ToTable("Logins");
 
                     b.HasCheckConstraint("CH_Login_LoginID", "len(LoginID) = 8");
+
+                    b.HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");
                 });
 
             modelBuilder.Entity("MvcMCBA.Models.Payee", b =>

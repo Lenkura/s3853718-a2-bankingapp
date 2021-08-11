@@ -9,7 +9,7 @@ namespace MvcMCBA.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public int CustomerID { get; set; }
-        public virtual Customer Customer { get; set; }
+        public string LoginID { get; set; }
+        public virtual Login Login { get; set; }
     }
 }

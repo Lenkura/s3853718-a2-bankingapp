@@ -23,8 +23,7 @@ namespace MvcMCBA.Data
         {
             base.OnModelCreating(builder);
             // Set check constraints (cannot be expressed with data annotations).
-            builder.Entity<Login>().HasCheckConstraint("CH_Login_LoginID", "len(LoginID) = 8").
-                HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");
+            builder.Entity<Login>().HasCheckConstraint("CH_Login_LoginID", "len(LoginID) = 8");
             builder.Entity<Account>().HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
             builder.Entity<Transaction>().HasCheckConstraint("CH_Transaction_Amount", "Amount > 0");
             // Configure ambiguous Account.Transactions navigation property relationship.

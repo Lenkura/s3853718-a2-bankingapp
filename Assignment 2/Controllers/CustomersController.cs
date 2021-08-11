@@ -129,9 +129,9 @@ namespace MvcMCBA.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Password(ChangePasswordViewModel viewModel)
+        public IActionResult Password(ChangePasswordViewModel viewModel)
         {
-            var loginID = HttpContext.Session.GetString("LoginID");
+            /*var loginID = HttpContext.Session.GetString("LoginID");
             var login = await _context.Logins.FindAsync(loginID);
             if (login == null || !PBKDF2.Verify(login.PasswordHash, viewModel.OldPasswordHash))
             {
@@ -162,11 +162,11 @@ namespace MvcMCBA.Controllers
                 {
                     throw;
                 }
-            }
+            }*/
 
             var user = _userManager.FindByNameAsync(HttpContext.Session.GetString("LoginID")).Result;
             var password = new PasswordHasher<ApplicationUser>();
-            var passHash = password.HashPassword(user,viewModel.NewPasswordHash1);
+            var passHash = password.HashPassword(user, viewModel.NewPasswordHash1);
             user.PasswordHash = passHash;
             var result = _userManager.UpdateAsync(user);
 
