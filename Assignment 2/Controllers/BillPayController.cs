@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MvcMCBA.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Customer")]
     public class BillPayController : Controller
     {
         private readonly MCBAContext _context;

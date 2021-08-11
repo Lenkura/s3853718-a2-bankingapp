@@ -10,6 +10,7 @@ using System;
 using System.Net.Http.Headers;
 using MvcMCBA.Data;
 using MvcMCBA.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcMCBA
 {
@@ -53,6 +54,7 @@ namespace MvcMCBA
             services.AddHostedService<BillPayBackgroundService>();
 
             services.AddDefaultIdentity<ApplicationUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<MCBAContext>();
             services.Configure<IdentityOptions>(options =>
             {
@@ -64,6 +66,12 @@ namespace MvcMCBA
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 0;
                 options.SignIn.RequireConfirmedEmail = false;
+            });
+            services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
             });
 
             services.AddControllersWithViews();

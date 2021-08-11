@@ -14,10 +14,11 @@ using MvcMCBA.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcMCBA.Controllers
 {
-
+    [Authorize(Roles = "Customer")]
     public class CustomersController : Controller
     {
         private readonly MCBAContext _context;

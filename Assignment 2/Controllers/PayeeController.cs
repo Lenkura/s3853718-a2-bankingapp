@@ -16,10 +16,11 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Text;
 using MvcMCBA.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcMCBA.Controllers
 {
-    [SecureContent]
+    [Authorize(Roles = "Customer")]
     public class PayeeController : Controller
     {
         private readonly MCBAContext _context;

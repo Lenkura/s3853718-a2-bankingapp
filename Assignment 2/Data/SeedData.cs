@@ -75,7 +75,6 @@ namespace MvcMCBA.Data
             };
             var passHash = password.HashPassword(user1, "abc123");
             user1.PasswordHash = passHash;
-
             var user2 = new ApplicationUser
             {
                 Email = "38074569",
@@ -103,8 +102,19 @@ namespace MvcMCBA.Data
             };
             passHash = password.HashPassword(user3, "youWill_n0tGuess-This!");
             user3.PasswordHash = passHash;
-
             context.Users.AddRange(user1, user2, user3);
+
+            var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
+            if (!roleManager.RoleExistsAsync("Customer").Result)
+            {
+                _ = roleManager.CreateAsync(new IdentityRole("Customer")).Result;
+            }
+
+            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+
+            _ = userManager.AddToRoleAsync(user1, "Customer").Result;
+            _ = userManager.AddToRoleAsync(user2, "Customer").Result;
+            _ = userManager.AddToRoleAsync(user3, "Customer").Result;
 
             context.Accounts.AddRange(
                 new Account

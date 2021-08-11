@@ -14,10 +14,11 @@ using System.Threading.Tasks;
 using X.PagedList;
 using System.Net.Http;
 using MvcMCBA.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcMCBA.Controllers
 {
-    [SecureContent]
+    [Authorize(Roles = "Customer")]
     public class StatementController : Controller
     {
         private readonly MCBAContext _context;
