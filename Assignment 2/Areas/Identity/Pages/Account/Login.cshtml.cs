@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using MvcMCBA.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Assignment_2.Areas.Identity.Pages.Account
 {
@@ -90,7 +91,9 @@ namespace Assignment_2.Areas.Identity.Pages.Account
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");
-                        return RedirectToAction("Index", "Login");
+                        HttpContext.Session.SetString("LoginID", user.LoginID);
+                        HttpContext.Session.SetInt32("CustomerID", user.Login.CustomerID);
+                        return RedirectToAction("IdentityLogin", "Login");
                     }
                     if (result.RequiresTwoFactor)
                     {

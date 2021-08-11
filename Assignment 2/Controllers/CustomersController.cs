@@ -32,7 +32,7 @@ namespace MvcMCBA.Controllers
         // GET: Customers/Details/5
         public async Task<IActionResult> Details()
         {
-            var id = HttpContext.Session.GetInt32(nameof(Customer.CustomerID));
+            var id = HttpContext.Session.GetInt32("CustomerID");
             var customer = await _context.Customers
                 .FirstOrDefaultAsync(m => m.CustomerID == id);
             if (customer == null)
@@ -124,7 +124,7 @@ namespace MvcMCBA.Controllers
         [HttpPost]
         public async Task<IActionResult> Password(ChangePasswordViewModel viewModel)
         {
-            var loginID = HttpContext.Session.GetString(nameof(Login.LoginID));
+            var loginID = HttpContext.Session.GetString("LoginID");
             var login = await _context.Logins.FindAsync(loginID);
             if (login == null || !PBKDF2.Verify(login.PasswordHash, viewModel.OldPasswordHash))
             {

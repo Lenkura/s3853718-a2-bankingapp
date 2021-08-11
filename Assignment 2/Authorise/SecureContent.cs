@@ -10,7 +10,7 @@ using System;
     { 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var customerID = context.HttpContext.Session.GetInt32(nameof(Customer.CustomerID));
+            var customerID = context.HttpContext.Session.GetInt32("CustomerID");
             if (!customerID.HasValue)
                 context.Result = new RedirectToActionResult("Index", "Login",null);
         }

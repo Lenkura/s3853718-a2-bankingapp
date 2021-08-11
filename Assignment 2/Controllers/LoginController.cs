@@ -45,9 +45,9 @@ namespace MvcMCBA.Controllers
                 return View(new Login { LoginID = loginID });
             }
             // Login customer.
-            HttpContext.Session.SetString(nameof(Models.Login.LoginID), login.LoginID);
-            HttpContext.Session.SetInt32(nameof(Customer.CustomerID), login.CustomerID);
-            HttpContext.Session.SetString(nameof(Customer.Name), login.Customer.Name);
+            HttpContext.Session.SetString("LoginID", login.LoginID);
+            HttpContext.Session.SetInt32("CustomerID", login.CustomerID);
+            HttpContext.Session.SetString("Name", login.Customer.Name);
 
             return RedirectToAction("Index", "Transaction");
         }
@@ -58,5 +58,13 @@ namespace MvcMCBA.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Login");
         }
+
+        public async Task<IActionResult> IdentityLogin()
+        {
+            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32("CustomerID"));
+            HttpContext.Session.SetString("Name", customer.Name);
+            return RedirectToAction("Index", "Transaction");
+        }
+
     }
 }

@@ -26,7 +26,7 @@ namespace MvcMCBA.Controllers
 
         public async Task<IActionResult> List(int? page = 1)
         {
-            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
+            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32("CustomerID").Value);
             var accountNumber = new List<int>();
             foreach (var a in customer.Accounts)
             {
@@ -40,7 +40,7 @@ namespace MvcMCBA.Controllers
 
         public async Task<IActionResult> NewPayment(int payeeid)
         {
-            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
+            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32("CustomerID").Value);
             var accountNumber = new List<SelectListItem>();
             foreach (var a in customer.Accounts)
             {
@@ -56,7 +56,7 @@ namespace MvcMCBA.Controllers
         [HttpPost]
         public async Task<IActionResult> NewPayment(BillPayViewModel viewModel)
         {
-            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
+            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32("CustomerID").Value);
             bool ownAccount = false;
             foreach (var a in customer.Accounts)
                 if (a.AccountNumber == Int32.Parse(viewModel.AccountNumber))
@@ -127,7 +127,7 @@ namespace MvcMCBA.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(BillPay billpay)
         {
-            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value);
+            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32("CustomerID").Value);
             bool ownAccount = false;
             foreach (var a in customer.Accounts)
                 if (a.AccountNumber == billpay.AccountNumber)
