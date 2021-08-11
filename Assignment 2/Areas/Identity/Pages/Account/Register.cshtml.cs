@@ -5,14 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using DataValidator;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using MvcMCBA.Data;
 using MvcMCBA.Models;
 
 namespace Assignment_2.Areas.Identity.Pages.Account
@@ -24,17 +27,21 @@ namespace Assignment_2.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly MCBAContext _context;
 
         public RegisterModel(
+
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+             MCBAContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -47,8 +54,16 @@ namespace Assignment_2.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [Display(Name = "LoginID")]
-            public string LoginID { get; set; }
+            [Display(Name = "Name")]
+            public string Name { get; set; }
+
+            [Required]
+            [Display(Name = "Opening Account Type")]
+            public AccountType AccountType { get; set; }
+
+            [Required]
+            [Display(Name = "Opening Deposit")]
+            public decimal Balance { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -72,16 +87,76 @@ namespace Assignment_2.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            if (!Input.Balance.ToString().IsDollarAmount())
+            {
+                ModelState.AddModelError(nameof(Input.Balance), "Enter a dollar amount");
+            }
+            switch (Input.AccountType)
+            {
+                case (AccountType.C):
+                    if (Input.Balance < AccountChecks.GetCheckingsMin())
+                        ModelState.AddModelError(nameof(Input.Balance), "Opening Deposit does not meet minimum");
+                    break;
+                case (AccountType.S):
+                    if (Input.Balance < AccountChecks.GetSavingsMin())
+                        ModelState.AddModelError(nameof(Input.Balance), "Opening Deposit does not meet minimum");
+                    break;
+            }
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.LoginID, Email = Input.LoginID, EmailConfirmed = true };
+                Random r = new Random();
+                int customerID = 0;
+                while (customerID == 0)
+                {
+                    var attemptCustID = r.Next(1001, 9999);
+                    var c = await _context.Customers.FindAsync(attemptCustID);
+                    if (c == null)
+                        customerID = attemptCustID;
+                }
+                var customer = new Customer { CustomerID = customerID, Name = Input.Name, Status = CustomerStatus.A };
+                _context.Add(customer);
+                int accountNumber = 0;
+                while (accountNumber == 0)
+                {
+                    var attemptAccNum = r.Next(1001, 9999);
+                    var c = await _context.Accounts.FindAsync(attemptAccNum);
+                    if (c == null)
+                        accountNumber = attemptAccNum;
+                }
+                _context.Add(
+                new MvcMCBA.Models.Account
+                {
+                    AccountNumber = accountNumber,
+                    AccountType = Input.AccountType,
+                    CustomerID = customerID,
+                    Balance = Input.Balance
+                });
+                _context.Add(
+                new Transaction
+                {
+                    AccountNumber = accountNumber,
+                    TransactionType = TransactionType.D,
+                    Amount = Input.Balance,
+                    Comment = "Opening Deposit",
+                    TransactionTimeUtc = DateTime.UtcNow
+
+                });
+                await _context.SaveChangesAsync();
+
+                var user = new ApplicationUser { UserName = Input.Name, Email = Input.Name, EmailConfirmed = true, CustomerID = customerID };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
 
+                    _logger.LogInformation("User created a new account with password.");
+                    _ = await _userManager.AddToRoleAsync(user, "Customer");
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                    HttpContext.Session.SetString("LoginID", user.UserName);
+                    HttpContext.Session.SetInt32("CustomerID", user.CustomerID);
+                    HttpContext.Session.SetString("Name", user.Customer.Name);
+                    return RedirectToAction("Registration", "Customers");
 
                 }
                 foreach (var error in result.Errors)

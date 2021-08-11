@@ -66,6 +66,9 @@ namespace MvcMCBA
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 0;
                 options.SignIn.RequireConfirmedEmail = false;
+
+                //Username Settings
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._/ ";
             });
             services.AddAuthorization(options =>
             {

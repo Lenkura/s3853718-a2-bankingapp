@@ -26,7 +26,7 @@ namespace AdminPortal.Models
         public string Suburb { get; set; }
 
         [Column(TypeName = "nvarchar")]
-        public AusStates State { get; set; }
+        public AusStates? State { get; set; }
 
         [StringLength(4)]
         [Range(1000, 9999, ErrorMessage = "Enter a Valid Postcode")]

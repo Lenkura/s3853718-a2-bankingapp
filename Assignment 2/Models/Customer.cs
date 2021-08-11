@@ -17,7 +17,8 @@ namespace MvcMCBA.Models
         NT = 4,
         ACT = 5,
         SA = 6,
-        WA = 7
+        WA = 7,
+
     }
     public enum CustomerStatus
     {
@@ -47,7 +48,7 @@ namespace MvcMCBA.Models
 
         [Column(TypeName = "nvarchar")]
         //[StringLength(3)]
-        public AusStates State { get; set; }
+        public AusStates? State { get; set; }
 
         [StringLength(4)]
         [Range(1000, 9999, ErrorMessage = "Enter a Valid Postcode")]
