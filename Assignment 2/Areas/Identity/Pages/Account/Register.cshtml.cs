@@ -145,7 +145,16 @@ namespace Assignment_2.Areas.Identity.Pages.Account
                 });
                 await _context.SaveChangesAsync();
 
-                var user = new ApplicationUser { UserName = Input.Name, Email = Input.Name, EmailConfirmed = true, CustomerID = customerID };
+                int loginID = 0;
+                while (loginID == 0)
+                {
+                    var attemptloginID = r.Next(10000001, 99999999);
+                    var c = await _userManager.FindByNameAsync(attemptloginID.ToString());
+                    if (c == null)
+                        loginID = attemptloginID;
+                }
+
+                var user = new ApplicationUser { UserName = loginID.ToString(), Email = Input.Name, EmailConfirmed = true, CustomerID = customerID };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
