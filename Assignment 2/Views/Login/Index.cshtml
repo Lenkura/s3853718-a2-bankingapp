@@ -28,7 +28,7 @@
 
 @if (!isLoggedIn)
 {
-    <p>
-        <a asp-controller="Login" asp-action="Login" class="btn btn-outline-dark">Login</a>
-    </p>
+<p>
+    <a class="btn btn-outline-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+</p>
 }

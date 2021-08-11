@@ -64,13 +64,5 @@ namespace MvcMCBA.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Login");
         }
-
-        public async Task<IActionResult> IdentityLogin()
-        {
-            var customer = await _context.Customers.FindAsync(HttpContext.Session.GetInt32("CustomerID"));
-            HttpContext.Session.SetString("Name", customer.Name);
-            return RedirectToAction("Index", "Transaction");
-        }
-
     }
 }

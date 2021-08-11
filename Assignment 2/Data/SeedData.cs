@@ -71,7 +71,7 @@ namespace MvcMCBA.Data
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString("D"),
-                LoginID = "12345678"
+                CustomerID = 2100
             };
             var passHash = password.HashPassword(user1, "abc123");
             user1.PasswordHash = passHash;
@@ -85,7 +85,7 @@ namespace MvcMCBA.Data
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString("D"),
-                LoginID = "38074569"
+                CustomerID = 2200
             };
             passHash = password.HashPassword(user2, "ilovermit2020");
             user2.PasswordHash = passHash;
@@ -99,7 +99,7 @@ namespace MvcMCBA.Data
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString("D"),
-                LoginID = "17963428"
+                CustomerID = 2300
             };
             passHash = password.HashPassword(user3, "youWill_n0tGuess-This!");
             user3.PasswordHash = passHash;
