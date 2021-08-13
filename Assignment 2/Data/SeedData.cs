@@ -116,6 +116,25 @@ namespace MvcMCBA.Data
             _ = userManager.AddToRoleAsync(user2, "Customer").Result;
             _ = userManager.AddToRoleAsync(user3, "Customer").Result;
 
+            var admin = new ApplicationUser
+            {
+                Email = "admin",
+                NormalizedEmail = "admin",
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+            };
+            passHash = password.HashPassword(admin, "admin");
+            admin.PasswordHash = passHash;
+            context.Users.Add(admin);
+            if (!roleManager.RoleExistsAsync("Admin").Result)
+            {
+                _ = roleManager.CreateAsync(new IdentityRole("Admin")).Result;
+            }
+            _ = userManager.AddToRoleAsync(admin, "Admin").Result;
+
             context.Accounts.AddRange(
                 new Account
                 {

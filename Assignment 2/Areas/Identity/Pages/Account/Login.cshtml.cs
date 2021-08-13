@@ -92,8 +92,11 @@ namespace Assignment_2.Areas.Identity.Pages.Account
                     {
                         _logger.LogInformation("User logged in.");
                         HttpContext.Session.SetString("LoginID", user.UserName);
-                        HttpContext.Session.SetInt32("CustomerID", user.CustomerID);
-                        HttpContext.Session.SetString("Name", user.Customer.Name);
+                        if (user.CustomerID != null)
+                        {
+                            HttpContext.Session.SetInt32("CustomerID", user.CustomerID.Value);
+                            HttpContext.Session.SetString("Name", user.Customer.Name);
+                        }
                         return RedirectToAction("Index", "Transaction");
                     }
                     if (result.RequiresTwoFactor)
