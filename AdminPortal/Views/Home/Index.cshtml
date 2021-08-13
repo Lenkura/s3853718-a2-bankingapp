@@ -1,8 +1,21 @@
-﻿@{
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
+
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">MCBA Admin Portal</h1>
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <p>Login through the link below or in the top right</p>
+        <a class="btn btn-primary" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    }
+    else
+    {
+        <p>Access Services through the links in the nav bar</p>
+    }
 </div>
