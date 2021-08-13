@@ -1,6 +1,10 @@
+using AdminPortal.Data;
+using AdminPortal.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +28,12 @@ namespace AdminPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<MCBAContext>(options =>
+            {
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"));
+            });
+
             services.AddHttpClient("api", client =>
             {
                 client.BaseAddress = new Uri("https://localhost:44398");
@@ -31,6 +41,10 @@ namespace AdminPortal
             });
             services.AddControllersWithViews();
             services.AddSession();
+            services.AddDefaultIdentity<ApplicationUser>()
+               .AddRoles<IdentityRole>()
+               .AddEntityFrameworkStores<MCBAContext>();
+            services.AddAuthorization();
         }
 
 
@@ -51,8 +65,8 @@ namespace AdminPortal
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseSession();
 
@@ -61,6 +75,7 @@ namespace AdminPortal
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Login}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

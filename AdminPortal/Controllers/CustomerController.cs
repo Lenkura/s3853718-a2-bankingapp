@@ -1,5 +1,5 @@
-﻿using AdminPortal.Authorise;
-using AdminPortal.Models;
+﻿using AdminPortal.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AdminPortal.Controllers
 {
-    [SecureContent]
+    [Authorize(Roles = "Admin")]
     public class CustomerController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;

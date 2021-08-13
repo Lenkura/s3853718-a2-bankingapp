@@ -1,18 +1,9 @@
-﻿using MvcMCBA.Authorise;
-using MvcMCBA.Models;
-using MvcMCBA.ViewModels;
-using DataValidator;
+﻿using MvcMCBA.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
-using System.Net.Http;
 using MvcMCBA.Data;
 using Microsoft.AspNetCore.Authorization;
 

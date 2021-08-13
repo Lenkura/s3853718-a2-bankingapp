@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcMCBA.Models;
-using MvcMCBA.Authorise;
 using Microsoft.AspNetCore.Http;
 using MvcMCBA.ViewModels;
 using SimpleHashing;
-using System.Net.Http;
-using Newtonsoft.Json;
 using System.Text;
 using MvcMCBA.Data;
 using Microsoft.EntityFrameworkCore;

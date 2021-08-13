@@ -9,6 +9,7 @@ namespace AdminPortal.Models
 
     public class CustomerDTO
     {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Range(1000, 9999)]
         public int CustomerID { get; init; }

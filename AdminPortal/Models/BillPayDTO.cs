@@ -9,6 +9,7 @@ namespace AdminPortal.Models
     public class BillPayDTO
     {
         [Required]
+        [Key]
         public int BillPayID { get; set; }
         [Required]
         [DataType(DataType.Text)]

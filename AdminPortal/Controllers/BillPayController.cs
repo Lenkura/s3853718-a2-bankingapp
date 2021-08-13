@@ -1,6 +1,6 @@
-﻿using AdminPortal.Authorise;
-using AdminPortal.Models;
+﻿using AdminPortal.Models;
 using AdminPortal.Models.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
@@ -14,7 +14,7 @@ using X.PagedList;
 
 namespace AdminPortal.Controllers
 {
-    [SecureContent]
+    [Authorize(Roles = "Admin")]
     public class BillPayController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;

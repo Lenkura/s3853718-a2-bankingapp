@@ -7,6 +7,7 @@ namespace AdminPortal.Models
 {
     public record TransactionDTO
     {
+        [Key]
         [Required]
         [Display(Name = "ID")]
         public int TransactionID { get; init; }

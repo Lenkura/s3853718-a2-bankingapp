@@ -8,6 +8,7 @@ namespace AdminPortal.Models
 {
     public class PayeeDTO
     {
+        [Key]
         [Required]
         public int PayeeID { get; set; }
         [Required, StringLength(50)]
