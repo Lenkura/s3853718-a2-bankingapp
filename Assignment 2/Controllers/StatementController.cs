@@ -7,6 +7,8 @@ using X.PagedList;
 using MvcMCBA.Data;
 using Microsoft.AspNetCore.Authorization;
 using MvcMCBA.ViewModels;
+using System;
+using System.Collections.Generic;
 
 namespace MvcMCBA.Controllers
 {
@@ -99,5 +101,71 @@ namespace MvcMCBA.Controllers
             });
         }
 
+        public async Task<IActionResult> ChartBalanceTrend(int accountNumber)
+        {
+            var transactions = await _context.Transactions.Where(x => x.AccountNumber == accountNumber).ToListAsync();
+
+            //hardcode starting date
+            const string format = "dd/MM/yyyy";
+            DateTime startingDate = DateTime.ParseExact("28/05/2021", format, null);
+            List<Transaction> priorTransaction = new();
+            List<Transaction> day1 = new();
+            List<Transaction> day2 = new();
+            List<Transaction> day3 = new();
+            List<Transaction> day4 = new();
+            List<Transaction> day5 = new();
+            List<Transaction> day6 = new();
+            List<List<Transaction>> days = new();
+            List<AccountTrendViewModel> accountTrend = new();
+            foreach (var t in transactions)
+            {
+                if (t.TransactionTimeUtc.Date.CompareTo(startingDate) <= 0)
+                    priorTransaction.Add(t);
+                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(1)))
+                    day1.Add(t);
+                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(2)))
+                    day2.Add(t);
+                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(3)))
+                    day3.Add(t);
+                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(4)))
+                    day4.Add(t);
+                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(5)))
+                    day5.Add(t);
+                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(6)))
+                    day6.Add(t);
+            }
+            foreach (var day in days) { 
+                foreach (var list in days)
+                {
+                    decimal balance = 0;
+                    DateTime date = DateTime.Today;
+                    foreach (var t in transactions)
+                    {
+                        date = t.TransactionTimeUtc.Date;
+                        if (t.TransactionType.Equals(TransactionType.D))
+                            balance += t.Amount;
+                        else if (t.TransactionType.Equals(TransactionType.W))
+                            balance -= t.Amount;
+                        else if (t.TransactionType.Equals(TransactionType.B))
+                            balance -= t.Amount;
+                        else if (t.TransactionType.Equals(TransactionType.T) && t.DestinationAccountNumber != null)
+                            balance -= t.Amount;
+                        else if (t.TransactionType.Equals(TransactionType.S))
+                            balance -= t.Amount;
+                        else
+                            balance += t.Amount;
+                    }
+                    accountTrend.Add(new AccountTrendViewModel
+                    {
+                        Date = date,
+                        Balance = balance
+                    });
+                }
+            }
+            return View(accountTrend);
+        }
+
     }
+
+}
 }

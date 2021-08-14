@@ -3,7 +3,7 @@
     ViewData["Title"] = "30-Day Breakdown";
 }
 
-<h1>Account Transaction Breakdown</h1>
+<h1>Account Transaction Breakdown by Type</h1>
 
 <div>
     <canvas id="myChart"></canvas>
@@ -27,9 +27,12 @@
                         'rgb(255, 255, 102)',
                         'rgb(96, 96, 96)',
                     ],
-                    hoverOffset: 4
+                    hoverOffset: 5
                 }]
             },
+            options: {
+                radius:"80%"
+            }
         });
     </script>
 
