@@ -12,6 +12,9 @@
     <h1>Account History</h1>
     <h2>@account.AccountNumber</h2>
     <hr />
+    <a class="btn btn-outline-info"
+       asp-action="ChartTypeBreakdown" asp-route-accountNumber="@account.AccountNumber">By Transaction Type</a>
+    <hr />
     <table class="table">
         <tr>
             <th>@Html.DisplayNameFor(x => x[0].TransactionID)</th>
