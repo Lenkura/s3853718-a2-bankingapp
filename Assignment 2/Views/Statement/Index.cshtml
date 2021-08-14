@@ -18,17 +18,21 @@
         @foreach (var account in Model.Accounts)
         {
 
-            <tr>
-                <td>@Html.DisplayFor(x => account.AccountNumber)</td>
-                <td>@Html.DisplayFor(x => account.AccountType)</td>
-                <td>@Html.DisplayFor(x => account.Balance)</td>
-                <td>@account.Transactions.Count</td>
-                <td>
-                    <a class="btn btn-outline-info"
-                       asp-action="IndexingHistory" asp-route-accountNumber="@account.AccountNumber">History</a>
-                </td>
+    <tr>
+        <td>@Html.DisplayFor(x => account.AccountNumber)</td>
+        <td>@Html.DisplayFor(x => account.AccountType)</td>
+        <td>@Html.DisplayFor(x => account.Balance)</td>
+        <td>@account.Transactions.Count</td>
+        <td>
+            <a class="btn btn-outline-info"
+               asp-action="IndexingHistory" asp-route-accountNumber="@account.AccountNumber">History</a>
+        </td>
+        <td>
+            <a class="btn btn-outline-info"
+               asp-action="ChartTypeBreakdown" asp-route-accountNumber="@account.AccountNumber">30 Days</a>
+        </td>
 
-            </tr>
+    </tr>
         }
     </table>
 </div>

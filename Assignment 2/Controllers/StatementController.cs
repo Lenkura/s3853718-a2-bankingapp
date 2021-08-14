@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using X.PagedList;
 using MvcMCBA.Data;
 using Microsoft.AspNetCore.Authorization;
+using Assignment_2.ViewModels;
 
 namespace MvcMCBA.Controllers
 {
@@ -61,6 +62,29 @@ namespace MvcMCBA.Controllers
                 OrderByDescending(x => x.TransactionTimeUtc).ToPagedListAsync(page, pageSize);
 
             return View(pagedList);
+        }
+
+        public async Task<IActionResult> ChartTypeBreakdown(int accountNumber)
+        {
+            var transactions = await _context.Transactions.Where(x => x.AccountNumber == accountNumber).ToListAsync();
+            decimal moneyIn = 0;
+            decimal moneyOut = 0;
+            decimal service = 0;
+            foreach (var t in transactions)
+            {
+                if (t.TransactionType.Equals(TransactionType.D))
+                    moneyIn += t.Amount;
+                else if (t.TransactionType.Equals(TransactionType.S))
+                    service += t.Amount;
+                else
+                    moneyOut += t.Amount;
+            }
+            return View(new TypeBreakdownViewModel()
+            {
+                MoneyIn = moneyIn,
+                MoneyOut = moneyOut,
+                Service = service
+            });
         }
 
     }
