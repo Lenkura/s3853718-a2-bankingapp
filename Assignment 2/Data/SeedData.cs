@@ -148,7 +148,7 @@ namespace MvcMCBA.Data
                     AccountNumber = 4101,
                     AccountType = AccountType.C,
                     CustomerID = 2100,
-                    Balance = 3079.60M,
+                    Balance = 2269.30M,
 
                 },
                 new Account
@@ -217,6 +217,13 @@ namespace MvcMCBA.Data
                     Comment = null,
                     TransactionTimeUtc = DateTime.ParseExact("19/05/2021 10:00:00 PM", format, null)
                 },
+                new Transaction
+                {
+                    TransactionType = TransactionType.B,
+                    AccountNumber = 4101,
+                    Amount = 200,
+                    TransactionTimeUtc = DateTime.ParseExact("20/05/2021 01:45:00 PM", format, null)
+                },
                  new Transaction
                  {
                      TransactionType = TransactionType.D,
@@ -225,12 +232,36 @@ namespace MvcMCBA.Data
                      Comment = "Wage",
                      TransactionTimeUtc = DateTime.ParseExact("21/05/2021 04:45:00 PM", format, null)
                  },
+                 new Transaction
+                 {
+                     TransactionType = TransactionType.T,
+                     AccountNumber = 4101,
+                     DestinationAccountNumber = 4100,
+                     Amount = 500,
+                     Comment = "Debt",
+                     TransactionTimeUtc = DateTime.ParseExact("23/05/2021 03:45:00 PM", format, null)
+                 },
+                 new Transaction
+                 {
+                     TransactionType = TransactionType.T,
+                     AccountNumber = 4101,
+                     Amount = 1000,
+                     Comment = "",
+                     TransactionTimeUtc = DateTime.ParseExact("23/05/2021 03:45:00 PM", format, null)
+                 },
                 new Transaction
                 {
                     TransactionType = TransactionType.D,
                     AccountNumber = 4101,
                     Amount = 400,
                     Comment = "Wage",
+                    TransactionTimeUtc = DateTime.ParseExact("22/05/2021 01:45:00 PM", format, null)
+                },
+                new Transaction
+                {
+                    TransactionType = TransactionType.B,
+                    AccountNumber = 4101,
+                    Amount = 100,
                     TransactionTimeUtc = DateTime.ParseExact("22/05/2021 01:45:00 PM", format, null)
                 },
                 new Transaction
@@ -267,6 +298,13 @@ namespace MvcMCBA.Data
                 },
                 new Transaction
                 {
+                    TransactionType = TransactionType.B,
+                    AccountNumber = 4101,
+                    Amount = 900,
+                    TransactionTimeUtc = DateTime.ParseExact("26/05/2021 01:45:00 PM", format, null)
+                },
+                new Transaction
+                {
                     TransactionType = TransactionType.D,
                     AccountNumber = 4101,
                     Amount = 500,
@@ -279,6 +317,14 @@ namespace MvcMCBA.Data
                     AccountNumber = 4101,
                     Amount = 100,
                     Comment = "Repairs",
+                    TransactionTimeUtc = DateTime.ParseExact("26/05/2021 01:45:00 PM", format, null)
+                },
+                new Transaction
+                {
+                    TransactionType = TransactionType.S,
+                    AccountNumber = 4101,
+                    Amount = 0.1M,
+                    Comment = "ATM Withdrawal",
                     TransactionTimeUtc = DateTime.ParseExact("26/05/2021 01:45:00 PM", format, null)
                 },
                 new Transaction
@@ -319,6 +365,23 @@ namespace MvcMCBA.Data
                     Amount = 0.1M,
                     Comment = "ATM Withdrawal",
                     TransactionTimeUtc = DateTime.ParseExact("27/05/2021 08:30:00 PM", format, null)
+                },
+                new Transaction
+                {
+                    TransactionType = TransactionType.T,
+                    AccountNumber = 4101,
+                    DestinationAccountNumber = 4100,
+                    Amount = 200,
+                    Comment = "Food",
+                    TransactionTimeUtc = DateTime.ParseExact("28/05/2021 03:45:00 PM", format, null)
+                },
+                new Transaction
+                {
+                    TransactionType = TransactionType.S,
+                    AccountNumber = 4101,
+                    Amount = 0.2M,
+                    Comment = "Account Transfer",
+                    TransactionTimeUtc = DateTime.ParseExact("28/05/2021 03:45:00 PM", format, null)
                 },
                 new Transaction
                 {
