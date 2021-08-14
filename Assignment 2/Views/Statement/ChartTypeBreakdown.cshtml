@@ -1,9 +1,11 @@
 ﻿@model TypeBreakdownViewModel
 @{
     ViewData["Title"] = "30-Day Breakdown";
+    var accountNumber = (int)ViewBag.AccountNumber;
 }
 
 <h1>Account Transaction Breakdown by Type</h1>
+<a asp-action="IndexingHistory" asp-route-accountNumber="@accountNumber">Back to History</a>
 
 <div>
     <canvas id="myChart"></canvas>

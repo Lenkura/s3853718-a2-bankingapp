@@ -68,6 +68,7 @@ namespace MvcMCBA.Controllers
 
         public async Task<IActionResult> ChartTypeBreakdown(int accountNumber)
         {
+            ViewBag.AccountNumber = accountNumber;
             var transactions = await _context.Transactions.Where(x => x.AccountNumber == accountNumber).ToListAsync();
             decimal deposits = 0;
             decimal transferIn = 0;
@@ -104,7 +105,7 @@ namespace MvcMCBA.Controllers
         public async Task<IActionResult> ChartBalanceTrend(int accountNumber)
         {
             var transactions = await _context.Transactions.Where(x => x.AccountNumber == accountNumber).ToListAsync();
-
+            ViewBag.AccountNumber = accountNumber;
             //hardcode starting date
             const string format = "dd/MM/yyyy hh:mm:ss tt";
             DateTime startingDate = DateTime.ParseExact("21/05/2021 11:59:59 PM", format, null);

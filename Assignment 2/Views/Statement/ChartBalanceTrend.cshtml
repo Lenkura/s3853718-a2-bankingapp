@@ -8,11 +8,12 @@
         labels.Add(t.Date.ToLocalTime().ToShortDateString());
         data.Add(t.Balance.ToString());
     }
+    var accountNumber = (int)ViewBag.AccountNumber;
 }
 
 <h1>Account Balance 7-day Trend</h1>
 <p>Note: the starting date has been hardcoded to be 21/05/2021</p>
-
+<a asp-action="IndexingHistory" asp-route-accountNumber="@accountNumber">Back to History</a>
 <div>
     <canvas id="myChart"></canvas>
 </div>
