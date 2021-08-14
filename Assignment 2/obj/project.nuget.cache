@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "F1du9/uHg+KCq7hsAsWmslN+8IgkFj0e5Y6cURGmu4q0AbaSfnacLOLLxB++brk2MNtfhayvph44UP+ODLHhrg==",
+  "dgSpecHash": "w+ECXEjeV0peQ4GVarNpt81uG84PJWYUgNU478jRWzyEtZvAtEOnsiXok3lx6oyzN0UjM/RChX/fLUIQZPOsVw==",
   "success": true,
   "projectFilePath": "D:\\Git\\s3853718-a2\\Assignment 2\\MvcMCBA.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Raymond\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
+    "C:\\Users\\Raymond\\.nuget\\packages\\chart.js\\2.9.3\\chart.js.2.9.3.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\jetbrains.annotations\\2021.1.0\\jetbrains.annotations.2021.1.0.nupkg.sha512",
     "C:\\Users\\Raymond\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.8\\microsoft.aspnetcore.cryptography.internal.5.0.8.nupkg.sha512",

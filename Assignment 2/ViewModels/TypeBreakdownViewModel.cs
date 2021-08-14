@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Assignment_2.ViewModels
+namespace MvcMCBA.ViewModels
 {
     public class TypeBreakdownViewModel
     {
-        public decimal MoneyIn { get; set; }
-        public decimal MoneyOut { get; set; }
+        public decimal Deposit { get; set; }
+        public decimal Withdrawal { get; set; }
+        public decimal BillPay { get; set; }
+        public decimal TransferIn { get; set; }
+        public decimal TransferOut { get; set; }
         public decimal Service { get; set; }
     }
 }

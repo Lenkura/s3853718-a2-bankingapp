@@ -1,0 +1,38 @@
+﻿@model TypeBreakdownViewModel
+@{
+    ViewData["Title"] = "30-Day Breakdown";
+}
+
+<h1>30-Day Transaction Breakdown</h1>
+
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Deposits', 'Withdrawals', 'BillPays', 'TransferIn', 'TransferOut', 'Service'],
+                datasets: [{
+                    data: [@Model.Deposit, @Model.Withdrawal, @Model.BillPay,@Model.TransferIn,@Model.TransferOut,@Model.Service],
+                    backgroundColor: [
+                        'rgb(0, 153, 0)',
+                        'rgb(204, 0, 0)',
+                        'rgb(0, 204, 204)',
+                        'rgb(178, 255, 102)',
+                        'rgb(255, 255, 102)',
+                        'rgb(96, 96, 96)',
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+        });
+
+    </script>
+
+}

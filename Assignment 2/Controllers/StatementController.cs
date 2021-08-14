@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using X.PagedList;
 using MvcMCBA.Data;
 using Microsoft.AspNetCore.Authorization;
-using Assignment_2.ViewModels;
+using MvcMCBA.ViewModels;
 
 namespace MvcMCBA.Controllers
 {
@@ -67,23 +67,35 @@ namespace MvcMCBA.Controllers
         public async Task<IActionResult> ChartTypeBreakdown(int accountNumber)
         {
             var transactions = await _context.Transactions.Where(x => x.AccountNumber == accountNumber).ToListAsync();
-            decimal moneyIn = 0;
-            decimal moneyOut = 0;
-            decimal service = 0;
+            decimal deposits = 0;
+            decimal transferIn = 0;
+            decimal withdrawals = 0;
+            decimal transferOut = 0;
+            decimal billpay = 0;
+            decimal fees = 0;
             foreach (var t in transactions)
             {
                 if (t.TransactionType.Equals(TransactionType.D))
-                    moneyIn += t.Amount;
+                    deposits += t.Amount;
+                else if (t.TransactionType.Equals(TransactionType.W))
+                    withdrawals += t.Amount;
+                else if (t.TransactionType.Equals(TransactionType.B))
+                    billpay += t.Amount;
+                else if (t.TransactionType.Equals(TransactionType.T) && t.DestinationAccountNumber != null)
+                    transferOut += t.Amount;
                 else if (t.TransactionType.Equals(TransactionType.S))
-                    service += t.Amount;
+                    fees += t.Amount;
                 else
-                    moneyOut += t.Amount;
+                    transferIn += t.Amount;
             }
             return View(new TypeBreakdownViewModel()
             {
-                MoneyIn = moneyIn,
-                MoneyOut = moneyOut,
-                Service = service
+                Deposit = deposits,
+                Withdrawal = withdrawals,
+                BillPay = billpay,
+                TransferIn = transferIn,
+                TransferOut = transferOut,
+                Service = fees
             });
         }
 
