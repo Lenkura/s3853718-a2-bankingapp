@@ -148,7 +148,7 @@ namespace MvcMCBA.Data
                     AccountNumber = 4101,
                     AccountType = AccountType.C,
                     CustomerID = 2100,
-                    Balance = 2269.30M,
+                    Balance = 2669.30M,
 
                 },
                 new Account
@@ -234,12 +234,20 @@ namespace MvcMCBA.Data
                  },
                  new Transaction
                  {
+                     TransactionType = TransactionType.D,
+                     AccountNumber = 4101,
+                     Amount = 400,
+                     Comment = "Cell",
+                     TransactionTimeUtc = DateTime.ParseExact("21/05/2021 08:45:00 PM", format, null)
+                 },
+                 new Transaction
+                 {
                      TransactionType = TransactionType.T,
                      AccountNumber = 4101,
                      DestinationAccountNumber = 4100,
                      Amount = 500,
                      Comment = "Debt",
-                     TransactionTimeUtc = DateTime.ParseExact("23/05/2021 03:45:00 PM", format, null)
+                     TransactionTimeUtc = DateTime.ParseExact("21/05/2021 08:45:00 PM", format, null)
                  },
                  new Transaction
                  {
@@ -247,7 +255,7 @@ namespace MvcMCBA.Data
                      AccountNumber = 4101,
                      Amount = 1000,
                      Comment = "",
-                     TransactionTimeUtc = DateTime.ParseExact("23/05/2021 03:45:00 PM", format, null)
+                     TransactionTimeUtc = DateTime.ParseExact("21/05/2021 08:45:00 PM", format, null)
                  },
                 new Transaction
                 {
@@ -301,7 +309,7 @@ namespace MvcMCBA.Data
                     TransactionType = TransactionType.B,
                     AccountNumber = 4101,
                     Amount = 900,
-                    TransactionTimeUtc = DateTime.ParseExact("26/05/2021 01:45:00 PM", format, null)
+                    TransactionTimeUtc = DateTime.ParseExact("24/05/2021 01:45:00 PM", format, null)
                 },
                 new Transaction
                 {

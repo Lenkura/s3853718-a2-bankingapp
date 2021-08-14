@@ -106,8 +106,9 @@ namespace MvcMCBA.Controllers
             var transactions = await _context.Transactions.Where(x => x.AccountNumber == accountNumber).ToListAsync();
 
             //hardcode starting date
-            const string format = "dd/MM/yyyy";
-            DateTime startingDate = DateTime.ParseExact("28/05/2021", format, null);
+            const string format = "dd/MM/yyyy hh:mm:ss tt";
+            DateTime startingDate = DateTime.ParseExact("21/05/2021 11:59:59 PM", format, null);
+
             List<Transaction> priorTransaction = new();
             List<Transaction> day1 = new();
             List<Transaction> day2 = new();
@@ -115,57 +116,86 @@ namespace MvcMCBA.Controllers
             List<Transaction> day4 = new();
             List<Transaction> day5 = new();
             List<Transaction> day6 = new();
-            List<List<Transaction>> days = new();
-            List<AccountTrendViewModel> accountTrend = new();
+
             foreach (var t in transactions)
             {
-                if (t.TransactionTimeUtc.Date.CompareTo(startingDate) <= 0)
+                if (t.TransactionTimeUtc.CompareTo(startingDate) <= 0)
                     priorTransaction.Add(t);
-                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(1)))
+                if (t.TransactionTimeUtc.ToLocalTime().CompareTo(startingDate.AddDays(1)) <= 0)
                     day1.Add(t);
-                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(2)))
+                if (t.TransactionTimeUtc.ToLocalTime().CompareTo(startingDate.AddDays(2)) <= 0)
                     day2.Add(t);
-                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(3)))
+                if (t.TransactionTimeUtc.ToLocalTime().CompareTo(startingDate.AddDays(3)) <= 0)
                     day3.Add(t);
-                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(4)))
+                if (t.TransactionTimeUtc.ToLocalTime().CompareTo(startingDate.AddDays(4)) <= 0)
                     day4.Add(t);
-                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(5)))
+                if (t.TransactionTimeUtc.ToLocalTime().CompareTo(startingDate.AddDays(5)) <= 0)
                     day5.Add(t);
-                if (t.TransactionTimeUtc.Date.Equals(startingDate.Date.AddDays(6)))
+                if (t.TransactionTimeUtc.ToLocalTime().CompareTo(startingDate.AddDays(6)) <= 0)
                     day6.Add(t);
             }
-            foreach (var day in days) { 
-                foreach (var list in days)
-                {
-                    decimal balance = 0;
-                    DateTime date = DateTime.Today;
-                    foreach (var t in transactions)
-                    {
-                        date = t.TransactionTimeUtc.Date;
-                        if (t.TransactionType.Equals(TransactionType.D))
-                            balance += t.Amount;
-                        else if (t.TransactionType.Equals(TransactionType.W))
-                            balance -= t.Amount;
-                        else if (t.TransactionType.Equals(TransactionType.B))
-                            balance -= t.Amount;
-                        else if (t.TransactionType.Equals(TransactionType.T) && t.DestinationAccountNumber != null)
-                            balance -= t.Amount;
-                        else if (t.TransactionType.Equals(TransactionType.S))
-                            balance -= t.Amount;
-                        else
-                            balance += t.Amount;
-                    }
-                    accountTrend.Add(new AccountTrendViewModel
-                    {
-                        Date = date,
-                        Balance = balance
-                    });
-                }
-            }
+
+            var accountTrend = new List<AccountTrendViewModel>(){
+            new AccountTrendViewModel
+            {
+                Date = startingDate.Date,
+                Balance = TransactionListTotal(priorTransaction)
+            },
+            new AccountTrendViewModel
+            {
+                Date = startingDate.Date.AddDays(1),
+                Balance = TransactionListTotal(day1)
+            },
+            new AccountTrendViewModel
+            {
+                Date = startingDate.Date.AddDays(2),
+                Balance = TransactionListTotal(day2)
+            },
+            new AccountTrendViewModel
+            {
+                Date = startingDate.Date.AddDays(3),
+                Balance = TransactionListTotal(day3)
+            },
+            new AccountTrendViewModel
+            {
+                Date = startingDate.Date.AddDays(4),
+                Balance = TransactionListTotal(day4)
+            },
+            new AccountTrendViewModel
+            {
+                Date = startingDate.Date.AddDays(5),
+                Balance = TransactionListTotal(day5)
+            },
+            new AccountTrendViewModel
+            {
+                Date = startingDate.Date.AddDays(6),
+                Balance = TransactionListTotal(day6)
+            },
+
+            };
             return View(accountTrend);
         }
 
-    }
+        private decimal TransactionListTotal(List<Transaction> transactions)
+        {
+            decimal balance = 0;
+            foreach (var t in transactions)
+            {
+                if (t.TransactionType.Equals(TransactionType.D))
+                    balance += t.Amount;
+                else if (t.TransactionType.Equals(TransactionType.W))
+                    balance -= t.Amount;
+                else if (t.TransactionType.Equals(TransactionType.B))
+                    balance -= t.Amount;
+                else if (t.TransactionType.Equals(TransactionType.T) && t.DestinationAccountNumber != null)
+                    balance -= t.Amount;
+                else if (t.TransactionType.Equals(TransactionType.S))
+                    balance -= t.Amount;
+                else
+                    balance += t.Amount;
+            }
+            return balance;
+        }
 
-}
+    }
 }
