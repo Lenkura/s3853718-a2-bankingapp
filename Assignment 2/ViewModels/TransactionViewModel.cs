@@ -12,6 +12,7 @@ namespace MvcMCBA.ViewModels
         public int AccountNumber { get; set; }
         public Account Account { get; set; }
         [DataType(DataType.Text)]
+        [Display(Name = "Destination Account Number")]
         public int DestinationAccountNumber { get; set; }
         public Account DestinationAccount { get; set; }
         [Required]

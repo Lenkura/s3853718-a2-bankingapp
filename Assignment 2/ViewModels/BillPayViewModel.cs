@@ -13,6 +13,7 @@ namespace MvcMCBA.ViewModels
     public class BillPayViewModel
     {
         [Required]
+        [Display(Name = "BillPay ID")]
         public int BillPayID { get; set; }
         [Required]
         [Display(Name = "Account Number")]

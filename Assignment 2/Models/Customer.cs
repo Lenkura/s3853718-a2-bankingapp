@@ -52,6 +52,7 @@ namespace MvcMCBA.Models
 
         [StringLength(4)]
         [Range(1000, 9999, ErrorMessage = "Enter a Valid Postcode")]
+        [Display(Name = "Post Code")]
         public string PostCode { get; set; }
 
         [StringLength(12)]

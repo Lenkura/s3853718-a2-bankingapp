@@ -45,6 +45,7 @@ namespace Assignment_2.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "Login ID")]
             public string LoginID { get; set; }
 
             [Required]
