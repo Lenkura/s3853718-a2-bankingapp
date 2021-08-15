@@ -54,5 +54,5 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.CustomerID">Edit Your Details</a><br />
-    <a asp-action="Password">Change Password</a>
+    <a asp-area="Identity" asp-page="/Account/Manage/ChangePassword" title="Manage">Change Password</a>
 </div>
