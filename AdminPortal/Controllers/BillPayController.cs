@@ -30,7 +30,7 @@ namespace AdminPortal.Controllers
             var billpays = JsonConvert.DeserializeObject<List<BillPayDTO>>(result);
 
             const int pageSize = 4;
-            var pagedList = billpays.ToPagedList((int)page, pageSize);
+            var pagedList = billpays.OrderBy(x=>x.ScheduleTimeUtc).ToPagedList((int)page, pageSize);
             return View(pagedList);
         }
 
