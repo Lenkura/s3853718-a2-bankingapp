@@ -2,6 +2,8 @@ Raymond Louey
 s3853718 
 Git Repository: https://github.com/rmit-wdt-sp2-2021/s3853718-a2
 
+Update database from the MvcMCBA project
+
 Attempted: Part 4 k) - ASP.NET Core Identity
 	   Part 4 l) - Generating Charts - Found in the Customer web page -> log in as 12345678 -> 'My Statements' in the nav bar -> 4101 'History'
 		     Chart 1 through 'Transaction type', Chart 2 through 'Balance Trend'

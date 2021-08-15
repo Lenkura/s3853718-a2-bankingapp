@@ -39,10 +39,8 @@ namespace AdminPortal.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAsync(int id, [Bind("CustomerID,Name,TFN,Address,Suburb,State,PostCode,Mobile,Status")] CustomerDTO customer)
+        public async Task<IActionResult> Edit([Bind("CustomerID,Name,TFN,Address,Suburb,State,PostCode,Mobile,Status")] CustomerDTO customer)
         {
-            if (id != customer.CustomerID)
-                return NotFound();
             if (ModelState.IsValid)
             {
                 var content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json");
@@ -52,7 +50,6 @@ namespace AdminPortal.Controllers
                     return RedirectToAction(nameof(Index));
                 ModelState.AddModelError(nameof(customer.Name), s);
             }
-            //ModelState.AddModelError(nameof(customer.Name), "Oh dear");
             return View(customer);
         }
     }
