@@ -84,10 +84,15 @@ namespace Assignment_2.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var user = await _userManager.FindByNameAsync(Input.LoginID);
+                if (user.Customer.Status.Equals(CustomerStatus.B))
+                {
+                    ModelState.AddModelError(string.Empty, "Account Blocked, Please contact us");
+                    return Page();
+                }
+
                 if (user != null)
                 {
                     var result = await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-
 
                     if (result.Succeeded)
                     {
