@@ -22,3 +22,15 @@ D:\Git\s3853718-a2\UserInputValidator\bin\Debug\net5.0\DataValidator.deps.json
 D:\Git\s3853718-a2\UserInputValidator\bin\Debug\net5.0\DataValidator.dll
 D:\Git\s3853718-a2\UserInputValidator\bin\Debug\net5.0\ref\DataValidator.dll
 D:\Git\s3853718-a2\UserInputValidator\bin\Debug\net5.0\DataValidator.pdb
+D:\Migration\Git\s3853718-a2\UserInputValidator\bin\Debug\net5.0\DataValidator.deps.json
+D:\Migration\Git\s3853718-a2\UserInputValidator\bin\Debug\net5.0\DataValidator.dll
+D:\Migration\Git\s3853718-a2\UserInputValidator\bin\Debug\net5.0\DataValidator.pdb
+D:\Migration\Git\s3853718-a2\UserInputValidator\obj\Debug\net5.0\DataValidator.csproj.AssemblyReference.cache
+D:\Migration\Git\s3853718-a2\UserInputValidator\obj\Debug\net5.0\DataValidator.GeneratedMSBuildEditorConfig.editorconfig
+D:\Migration\Git\s3853718-a2\UserInputValidator\obj\Debug\net5.0\DataValidator.AssemblyInfoInputs.cache
+D:\Migration\Git\s3853718-a2\UserInputValidator\obj\Debug\net5.0\DataValidator.AssemblyInfo.cs
+D:\Migration\Git\s3853718-a2\UserInputValidator\obj\Debug\net5.0\DataValidator.csproj.CoreCompileInputs.cache
+D:\Migration\Git\s3853718-a2\UserInputValidator\obj\Debug\net5.0\DataValidator.dll
+D:\Migration\Git\s3853718-a2\UserInputValidator\obj\Debug\net5.0\refint\DataValidator.dll
+D:\Migration\Git\s3853718-a2\UserInputValidator\obj\Debug\net5.0\DataValidator.pdb
+D:\Migration\Git\s3853718-a2\UserInputValidator\obj\Debug\net5.0\ref\DataValidator.dll
